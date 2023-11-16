@@ -1,0 +1,58 @@
+.wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+p {
+  font-size: 1.4rem;
+  line-height: 2;
+}
+
+.trackingNumber {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.category {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.date {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.warning {
+  margin: 40px auto;
+  color: var(--red);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.confirmation {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.objection {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.btn {
+  width: 100%;
+}

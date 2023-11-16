@@ -1,0 +1,47 @@
+.verifyInputs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex-direction: row-reverse; */
+  margin-top: 20px;
+}
+
+.verifyInput {
+  direction: ltr;
+  margin: 0 5px;
+  text-align: center;
+  font-size: 25px;
+  border: solid 1px #ccc;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  outline: none;
+  width: 40px;
+  height: 40px;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+}
+
+.verifyInput:focus {
+  border-color: var(--yellow);
+  box-shadow: 0 0 5px var(--yellow) inset;
+}
+
+.verifyInput::selection {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.verifyInput::-webkit-outer-spin-button,
+.verifyInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.verifyInput[type="number"] {
+  -moz-appearance: textfield;
+}

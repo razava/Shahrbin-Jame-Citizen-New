@@ -1,0 +1,472 @@
+.requestCard {
+  width: 100%;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--gray-scale-2);
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.requestCardThumbnailWrapper {
+  max-width: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.requestCardThumbnailWrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.requestCardInfoWrapper {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.requestCardInfoRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.requestCardCategory {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+.requestCardStatus {
+  border-radius: 15px;
+  background-color: var(--white);
+  text-overflow: ellipsis;
+  text-align: center;
+  padding: 2px 5px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80px;
+  width: 100%;
+  color: var(--black);
+}
+
+.RequestCardAddress {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+  text-overflow: ellipsis;
+}
+
+.RequestCardAddressIcon {
+  margin-left: 5px;
+  font-size: 1.5rem;
+  color: var(--blue);
+}
+
+.requestCardTrackingNumber {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+}
+
+.requestCardDate {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+}
+
+.requestCardProcess {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.RequestCardProcessIcon {
+  margin-left: 5px;
+}
+
+.requestCardActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RequestCardActionIcon {
+  font-size: 1.8rem;
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.RequestCardLikeAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.RequestCardLikeAction > * {
+  margin: 0 2px;
+}
+
+.RequestCardCommentAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.RequestCardCommentAction > * {
+  margin: 0 2px;
+}
+
+.requestComments {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: column;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.RequestCardNoCommentsText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--gray-scale-2);
+  padding: 10px;
+}
+
+.requestComment {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.requestComment:not(:last-child) {
+  border-bottom: 1px solid var(--gray-scale-5);
+}
+
+.requestCommentAvatar {
+  width: 50px;
+  height: 50px;
+  margin-left: 10px;
+  /* overflow: hidden; */
+}
+
+.requestCommentAvatar img {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.requestCommentDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.requestCommentInfo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.requestCommentUserTitle,
+.requestCommentDate {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gray-scale-2);
+}
+
+.requestCommentTextWrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.requestCommentText {
+  font-size: 1.4rem;
+  color: var(--black);
+  flex: 1;
+}
+
+.requestCommentAction {
+  font-size: 1.4rem;
+  color: var(--red);
+}
+
+.requestAddComment {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  min-height: 50px;
+  padding: 5px;
+}
+
+.requestAddCommentInput {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  resize: none;
+  vertical-align: middle;
+  line-height: 20px;
+}
+
+.requestAddCommentIconWrapper {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.requestAddCommentIcon {
+  color: var(--green);
+  transform: rotate(45deg);
+  font-size: 1.4rem;
+  width: 30px;
+  height: 30px;
+}
+
+.violationWrapper {
+  width: 100%;
+  padding: 10px;
+}
+
+.violationTypes {
+  width: 100%;
+}
+
+.violationType {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+  color: var(--black);
+  padding: 10px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.violationType:hover,
+.violationType.selected {
+  background-color: var(--gray-scale-6);
+}
+
+.violationComment {
+  min-height: 120px;
+}
+
+.violationBackButton {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 10px 5px;
+}
+
+.violationBackButton > * {
+  margin-left: 3px;
+}
+
+.violationSubmitButton {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.violationSubmitSuccess {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--green);
+  text-align: center;
+}
+
+.violationSubmitSuccessIcon {
+  font-size: 6rem;
+  color: var(--green);
+  margin-bottom: 20px;
+}
+
+.requestProcessWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.requestProcessTimeLineWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-height: 400px;
+  height: 100%;
+  padding: 20px;
+}
+
+.requestProcessTimeLine {
+  position: absolute;
+  height: 100%;
+  width: 7px;
+  background-color: var(--white);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  right: 25%;
+}
+
+.requestProcessTimeLineItem {
+  /* max-width: 70%; */
+  width: 100%;
+  position: relative;
+  z-index: 4;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  padding-bottom: 20px;
+}
+
+.requestProcessTimeLineContent {
+  width: calc(70% - 20px);
+  background-color: var(--white);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  position: relative;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  left: calc(-30% - 20px);
+}
+
+.requestProcessTimeLineItemMessage {
+  width: 100%;
+  padding: 10px;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 2px #000;
+}
+
+.requestProcessLogDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 40px;
+}
+
+.requestProcessLogDetails > span:nth-child(1) {
+  font-size: 1.5rem;
+  color: var(--black);
+  padding: 5px;
+  line-height: 1.5;
+}
+
+.requestProcessLogDetails > span:nth-child(2) {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+}
+
+.requestProcessLogAttachmentsTitle {
+  padding: 0 10px;
+  font-size: 1.5rem;
+  color: var(--blue);
+}
+
+.requestProcessLogAttachments {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.requestProcessLogAttachment,
+.requestProcessLogAttachment img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.requestProcessLogCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  border-color: var(--white);
+  border-width: 3px;
+  z-index: 400;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  right: calc(25% - 25px);
+  color: var(--white);
+  font-size: 1.5rem;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.requestProcessLogStamp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  right: 0px;
+  width: calc(20%);
+  margin-left: 10px;
+}
+
+.requestProcessLogStampTime {
+  font-size: 1.5rem;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.requestProcessLogStampDate {
+  font-size: 1.2rem;
+}
+
+.requestProcessLogHighLight {
+  color: var(--green);
+  font-size: 2rem;
+}
+
+@media screen and (min-width: 680px) {
+  .requestCard {
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* border: 1px solid #eee; */
+    border: 0;
+  }
+}

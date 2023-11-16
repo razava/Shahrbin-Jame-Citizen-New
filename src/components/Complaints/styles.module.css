@@ -1,0 +1,158 @@
+.complaintsList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.complaintsList.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.complaintCard {
+  width: 100%;
+  background-color: var(--white);
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  min-height: 120px;
+}
+
+.complaintCardThumbnailWrapper {
+  max-width: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.complaintCardThumbnailWrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.complaintCardInfoWrapper {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.complaintCardInfoRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.complaintCardCategory {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+}
+
+.complaintCardStatus {
+  border-radius: 15px;
+  background-color: var(--white);
+  text-overflow: ellipsis;
+  text-align: center;
+  padding: 2px 5px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80px;
+  width: 100%;
+  color: var(--black);
+}
+
+.complaintCardAddress {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+  text-overflow: ellipsis;
+}
+
+.complaintCardAddress > p {
+  font-size: 1.2rem;
+}
+
+.complaintCardAddressIcon {
+  margin-left: 5px;
+  font-size: 1.5rem;
+  color: var(--gray-scale-2);
+}
+
+.complaintCardTrackingNumber {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+}
+
+.complaintCardDate {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+}
+
+.complaintCardProcess {
+  font-size: 1.2rem;
+  color: var(--gray-scale-2);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.complaintCardProcessIcon {
+  margin-left: 5px;
+}
+
+.complaintCardActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+}
+
+.complaintCardActionIcon {
+  font-size: 1.4rem;
+  margin-right: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+  color: var(--blue);
+}
+
+.complaintCardLikeAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.complaintCardLikeAction > * {
+  margin: 0 2px;
+}
+
+.complaintCardCommentAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.complaintCardCommentAction > * {
+  margin: 0 2px;
+}
+

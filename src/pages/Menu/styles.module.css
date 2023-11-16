@@ -1,0 +1,220 @@
+.menuList {
+  width: 100%;
+  max-width: 600px;
+  flex: 1;
+  display: grid;
+  grid-template-areas:
+    "new-complaint new-request"
+    "recent-requests my-complaints"
+    "recent-requests my-requests"
+    "polls news"
+    "settings news";
+  grid-gap: 10px;
+  margin: 20px auto;
+  grid-template-rows: calc((100% / 5) - 5px);
+  grid-auto-rows: calc((100% / 5) - 5px);
+  height: 100%;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.menuList > *:nth-child(1) {
+  grid-area: new-complaint;
+}
+
+.menuList > *:nth-child(2) {
+  grid-area: new-request;
+}
+
+.menuList > *:nth-child(3) {
+  grid-area: recent-requests;
+}
+
+.menuList > *:nth-child(4) {
+  grid-area: my-complaints;
+}
+
+.menuList > *:nth-child(5) {
+  grid-area: my-requests;
+}
+
+.menuList > *:nth-child(6) {
+  grid-area: polls;
+}
+
+.menuList > *:nth-child(7) {
+  grid-area: news;
+}
+
+.menuList > *:nth-child(8) {
+  grid-area: settings;
+}
+
+.menuListItem {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.menuListItemLink {
+  color: var(--white);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.menuListItemIcon {
+  font-size: 3.8rem;
+  /* margin-bottom: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+}
+
+.menuListItemTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--black);
+}
+
+@media screen and (min-width: 680px) {
+  .menuListItem {
+    background-color: var(--yellow);
+  }
+}
+
+/* **************** side menu ******************* */
+.sideMenu {
+  width: 70px;
+  background: linear-gradient(to top, var(--yellow) 0%, #ffbe0b 100%);
+  background: linear-gradient(to bottom, var(--yellow) 0%, #fb8500 100%);
+  border-radius: 30px 0 0 30px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: all 0.5s;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.sideMenu.open {
+  width: 200px;
+}
+
+.sideMenuItems {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px 0;
+}
+
+.sideMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  padding-right: 15px;
+}
+
+.sideMenuItemIconWrapper {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.sideMenuItem.active .sideMenuItemIconWrapper {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.sideMenuItem.active .sideMenuItemTitle {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 1.3rem;
+}
+
+.sideMenuItemIcon {
+  width: 50%;
+  height: 50%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  color: var(--white);
+  transition: all 0.3s;
+  font-size: 1.8rem;
+}
+
+.sideMenuItemIcon > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sideMenuItem.active .sideMenuItemIcon {
+  background-color: transparent;
+  color: var(--white);
+  font-size: 1.6rem;
+}
+
+.sideMenuItemTitle {
+  font-size: 1.2rem;
+  color: var(--white);
+  color: var(--white);
+  font-weight: 700;
+  margin-right: 5px;
+  transition: all 0.3s;
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.sideMenu.open .sideMenuItemTitle {
+  opacity: 1;
+  width: auto;
+}
+
+.sideMenu.isAnimating .sideMenuItemTitle {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.sideMenuToggle {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow);
+  position: absolute;
+  left: -10px;
+  top: 20px;
+  transition: all 0.8s;
+  cursor: pointer;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.sideMenu.open .sideMenuToggle {
+  transform: rotate(180deg);
+}

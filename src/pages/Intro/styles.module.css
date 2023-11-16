@@ -1,0 +1,59 @@
+.logoWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -100px;
+  background-color: var(--yellow);
+  z-index: 10;
+  border-radius: 50%;
+  border: 8px solid var(--white);
+}
+
+.logoWrapper img {
+  width: 100px;
+  height: 100px;
+}
+
+.titleWrapper {
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.titleWrapper h1 {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.titleWrapper p {
+  font-size: 1.5rem;
+  color: var(--gray-scale-3);
+}
+
+.btnWrapper {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnWrapper button {
+  max-width: 50vw !important;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 680px) {
+  .logoWrapper {
+    top: 100px;
+  }
+
+  .supporters {
+    display: none;
+  }
+}

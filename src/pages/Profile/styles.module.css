@@ -1,0 +1,36 @@
+.wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  background-color: var(--white);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+.profileFields {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 10px;
+  overflow-y: auto;
+  /* flex: 1; */
+}
+
+.profileFieldWrapper {
+}
+
+.profileSaveButton {
+  width: 100%;
+  margin-top: 40px;
+  max-width: 600px;
+}
+
+@media screen and (min-width: 680px) {
+  .profileFields {
+    /* overflow-y: hidden; */
+  }
+}

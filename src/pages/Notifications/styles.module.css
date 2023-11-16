@@ -1,0 +1,52 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrapper.loading {
+  justify-content: center;
+}
+
+.notifCard {
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 10px auto;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.notifCardIcon {
+  font-size: 3rem;
+  color: var(--yellow);
+  margin-left: 20px;
+}
+
+.notifCardDetails {
+  flex: 1;
+}
+
+.notifCardTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.notifCardRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.notifCardContent,
+.notifCardDate {
+  font-size: 1.3rem;
+  color: var(--gray-scale-2);
+  font-weight: 700;
+}

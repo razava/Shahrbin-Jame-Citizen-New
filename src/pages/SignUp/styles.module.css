@@ -1,0 +1,27 @@
+.pnpWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.pnpWrapper > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pnpLink {
+  color: var(--blue);
+}
+
+.pnpLink > * {
+  margin: 0 3px;
+}
+
+.pnpAgreement {
+  font-size: 1.4rem;
+  color: var(--black);
+}

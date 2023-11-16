@@ -1,0 +1,19 @@
+.pnp {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+}
+
+.pnpSectionTitle {
+  margin: 20px auto;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.pnpSectionContent {
+  font-size: 1.4rem;
+  color: var(--black);
+  line-height: 1.5;
+  text-align: justify;
+}

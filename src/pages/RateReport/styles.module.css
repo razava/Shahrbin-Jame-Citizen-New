@@ -1,0 +1,21 @@
+.feedbackMessageWrapper {
+  width: 90%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.feedbackMessage {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.feedbackButtonWrapper {
+  width: 90%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

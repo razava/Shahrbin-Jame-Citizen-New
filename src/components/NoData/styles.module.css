@@ -1,0 +1,23 @@
+.noData {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: 0 0 8px 8px;
+  color: var(--gray-scale-2);
+  padding: 20px 0;
+  flex: 1;
+}
+
+.noDataMessage {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.noDataIcon {
+  font-size: 4rem;
+}

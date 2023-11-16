@@ -1,0 +1,175 @@
+.userContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  padding: 20px 20px 0 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.userBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.underlayImage img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  opacity: 0.3;
+  /* transition: all 0.5s cubic-bezier(0.25, 0.75, 0.5, 1.25); */
+  transition: all 0.5s ease;
+}
+
+.underlayImage.up img {
+  bottom: calc(100% - 175px);
+}
+
+.userHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  transition: all 0.5s;
+  padding: 10px;
+}
+
+.userHeader > div {
+  display: flex;
+  align-items: center;
+}
+
+.userHeader_card {
+  height: 40px;
+  background-color: var(--gray-scale-6);
+  border-radius: 25px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userHeader_currentUser {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userHeader > div > * {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.userHeaderIcon {
+  font-size: 2rem;
+}
+
+.userHeaderIcon.circular {
+}
+
+.userHeaderUserInfo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  opacity: 1;
+  transition: all 0.5s;
+  margin-right: 5px;
+}
+
+.userHeaderPageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.instanceToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.instanceToggle > * {
+  margin-left: 5px;
+}
+
+.userContent {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-x: hidden;
+  /* overflow-y: scroll; */
+}
+
+.userContent.down {
+  transform: translateY(0);
+}
+
+.userContent.up {
+  margin-top: 50px;
+  border-radius: 15px 15px 0 0;
+}
+
+/* *************** desktop ******************** */
+
+.d_userContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.d_userPage {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.d_userContent {
+  flex: 1;
+  padding: 40px;
+  height: calc(100vh - var(--d-header-height));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: fixed;
+  top: var(--d-header-height);
+  left: 0;
+  width: calc(100% - var(--d-sideMenu-width-close));
+  transition: all 0.5s;
+}
+
+.d_userContent.open {
+  width: calc(100% - var(--d-sideMenu-width-open));
+}
+
+@media screen and (min-width: 680px) {
+  .userHeader {
+    height: var(--d-header-height);
+    padding: 10px;
+    width: calc(100% - 70px);
+  }
+
+  .userHeader.open {
+    width: calc(100% - 200px);
+  }
+}

@@ -1,0 +1,256 @@
+.authPage {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--white);
+  position: relative;
+}
+
+.overlayWrapper,
+.svgWrapper,
+.svgWrapper svg,
+.authImageWrapper {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+}
+
+.svgWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.svgWrapper svg {
+}
+
+.overlay {
+}
+
+.authImageWrapper {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.authImage {
+  position: absolute;
+  bottom: -22px;
+  object-fit: contain;
+  z-index: 10;
+  clip-path: ellipse(50% 80% at 50% 5%);
+}
+
+.authContent {
+  width: 100%;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-20px);
+  /* transform: scale(0.5); */
+  transition: all 0.3s ease;
+  z-index: 10;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--white);
+}
+
+.authContent.isNavigating {
+  transition: all 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  /* transform: scale(1); */
+}
+
+.form {
+  width: 100%;
+}
+
+.authInputWrapper {
+  max-width: 568px !important;
+  width: 100% !important;
+  margin: 10px auto !important;
+}
+
+.authInput {
+  text-align: center !important;
+}
+
+.authTitle {
+  font-size: 1.8rem;
+  color: var(--black);
+  text-align: center;
+  font-weight: 700;
+}
+
+.authButtonWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.authButton {
+  width: 100%;
+  max-width: 568px !important;
+}
+
+.authLinks {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px auto;
+}
+
+.authLink {
+  color: var(--gray-sclae-4);
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  text-decoration: underline;
+}
+
+.backButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  color: var(--black);
+}
+
+.supporters {
+  margin: 20px auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.externalLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto;
+}
+
+/* *************** desktop *************** */
+.d_wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--yellow);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  overflow-y: hidden;
+}
+
+.d_pageSide {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 40px;
+  transition: all 0.3s;
+  z-index: 0;
+  height: 100vh;
+}
+
+.d_pageSideContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.d_pageSideContent img {
+  width: 90%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* .d_pageSideContent > img:nth-child(2) {
+  width: 50px;
+  align-items: flex-end;
+} */
+
+.d_pageSideBottomImage {
+  margin: 0;
+  width: 100%;
+  max-height: 200px;
+}
+
+.d_pageContent {
+  width: 70%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.d_pageContent.right {
+  right: 0;
+  border-radius: 50px 0 0 0;
+}
+
+.d_pageContent.right + .d_pageSide {
+  left: 0;
+}
+
+.d_pageContent.left {
+  right: 30%;
+  border-radius: 0 50px 0 0;
+}
+
+.d_pageContent.left + .d_pageSide {
+  left: 70%;
+}
+
+.authNavigation {
+  max-width: 120px;
+  width: 100%;
+  min-height: 40px;
+  background-color: var(--white);
+  border-radius: 25px;
+  border: 1px solid var(--gray-scale-5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authNavigationLink {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.authNavigationLink.active {
+  background-color: var(--yellow);
+}
+
+.authNavigation + * {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
