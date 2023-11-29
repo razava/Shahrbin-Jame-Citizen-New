@@ -62,16 +62,13 @@ const DatePicker = ({
       flexDirection: "column",
       overflowY: "auto",
       border: "1px solid var(--light)",
-      boxShahdow: "0 0 10px rgba(0,0,0,0.1)",
+      boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
       borderRadius: 10,
       transition: "opacity 0.3s, transform 0.3s",
+      height: "250px",
     };
     const boundings = inputRef?.current?.getBoundingClientRect();
-    if (boundings?.top > windowHeight - boundings?.bottom) {
-      style.bottom = windowHeight - boundings?.bottom + boundings?.height;
-    } else {
-      style.top = boundings?.top + boundings?.height;
-    }
+    style.top = boundings?.top + boundings?.height;
     style.left = boundings?.left + (boundings?.width - 332) / 2;
     setStyle(style);
   };

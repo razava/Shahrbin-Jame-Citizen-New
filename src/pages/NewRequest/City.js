@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useInstance from "../../hooks/useInstance";
 import styles from "./styles.module.css";
+import { LS } from "../../utils/functions";
+import { appConstants } from "../../utils/variables";
 
 const City = ({ onChange = (f) => f, goToNextStep = (f) => f }) => {
   // hooks
@@ -8,9 +10,22 @@ const City = ({ onChange = (f) => f, goToNextStep = (f) => f }) => {
 
   //   functions
   const handleClick = (instance) => {
-    onChange(instance, "city");
-    goToNextStep();
+    setAppInstance(instance);
+    if (!LS.read(appConstants.SH_CT_CHANGE_INSTANCE)) {
+      onChange(instance, "city");
+      goToNextStep();
+    }
+    LS.save(appConstants.SH_CT_CHANGE_INSTANCE, "true");
+    console.log(1111);
   };
+  useEffect(() => {
+    if (LS.read(appConstants.SH_CT_CHANGE_INSTANCE)) {
+      onChange(LS.read(appConstants.SH_CT_INSTANCE), "city");
+      goToNextStep();
+      LS.remove(appConstants.SH_CT_CHANGE_INSTANCE);
+      console.log(22);
+    }
+  }, []);
 
   // renders
   const renderCity = (instance) => {

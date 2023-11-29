@@ -78,8 +78,8 @@ const TimeLine = ({
                     height: diameter,
                   }}
                 >
-                  <circle cx={radius} cy={radius} r={radius}></circle>
-                  <circle cx={radius} cy={radius} r={radius}></circle>
+                  {/* <circle cx={radius} cy={radius} r={radius}></circle> */}
+                  {/* <circle cx={radius} cy={radius} r={radius}></circle> */}
                 </svg>
                 <div
                   className={styles.timeLineStepIcon}

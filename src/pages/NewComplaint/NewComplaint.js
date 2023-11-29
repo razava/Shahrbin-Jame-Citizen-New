@@ -10,6 +10,7 @@ import ComplaintCategory from "./ComplaintCategory";
 import Details from "../NewRequest/Details";
 import Attachments from "../NewRequest/Attachments";
 import ComplaintReview from "./ComplaintReview";
+import useInstance from "../../hooks/useInstance";
 
 const NewComplaint = () => {
   // states
@@ -29,13 +30,30 @@ const NewComplaint = () => {
     onSubmit,
   } = useNewComplaint();
   const { windowWidth } = useResize();
-
+  const { currentInstance, instances, setAppInstance } = useInstance();
   // effects
   useEffect(() => {
     if (windowWidth > responsiveBreakPoint) setIsDesktop(true);
     else setIsDesktop(false);
   }, [windowWidth]);
 
+  // useEffect(() => {
+  //   if ((currentStep.id = "category")) {
+  //      setTimeout(function () {
+  //        setAppInstance({
+  //          id: 22,
+  //          name: "شهربین بافق",
+  //          description: "",
+  //          abbreviation: "bfg",
+  //          cityId: 1231,
+  //          city: null,
+  //          englishName: "Bafgh",
+  //          latitude: 31.603917,
+  //          longitude: 55.406412,
+  //        });
+  //      }, 1000);
+  //   }
+  // },[currentStep])
   //   renders
   const renderCurrentStep = () => {
     if (currentStep.id === allSteps[0].id)
@@ -61,7 +79,12 @@ const NewComplaint = () => {
           goToNextStep={goToNextStep}
           value={values.description}
           onChange={onChange}
-          name={"description"}
+          name={{
+            description: "description",
+            firstName: "firstName",
+            laststName: "laststName",
+            nationalId: "nationalId",
+          }}
         />
       );
     else if (currentStep.id === allSteps[3].id)
@@ -73,7 +96,13 @@ const NewComplaint = () => {
         />
       );
     else if (currentStep.id === allSteps[4].id)
-      return <ComplaintReview values={values} loading={loading} onSubmit={onSubmit} />;
+      return (
+        <ComplaintReview
+          values={values}
+          loading={loading}
+          onSubmit={onSubmit}
+        />
+      );
   };
   return (
     <>

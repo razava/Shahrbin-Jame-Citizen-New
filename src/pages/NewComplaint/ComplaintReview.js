@@ -22,6 +22,20 @@ const ComplaintReview = ({ values = {}, loading, onSubmit = (f) => f }) => {
           </li>
 
           <li className={styles.reviewItem}>
+            <span className={styles.reviewItemTitle}>نام و نام‌خانوادگی: </span>
+            <span className={styles.reviewItemValue}>
+              {values?.firstName} {values?.laststName}
+            </span>
+          </li>
+
+          <li className={styles.reviewItem}>
+            <span className={styles.reviewItemTitle}>کدملی: </span>
+            <span className={styles.reviewItemValue}>
+              {values?.nationalId}
+            </span>
+          </li>
+
+          <li className={styles.reviewItem}>
             {console.log(values)}
             <span className={styles.reviewItemTitle}>جزئیات: </span>
             <span className={styles.reviewItemValue}>

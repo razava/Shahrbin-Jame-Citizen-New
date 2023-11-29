@@ -39,7 +39,7 @@ const UserHeader = ({ position }) => {
       }
     }
   };
-
+  console.log(instances);
   // renders
   const renderCurrentInstance = () => {
     return (

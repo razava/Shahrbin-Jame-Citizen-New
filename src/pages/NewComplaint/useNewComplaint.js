@@ -5,6 +5,7 @@ import Icon from "../../components/Icon/Icon";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
 import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import useInstance from "../../hooks/useInstance";
 
 const allStepsDefault = [
   {
@@ -56,14 +57,18 @@ const useNewComplaint = () => {
   const [values, setValues] = useState({
     category: {},
     description: "",
+    firstName: "",
+    laststName: "",
+    nationalId: "",
     attachments: [],
     city: null,
   });
-
+  const { currentInstance, instances, setAppInstance } = useInstance();
   // functions
   const goToNextStep = () => {
     const nextStep = allSteps.find((s) => s.order === currentStep.order + 1);
     setCurrentStep(nextStep);
+    console.log(values);
   };
 
   // 1: checks if the step is even active (could be inActive in some cases)
@@ -98,6 +103,9 @@ const useNewComplaint = () => {
     formData.append("instanceId", values.city?.id);
     formData.append("categoryId", values.category.id);
     formData.append("description", values.description);
+    formData.append("firstName", values.firstName);
+    formData.append("laststName", values.laststName);
+    formData.append("nationalId", values.nationalId);
     values.attachments.forEach((a) => formData.append("attachments", a.file));
     return formData;
   };
