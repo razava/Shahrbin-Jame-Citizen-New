@@ -13,7 +13,7 @@
 
 # zip files
 *.zip
-.rar
+*.rar
 
 # misc
 .DS_Store
