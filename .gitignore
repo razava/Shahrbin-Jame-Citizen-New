@@ -12,8 +12,8 @@
 /build
 
 # zip files
-.zip
-.rar
+*.zip
+*.rar
 
 # misc
 .DS_Store
