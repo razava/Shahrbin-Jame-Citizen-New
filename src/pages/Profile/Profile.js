@@ -7,11 +7,28 @@ import DropDown from "../../components/DropDown/DropDown";
 import { educations, genders } from "./constants";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import Button from "../../components/Button/Button";
+import { api } from "../../services/http";
+import useFetch from "../../hooks/useFetch";
 
 const Profile = () => {
+  //functions
+  // const getEducations = async () => {
+  //   const { success, data } = await api.CitizenCommon({
+  //     tail: "Educations",
+  //   });
+  //   if (success) {
+  //     console.log(data);
+  //   }
+  // };
   //   hooks
-  const { values, loading, handleUserDataChange, updateUserData } = useMe();
-
+  const {
+    values,
+    loading,
+    handleUserDataChange,
+    updateUserData,
+    handelAvatar,
+  } = useMe();
+  // const { loading: loading2 } = useFetch({ fn: getEducations, auto: true });
   return (
     <>
       <section className={styles.wrapper}>
@@ -19,7 +36,7 @@ const Profile = () => {
           source={values.avatarFile}
           name="avatarFile"
           editable
-          onChange={handleUserDataChange}
+          onChange={handelAvatar}
         />
 
         <div className={styles.profileFields}>

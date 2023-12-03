@@ -31,7 +31,6 @@ const createApi = () => {
           cancelTokenBearer.current = cancelToken;
           const isAuthenticated = LS.read(appConstants.SH_CT_ACCESS_TOKEN);
           const instance = LS.read(appConstants.SH_CT_INSTANCE);
-
           const createRequest = () => {
             const token = LS.read(appConstants.SH_CT_ACCESS_TOKEN)
               ? `Bearer ${LS.read(appConstants.SH_CT_ACCESS_TOKEN)}`

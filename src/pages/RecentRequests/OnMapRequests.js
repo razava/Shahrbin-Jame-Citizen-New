@@ -40,9 +40,9 @@ const OnMapRequests = () => {
       pageNumber,
       pageSize,
     };
-    const { success, data, headers } = await api.report({
+    const { success, data, headers } = await api.CitizenReport({
       params: params,
-      tail: "all",
+      // tail: "all",
     });
     if (success) {
       setData(data);
@@ -96,11 +96,11 @@ const OnMapRequests = () => {
           style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=${process.env.REACT_APP_PMI_TOKEN}`}
           onClick={onMapClicked}
         >
-          {data.map((d) => (
+          {/* {data.map((d) => (
             <Marker coordinates={[d.address.longitude, d.address.latitude]}>
               <img src={marker} onClick={() => showDetails(d)} />
             </Marker>
-          ))}
+          ))} */}
           <Marker
             coordinates={[
               selected?.address?.longitude || defaultCoords.latitude,

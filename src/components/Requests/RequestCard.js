@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./styles.module.css";
 import noThumbnail from "../../assets/images/no-image.jpeg";
 import { DNT, URI } from "../../utils/functions";
@@ -10,6 +10,7 @@ import RequestViolation from "./RequestViolation";
 import RequestProcessIcon from "./RequestProcessIcon";
 import { useNavigate } from "react-router-dom";
 import RequestStatus from "./RequestStatus";
+import { AppStore } from "../../store/AppContext";
 
 const RequestCard = ({ request, isSelfRequest = false }) => {
   // variables
@@ -17,7 +18,10 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
     request?.medias?.length > 0
       ? URI.createMediaUri(request.medias[0].url3)
       : noThumbnail;
-
+  const [store] = useContext(AppStore);
+  const categories = store.initialData.categories || {};
+  const categoryTitle = categories.find((item) => item.id == request.categoryId)
+  console.log(categoryTitle);
   // hooks
   const navigate = useNavigate();
 
@@ -41,7 +45,8 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
         <div className={styles.requestCardInfoWrapper}>
           <div className={styles.requestCardInfoRow}>
             <p className={styles.requestCardCategory}>
-              {request.category.title}
+              {/* {request.category.title} */}
+              {categoryTitle.title}
             </p>
             <RequestStatus lastStatus={request.lastStatus} />
           </div>
@@ -67,7 +72,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           </div>
 
           <div className={styles.requestCardInfoRow}>
-            <RequestProcessIcon logs={request.transitionLogs} />
+            <RequestProcessIcon request={request} logs={request.transitionLogs} />
             <div className={styles.requestCardActions}>
               <RequestViolation request={request} />
               <RequestLike request={request} />

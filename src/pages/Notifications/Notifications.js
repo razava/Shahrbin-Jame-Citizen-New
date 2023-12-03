@@ -19,9 +19,9 @@ const Notifications = () => {
       pageNumber,
       pageSize,
     };
-    const { success, data, headers } = await api.messages({
+    const { success, data, headers } = await api.Messages({
       params,
-      isPerInstance: false,
+      isPerInstance: true,
     });
     if (success) {
       extractPaginationData(headers);

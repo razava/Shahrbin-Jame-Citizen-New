@@ -19,7 +19,7 @@ const InitialLoader = ({ children }) => {
 
   // variables
   const isComplete = done && loader && !error && isSuccess;
-
+  console.log(error);
   //   functions
   const onAnimationEnd = () => {
     setClose(true);

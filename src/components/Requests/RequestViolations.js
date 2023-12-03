@@ -29,13 +29,14 @@ const RequestViolations = ({ request = {}, comment = {} }) => {
   const submitViolation = async () => {
     const payload = {
       reportId: request.id,
-      commentId: comment.id,
+      // commentId: comment.id,
       description: violationDescription,
       violationTypeId: violationType.id,
     };
-    const { success } = await api.violation({
+    const { success } = await api.CitizenReport({
       method: httpMethods.post,
-      payload,
+      tail: "ReportViolation",
+      id: request.id,
     });
     if (success) {
       setCurrentStep((prev) => prev + 1);

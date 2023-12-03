@@ -53,8 +53,8 @@ const ResetPass = () => {
       verificationCode: state.token,
     };
     try {
-      const { success } = await api.authenticate({
-        tail: "resetpassword",
+      const { success } = await api.CitizenAccount({
+        tail: "ResetPassword",
         payload,
         method: httpMethods.post,
       });

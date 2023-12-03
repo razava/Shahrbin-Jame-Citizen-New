@@ -27,8 +27,8 @@ const RateReport = () => {
       token,
       rating,
     };
-    const { success } = await api.feedback({
-      tail: "rate",
+    const { success } = await api.CitizenReport({
+      tail: "feedback",
       id: feedbackId,
       params,
     });

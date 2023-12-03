@@ -71,11 +71,10 @@ const Verify = () => {
       username: state.phoneNumber,
       verificationCode: verificationCode.current.reverse().join(""),
       password: state.password || "string",
-      recaptchaToken: "string",
     };
     try {
-      const { success, data } = await api.authenticate({
-        tail: state.type === "signin" ? "verify" : "requestToken",
+      const { success, data } = await api.CitizenAccount({
+        tail: state.type === "signin" ? "Verify" : "RequestToken",
         payload,
         method: httpMethods.post,
       });

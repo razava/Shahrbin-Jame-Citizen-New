@@ -37,12 +37,15 @@ const Avatar = ({
   };
 
   useEffect(() => {
+    console.log(store.initialData.user?.avatar?.url3);
     const imageSource =
       source || store.initialData.user?.avatar
-        ? URI.createMediaUri(store.initialData.user?.avatar?.url3)
+        ? URI.createMediaUri(store.initialData.user?.avatar?.url)
         : undefined;
+    console.log(imageSource);
     setImageSource(imageSource);
   }, [source, store.initialData.user.avatar]);
+  console.log(imageSource);
   return (
     <>
       <figure className={styles.avatar}>

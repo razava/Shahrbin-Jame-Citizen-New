@@ -14,9 +14,11 @@ const useInstance = () => {
   // functions
   const getInstances = async () => {
     try {
-      const { data, success } = await api.instanceManagement({
+      const { data, success } = await api.CitizenCommon({
+        tail: "ShahrbinInstances",
         showMessageOnError: false,
-        isPerInstance: false,
+        // isPerInstance: false,
+        instanceId:1,
       });
       if (success) {
         dispatch({ type: appActions.SET_INSTANCES, payload: data });

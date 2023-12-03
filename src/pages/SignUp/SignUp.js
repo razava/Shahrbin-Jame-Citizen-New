@@ -64,14 +64,19 @@ const SignUp = () => {
     const payload = {
       username: values.phoneNumber,
       password: values.password,
-      captchaValue: captcha.value,
-      captchaKey: captcha.key,
+      // captcha: {
+      //   key: captcha.key,
+      //   value: captcha.value,
+      // },
+      // captchaValue: captcha.value,
+      // captchaKey: captcha.key,
     };
     try {
-      await api.authenticate({
-        tail: "register",
+      await api.CitizenAccount({
+        tail: "RegisterApp",
         payload,
         method: httpMethods.post,
+        instanceId: 1,
       });
       captcha.refresh();
       captcha.setValue("");

@@ -4,7 +4,7 @@ import Icon from "../Icon/Icon";
 import RequestProcess from "./RequestProcess";
 import styles from "./styles.module.css";
 
-const RequestProcessIcon = ({ logs=[], keys }) => {
+const RequestProcessIcon = ({ logs = [], keys, request }) => {
   //   hooks
   const { open } = useBottomSheet();
 
@@ -19,7 +19,9 @@ const RequestProcessIcon = ({ logs=[], keys }) => {
     e.stopPropagation();
     open({
       style,
-      renderComponent: () => <RequestProcess history={logs} keys={keys} />,
+      renderComponent: () => (
+        <RequestProcess history={logs} keys={keys} requestId={request.id} />
+      ),
     });
   };
 

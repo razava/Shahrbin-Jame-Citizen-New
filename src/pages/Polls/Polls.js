@@ -16,7 +16,7 @@ const Polls = () => {
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.polls();
+    const { success, data } = await api.CitizenPolls({tail:"Polls",isPerInstance:true});
     if (success) setPolls(data);
   };
 

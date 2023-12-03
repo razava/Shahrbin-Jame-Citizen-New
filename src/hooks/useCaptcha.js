@@ -10,7 +10,7 @@ const useCaptcha = () => {
 
   // functions
   const getCaptcha = async () => {
-    const { success, data, headers } = await api.authenticate({
+    const { success, data, headers } = await api.CitizenAccount({
       tail: "captcha",
     });
     if (success) {

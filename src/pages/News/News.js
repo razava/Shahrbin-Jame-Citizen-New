@@ -13,8 +13,9 @@ const News = () => {
 
   //   functions
   const getData = async () => {
-    const { success, data } = await api.news({
-      isPerInstance: false,
+    const { success, data } = await api.CitizenNews({
+      tail: "News",
+      isPerInstance: true,
     });
     if (success) setNews(data);
   };

@@ -24,7 +24,6 @@ const NewRequest = () => {
     onSubmit,
   } = useNewRequest();
   const { isDesktop } = useResize();
-
   //   renders
   const renderCurrentStep = () => {
     if (currentStep.id === allSteps[0].id)

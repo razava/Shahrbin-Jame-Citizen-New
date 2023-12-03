@@ -16,8 +16,8 @@ const Request = () => {
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.info({ tail: "report", id });
-    if (success) setRequest(data.report);
+    const { success, data } = await api.CitizenReport({ tail: "Mine", id });
+    if (success) setRequest(data);
   };
 
   // hooks
@@ -38,6 +38,7 @@ const Request = () => {
   };
 
   const renderDetailsCard = () => {
+    console.log(request);
     const images = request.medias.filter((media) => media.mediaType === 0);
     const image =
       images.length > 0 ? URI.createMediaUri(images[0].url) : noImage;
@@ -97,14 +98,14 @@ const Request = () => {
           <div className={styles.requestInfo}>
             <p className={styles.requestInfoTitle}>زمان پاسخگویی : </p>
             <p className={styles.requestInfoValue}>
-              {DNT.hoursToDays(request.category?.responseDuration)} روز
+              {DNT.toJalaliString2(request?.responseDeadline)}
             </p>
           </div>
 
           <div className={styles.requestInfo}>
             <p className={styles.requestInfoTitle}>زمان اتمام : </p>
             <p className={styles.requestInfoValue}>
-              {DNT.hoursToDays(request.category?.duration)} روز
+              {DNT.toJalaliString2(request?.deadline)}
             </p>
           </div>
 

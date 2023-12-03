@@ -46,8 +46,8 @@ const NearestRequests = () => {
       return (
         <RequestList
           source={{
-            controller: "report",
-            params: { tail: "nearest", params },
+            controller: "CitizenReport",
+            params: { tail: "Nearest", params },
           }}
         />
       );

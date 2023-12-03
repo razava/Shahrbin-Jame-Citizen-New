@@ -11,9 +11,10 @@ const useAuthenticate = () => {
   //   variables
   // const { currentAuthMode } = store;
   const isAuthenticated =
-    !!LS.read(appConstants.SH_CT_ACCESS_TOKEN) &&
-    !AUTHENTICATOR.isTokenExpired();
-
+    !!LS.read(appConstants.SH_CT_ACCESS_TOKEN)
+  //&&
+    // !AUTHENTICATOR.isTokenExpired();
+  console.log(isAuthenticated);
   // functions
   // const changeAuthMode = (to = {}) => {
   //   if (searchParams.get("mode") === to.name) return;
@@ -22,10 +23,10 @@ const useAuthenticate = () => {
   // };
 
   const saveUserData = (data) => {
-    LS.save(appConstants.SH_CT_ACCESS_TOKEN, data.token);
-    LS.save(appConstants.SH_CT_USER_ROLES, data.roles);
-    LS.save(appConstants.SH_CT_CURRENT_TIME, data.currentTime);
-    LS.save(appConstants.SH_CT_EXPIRATION, data.expiration);
+    LS.save(appConstants.SH_CT_ACCESS_TOKEN, data);
+    // LS.save(appConstants.SH_CT_USER_ROLES, data.roles);
+    // LS.save(appConstants.SH_CT_CURRENT_TIME, data.currentTime);
+    // LS.save(appConstants.SH_CT_EXPIRATION, data.expiration);
   };
 
   const onSignInSuccess = (data) => {

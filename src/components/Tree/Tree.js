@@ -19,7 +19,7 @@ const Tree = ({
   const onLastLevelReached = (data) => {
     return onSelectNode(data);
   };
-
+  console.log(data);
   // hooks
   const {
     currentNodes,
@@ -39,6 +39,7 @@ const Tree = ({
   
   //   renders
   const renderTree = () => {
+    console.log(currentNodes);
     return (
       <ul className={CN.join(styles.treeItems)}>
         {currentNodes.map((node) => (

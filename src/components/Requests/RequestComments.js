@@ -49,8 +49,8 @@ const Comments = ({ request = {} }) => {
 
   //   functions
   const getComments = async () => {
-    const { success, data } = await api.report({
-      tail: "comment",
+    const { success, data } = await api.CitizenReport({
+      tail: "Comment",
       id: request.id,
     });
     if (success) {
@@ -67,7 +67,7 @@ const Comments = ({ request = {} }) => {
       isSeen: true,
       isVerified: true,
     };
-    const { success } = await api.report({
+    const { success } = await api.CitizenReport({
       tail: "comment",
       id: request.id,
       payload,

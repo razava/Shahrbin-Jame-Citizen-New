@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Icon from "../Icon/Icon";
 import styles from "./styles.module.css";
 import { api } from "../../services/http";
+import { httpMethods } from "../../utils/variables";
 
 const RequestLike = ({ request = {} }) => {
   // states
@@ -16,7 +17,11 @@ const RequestLike = ({ request = {} }) => {
       isLiked,
     };
     try {
-      const { success, data } = await api.report({ tail: "like", params });
+      const { success, data } = await api.CitizenReport({
+        tail: "like",
+        id: params.reportId,
+        method: httpMethods.put,
+      });
       if (success) {
         setLikes(data);
       } else {

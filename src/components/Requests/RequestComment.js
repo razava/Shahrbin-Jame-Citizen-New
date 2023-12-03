@@ -13,8 +13,8 @@ const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
   //   functions
   const deleteComment = async (e) => {
     e.stopPropagation();
-    const { success } = await api.report({
-      tail: "comment",
+    const { success } = await api.CitizenReport({
+      tail: "Comment",
       id: comment.id,
       method: httpMethods.delete,
     });

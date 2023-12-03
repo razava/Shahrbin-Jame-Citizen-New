@@ -294,6 +294,15 @@ export class DNT {
       .locale("fa")
       .format(format);
   }
+  static toJalaliString2(dateString, format = "DD MMMM YYYY") {
+    if (!dateString) return "---";
+    return dayjs
+      .utc(dateString)
+      .local()
+      .calendar("jalali")
+      .locale("fa")
+      .format(format);
+  }
 
   static hoursToDays(hours) {
     return Math.floor(hours / 24);

@@ -16,6 +16,7 @@ const CategoryItem = ({ item }) => {
       setClassName(styles.animate);
     }
   }, []);
+  console.log(item);
   return (
     <>
       <div

@@ -7,7 +7,7 @@ const MyRequests = () => {
     <>
       <section className={styles.wrapper}>
         <RequestList
-          source={{ controller: "report", params: {} }}
+          source={{ controller: "CitizenReport", params: {tail:"Mine"} }}
           isSelfRequest={true}
         />
       </section>

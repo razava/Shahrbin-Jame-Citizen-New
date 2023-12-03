@@ -41,6 +41,7 @@ const useTree = ({
   const getCurrentNodes = (tracks, navigationStack) => {
     const lastTrack = tracks.slice(-1)?.[0];
     const lastStack = navigationStack.slice(-1)?.[0];
+    console.log(data["categories"]);
     if (lastTrack)
       return lastStack.find(
         (n) => String(n[keys.value]) === String(lastTrack[keys.value])
@@ -167,6 +168,7 @@ const useTree = ({
         navigationStack,
         currentLevel
       );
+      console.log(currentNodes);
       const nodes = getAllNodes(data);
       dispatch({
         type: appActions.SET_CREATE_REQUEST,

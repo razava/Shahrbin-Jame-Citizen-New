@@ -21,7 +21,7 @@ const Poll = () => {
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.polls({ id });
+    const { success, data } = await api.CitizenPolls({ id });
     if (success) {
       setPoll(data);
       setValues({
@@ -36,8 +36,8 @@ const Poll = () => {
       ...values,
       selectedChoices: values.selectedChoices.map((s) => s.id),
     };
-    const { success, data } = await api.polls({
-      tail: "answer",
+    const { success, data } = await api.CitizenPolls({
+      tail: "Polls/Answer",
       payload,
       method: httpMethods.post,
       id: poll.id,

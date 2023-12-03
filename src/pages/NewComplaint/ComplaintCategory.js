@@ -13,7 +13,7 @@ const ComplaintCategory = ({
   // store
   const [store] = useContext(AppStore);
   const categories = store.initialData.complaintCategories || {};
-
+  console.log(categories);
   // functions
   const onSelectNode = (data) => {
     onChange(data.tracks.slice(-1)[0], "category");

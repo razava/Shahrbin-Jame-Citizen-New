@@ -44,9 +44,32 @@ const useMe = () => {
     setValues({ ...passwordValues, [name]: value });
   };
 
+  const handelAvatar = async (value, name) => {
+    console.log(value);
+    setLoading(true);
+    const headers = {
+      "Content-Type": contentTypes.formData,
+    };
+    try {
+      const { success } = await api.CitizenAccount({
+        method: httpMethods.put,
+        payload: DS.toFormData({ File: value, AttachmentType: 1 }),
+        headers,
+        tail: "Avatar",
+        isPerInstance: true,
+      });
+      setLoading(false);
+      if (success) {
+        toast("پروفایل بروزرسانی شد.", { type: "success" });
+        getUserData();
+      }
+    } catch (err) {
+      setLoading(false);
+    }
+  };
   const getUserData = async () => {
-    const { success, data } = await api.userInformation({
-      isPerInstance: false,
+    const { success, data } = await api.CitizenAccount({
+      isPerInstance: true,
     });
     if (success) {
       const payload = { ...store.initialData, user: data };
@@ -58,16 +81,27 @@ const useMe = () => {
   };
 
   const updateUserData = async () => {
+    function clean(obj) {
+      for (var propName in obj) {
+        if (
+          obj[propName] === null ||
+          obj[propName] === undefined ||
+          obj[propName] === ""
+        ) {
+          delete obj[propName];
+        }
+      }
+      return obj;
+    }
+    clean(values)
+    const editedValues = values;
+    delete editedValues.avatarFile;
     setLoading(true);
-    const headers = {
-      "Content-Type": contentTypes.formData,
-    };
     try {
-      const { success } = await api.userInformation({
+      const { success } = await api.CitizenAccount({
         method: httpMethods.put,
-        payload: DS.toFormData(values),
-        headers,
-        isPerInstance: false,
+        payload: editedValues,
+        isPerInstance: true,
       });
       setLoading(false);
       if (success) {
@@ -81,8 +115,8 @@ const useMe = () => {
 
   const changeUserPassword = async () => {
     setLoading(true);
-    const { success } = await api.authenticate({
-      tail: "password",
+    const { success } = await api.CitizenAccount({
+      tail: "Password",
       method: httpMethods.put,
       payload: passwordValues,
     });
@@ -124,6 +158,7 @@ const useMe = () => {
     handleUserDataChange,
     handlePasswordDataChange,
     updateUserData,
+    handelAvatar,
     changeUserPassword,
     getUserData,
     getUserFullName,

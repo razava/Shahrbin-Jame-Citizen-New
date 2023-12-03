@@ -110,26 +110,44 @@ const useNewRequest = () => {
   };
 
   const getPayload = () => {
-    const formData = new FormData();
-    formData.append("categoryId", values.category.id);
-    formData.append("comments", values.comments);
-    formData.append("address.detail", values.address.details);
-    formData.append("address.latitude", values.address.coordinates.latitude);
-    formData.append("address.longitude", values.address.coordinates.longitude);
-    formData.append("IsIdentityVisible", values.isIdentityVisible);
-    values.attachments.forEach((a) => formData.append("attachments", a.file));
-    return formData;
+    // const formData = new FormData();
+    console.log(values.address);
+    const data = {
+      categoryId: values.category.id,
+      comments: values.comments,
+      address: {
+        regionId: 1223,
+        street: "",
+        valley: "",
+        detail: values.address.details,
+        number: "",
+        postalCode: "",
+        latitude: values.address.coordinates.latitude,
+        longitude: values.address.coordinates.longitude,
+        elevation: 0,
+      },
+      attachments: values.attachments.forEach((a) => a.id),
+      isIdentityVisible: values.isIdentityVisible,
+    };
+    // formData.append("categoryId", values.category.id);
+    // formData.append("comments", values.comments);
+    // formData.append("address.detail", values.address.details);
+    // formData.append("address.latitude", values.address.coordinates.latitude);
+    // formData.append("address.longitude", values.address.coordinates.longitude);
+    // formData.append("IsIdentityVisible", values.isIdentityVisible);
+    // values.attachments.forEach((a) => formData.append("attachments", a.id));
+    return data;
   };
 
   const onSubmit = async () => {
     const payload = getPayload();
-    const headers = {
-      "Content-Type": contentTypes.formData,
-    };
-    const { success } = await api.report({
+    // const headers = {
+    //   "Content-Type": contentTypes.formData,
+    // };
+    const { success } = await api.CitizenReport({
       payload,
       method: httpMethods.post,
-      headers,
+      // headers,
       instanceId: values.city.id,
     });
     if (success) {

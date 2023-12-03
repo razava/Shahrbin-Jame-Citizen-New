@@ -19,15 +19,16 @@ const RequestProcess = ({
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.info({
-      tail: "report",
+    console.log("hoo");
+    const { success, data } = await api.CitizenReport({
+      tail: "ReportHistory",
       id: requestId,
     });
-    if (success) setData(data.history);
+    if (success) setData(data);
   };
-
+  console.log(requestId);
   //   hooks
-  const { loading } = useFetch({ fn: getData, auto: requestId });
+  const { loading } = useFetch({ fn: getData, auto: true }); //auto: requestId });
 
   //   renders
   const renderContent = () => {

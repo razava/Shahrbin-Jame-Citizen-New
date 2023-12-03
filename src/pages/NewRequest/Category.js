@@ -23,17 +23,18 @@ const Category = ({
   };
 
   const getCategories = async () => {
-    const { success, data } = await api.common({
-      tail: "categories",
+    const { success, data } = await api.CitizenCommon({
+      tail: "Categories",
       instanceId: city?.id,
     });
     if (success) {
-      setCategories(data);
+      setCategories(data[0]);
     }
   };
 
   // hooks
   const { loading } = useFetch({ fn: getCategories, auto: true });
+  console.log(categories);
   return (
     <>
       <section className={CN.join(styles.categoryWrapper, loading ? styles.loading : "")}>

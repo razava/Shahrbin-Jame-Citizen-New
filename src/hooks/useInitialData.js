@@ -13,7 +13,8 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   // states
   const [done, setDone] = useState(false);
   const [error, setError] = useState(false);
-
+  const [store] = useContext(AppStore);
+  const categories = store.initialData.complaintCategories || {};
   // hooks
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
             fetch(getCategories),
             fetch(getUser),
             fetch(getViolationTypes),
-            fetch(getComplaintCategories),
+            // fetch(getComplaintCategories),
           ]
         : [];
       const allData = await Promise.all(promises);
@@ -36,9 +37,10 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
         categories: allData.length > 0 ? allData[0] : {},
         user: allData.length > 1 ? allData[1] : {},
         violationTypes: allData.length > 2 ? allData[2] : {},
-        complaintCategories: allData.length > 3 ? allData[3] : {},
+        // complaintCategories: allData.length > 3 ? allData[3] : {},
       };
       dispatch({ type: appActions.SET_INITIALDATA, payload: initialData });
+      console.log("iniiii");
     } catch (err) {
       console.log(err);
       setError(true);
@@ -60,22 +62,22 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   };
 
   const getUser = () => {
-    return api.userinformation({
+    return api.CitizenAccount({
       showMessageOnError: false,
-      isPerInstance: false,
+      isPerInstance: true,
     });
 
   };
 
   const getViolationTypes = () => {
-    return api.violation({
-      tail: `types`,
+    return api.CitizenCommon({
+      tail: `ViolationTypes`,
       showMessageOnError: false,
     });
   };
 
   const getCategories = () => {
-    return api.common({
+    return api.CitizenCommon({
       tail: "Categories",
       showMessageOnError: false,
     });

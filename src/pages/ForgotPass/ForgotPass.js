@@ -46,8 +46,8 @@ const ForgotPass = () => {
       captchaKey: captcha.key,
     };
     try {
-      await api.authenticate({
-        tail: "forgotpasswod",
+      await api.CitizenAccount({
+        tail: "ForgotPasswod",
         payload,
         method: httpMethods.post,
       });
