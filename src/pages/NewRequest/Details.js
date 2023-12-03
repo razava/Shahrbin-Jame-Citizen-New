@@ -17,7 +17,7 @@ const Details = ({
   const [details, setDetails] = useState({
     firstName: "",
     lastName: "",
-    nationalId:"",
+    nationalId: "",
     comments: value,
   });
   const { validate, validateOne, errors } = useValidation();
@@ -68,30 +68,34 @@ const Details = ({
     <>
       <section className={styles.details}>
         <div className={styles.inputWrapper} style={{ display: "flex" }}>
-          <TextInput
-            type="string"
-            name="firstName"
-            value={details.firstName}
-            onChange={handelFirstName}
-            label="نام"
-            error={errors.firstName}
-          />
-          <TextInput
-            type="string"
-            name="lastName"
-            value={details.lastName}
-            onChange={handelLastName}
-            label="نام خانوادگی"
-            error={errors.lastName}
-          />
-          <TextInput
-            type="string"
-            name="nationalId"
-            value={details.nationalId}
-            onChange={handelNationalId}
-            label="کد ملی"
-            error={errors.nationalId}
-          />
+          {name !== "comments" && (
+            <>
+              <TextInput
+                type="string"
+                name="firstName"
+                value={details.firstName}
+                onChange={handelFirstName}
+                label="نام"
+                error={errors.firstName}
+              />
+              <TextInput
+                type="string"
+                name="lastName"
+                value={details.lastName}
+                onChange={handelLastName}
+                label="نام خانوادگی"
+                error={errors.lastName}
+              />
+              <TextInput
+                type="string"
+                name="nationalId"
+                value={details.nationalId}
+                onChange={handelNationalId}
+                label="کد ملی"
+                error={errors.nationalId}
+              />
+            </>
+          )}
         </div>
         <TextArea
           placeholder="توضیحات"
@@ -102,7 +106,16 @@ const Details = ({
           value={details.comments}
           onChange={handleChange}
         />
-        <Button className={styles.detailsButton} onClick={handelNextStep}>
+        <Button
+          className={styles.detailsButton}
+          onClick={() => {
+            if (!name == "comments") {
+              handelNextStep();
+            } else {
+              goToNextStep();
+            }
+          }}
+        >
           ادامه
         </Button>
       </section>
