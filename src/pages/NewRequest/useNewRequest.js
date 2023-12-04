@@ -106,6 +106,8 @@ const useNewRequest = () => {
   };
 
   const onChange = (value, name) => {
+    console.log(value);
+    console.log(name);
     setValues({ ...values, [name]: value });
   };
 

@@ -395,14 +395,23 @@
 .inputWrapper{
   display: flex;
   width: 100%;
+  margin: auto;
+}
+.inputWrapper  section{
+  /* flex: 1; */
+  width: 33%;
 }
 .inputWrapper  input{
-  flex: 1 1 0%;
+  border-radius: 10px !important;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1024px) {
   .inputWrapper{
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+  .inputWrapper  section{
+  /* flex: 1; */
+  width: 100%;
 }
 }

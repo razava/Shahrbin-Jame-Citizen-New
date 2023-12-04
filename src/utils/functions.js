@@ -239,6 +239,8 @@ export class ERROR {
       return "رمز عبور باید شامل 6 کاراکتر و حداقل یک عدد باشد.";
     else if (error["passwordMatch"])
       return "رمز عبور و تکرار آن مطابقت ندارند.";
+    else if (error["nationalId"])
+      return "کدملی معتبر نمی باشد.";
   }
 
   static extension() {

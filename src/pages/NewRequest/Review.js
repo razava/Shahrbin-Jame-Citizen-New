@@ -5,6 +5,7 @@ import Toggle from "../../components/Toggle/Toggle";
 import styles from "./styles.module.css";
 
 const Review = ({ values = {}, loading, onSubmit = (f) => f }) => {
+  console.log(values);
   return (
     <>
       <section className={styles.review}>

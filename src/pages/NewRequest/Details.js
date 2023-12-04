@@ -13,6 +13,8 @@ const Details = ({
   name = "",
 }) => {
   // states
+  const checkField = Object.values(name).includes("firstName");
+  console.log(checkField);
   const [comments, setComments] = useState(value);
   const [details, setDetails] = useState({
     firstName: "",
@@ -23,7 +25,8 @@ const Details = ({
   const { validate, validateOne, errors } = useValidation();
   // functions
   const handleChange = (value) => {
-    onChange(value, name.description);
+    console.log(name);
+    onChange(value, name.comments);
     setDetails((prev) => {
       return { ...prev, comments: value };
     });
@@ -57,7 +60,7 @@ const Details = ({
         payload: { lastName: details.lastName },
       },
       {
-        name: validationTypes.required,
+        name: validationTypes.nationalId,
         payload: { nationalId: details.nationalId },
       },
     ];
@@ -68,14 +71,18 @@ const Details = ({
     <>
       <section className={styles.details}>
         <div className={styles.inputWrapper} style={{ display: "flex" }}>
-          {name !== "comments" && (
+          {checkField && (
             <>
               <TextInput
                 type="string"
                 name="firstName"
                 value={details.firstName}
                 onChange={handelFirstName}
-                label="نام"
+                label={
+                  <p>
+                    <span style={{ color: "var(--red)" }}>* </span>نام
+                  </p>
+                }
                 error={errors.firstName}
               />
               <TextInput
@@ -83,7 +90,11 @@ const Details = ({
                 name="lastName"
                 value={details.lastName}
                 onChange={handelLastName}
-                label="نام خانوادگی"
+                label={
+                  <p>
+                    <span style={{ color: "var(--red)" }}>* </span>نام خانوادگی
+                  </p>
+                }
                 error={errors.lastName}
               />
               <TextInput
@@ -91,7 +102,11 @@ const Details = ({
                 name="nationalId"
                 value={details.nationalId}
                 onChange={handelNationalId}
-                label="کد ملی"
+                label={
+                  <p>
+                    <span style={{ color: "var(--red)" }}>* </span>کدملی
+                  </p>
+                }
                 error={errors.nationalId}
               />
             </>
@@ -109,9 +124,10 @@ const Details = ({
         <Button
           className={styles.detailsButton}
           onClick={() => {
-            if (!name == "comments") {
+            if (checkField) {
               handelNextStep();
             } else {
+              // handleChange();
               goToNextStep();
             }
           }}

@@ -80,7 +80,7 @@ const NewComplaint = () => {
           value={values.description}
           onChange={onChange}
           name={{
-            description: "description",
+            comments: "comments",
             firstName: "firstName",
             laststName: "laststName",
             nationalId: "nationalId",

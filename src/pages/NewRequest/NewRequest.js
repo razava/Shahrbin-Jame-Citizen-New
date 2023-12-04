@@ -59,7 +59,7 @@ const NewRequest = () => {
           goToNextStep={goToNextStep}
           value={values.comments}
           onChange={onChange}
-          name={"comments"}
+          name={{ comments: "comments" }}
         />
       );
     else if (currentStep.id === allSteps[4].id)
