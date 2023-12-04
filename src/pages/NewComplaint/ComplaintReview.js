@@ -39,10 +39,10 @@ const ComplaintReview = ({ values = {}, loading, onSubmit = (f) => f }) => {
             {console.log(values)}
             <span className={styles.reviewItemTitle}>جزئیات: </span>
             <span className={styles.reviewItemValue}>
-              {/* {String(values.comments).length > 50
+              {String(values.comments).length > 50
                 ? String(values.comments).slice(0, 50) + "..."
-                : values.comments} */}
-              {values?.description}
+                : values.comments}
+              {/* {values?.description} */}
             </span>
           </li>
 
