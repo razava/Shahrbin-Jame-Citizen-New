@@ -56,7 +56,7 @@ const useNewComplaint = () => {
   const [allSteps, setAllSteps] = useState(allStepsDefault);
   const [values, setValues] = useState({
     category: {},
-    description: "",
+    comments: "",
     firstName: "",
     laststName: "",
     nationalId: "",
@@ -102,7 +102,7 @@ const useNewComplaint = () => {
     const formData = new FormData();
     formData.append("instanceId", values.city?.id);
     formData.append("categoryId", values.category.id);
-    formData.append("description", values.description);
+    formData.append("description", values.comments);
     formData.append("firstName", values.firstName);
     formData.append("laststName", values.laststName);
     formData.append("nationalId", values.nationalId);

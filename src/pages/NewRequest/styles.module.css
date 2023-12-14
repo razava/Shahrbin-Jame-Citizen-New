@@ -392,17 +392,21 @@
   }
 }
 
-.inputWrapper{
+.inputWrapper {
   display: flex;
   width: 100%;
+  margin: auto;
 }
-.inputWrapper  input{
-  flex: 1 1 0%;
+.inputWrapper section {
+  width: 33%;
 }
-@media screen and (max-width: 992px) {
-  .inputWrapper{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.inputWrapper input {
+  border-radius: 8px !important;
 }
+@media screen and (max-width: 1024px) {
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
