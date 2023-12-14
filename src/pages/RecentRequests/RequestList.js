@@ -25,6 +25,9 @@ const RequestList = ({
     };
     try {
       const { success, data, headers } = await api[source.controller]({
+        ...source.params,
+        params: { ...params, ...source.params.params },
+        ...source.rest,
       });
       if (success) {
         setData((prev) => [...prev, ...data]);

@@ -111,7 +111,8 @@ const useNewRequest = () => {
 
   const getPayload = () => {
     // const formData = new FormData();
-    console.log(values.address);
+    // console.log(values.address);
+    // console.log(values.attachments);
     const data = {
       categoryId: values.category.id,
       comments: values.comments,
@@ -126,9 +127,10 @@ const useNewRequest = () => {
         longitude: values.address.coordinates.longitude,
         elevation: 0,
       },
-      attachments: values.attachments.forEach((a) => a.id),
+      attachments: values.attachments.map((a) => a.id),
       isIdentityVisible: values.isIdentityVisible,
     };
+    console.log(data);
     // formData.append("categoryId", values.category.id);
     // formData.append("comments", values.comments);
     // formData.append("address.detail", values.address.details);
