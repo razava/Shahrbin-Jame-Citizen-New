@@ -20,8 +20,24 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
       : noThumbnail;
   const [store] = useContext(AppStore);
   const categories = store.initialData.categories || {};
-  const categoryTitle = categories.find((item) => item.id == request.categoryId)
-  console.log(categoryTitle);
+  console.log(categories);
+  // const categoryTitle = categories.find((item) => item.id == request.categoryId)
+  // console.log(categoryTitle);
+  console.log(request);
+  let categoryTitle;
+  categories.categories.map((item) => {
+    if (item.id == request.categoryId) {
+      categoryTitle = item.title;
+      return item;
+    } else {
+      const a = item.categories.map((itm) => {
+        if (itm.id == request.categoryId) {
+          categoryTitle = itm.title;
+        }
+      });
+    }
+  });
+  console.log(request);
   // hooks
   const navigate = useNavigate();
 
@@ -46,7 +62,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           <div className={styles.requestCardInfoRow}>
             <p className={styles.requestCardCategory}>
               {/* {request.category.title} */}
-              {categoryTitle.title}
+              {categoryTitle}
             </p>
             <RequestStatus lastStatus={request.lastStatus} />
           </div>
@@ -72,7 +88,10 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           </div>
 
           <div className={styles.requestCardInfoRow}>
-            <RequestProcessIcon request={request} logs={request.transitionLogs} />
+            <RequestProcessIcon
+              request={request}
+              logs={request.transitionLogs}
+            />
             <div className={styles.requestCardActions}>
               <RequestViolation request={request} />
               <RequestLike request={request} />

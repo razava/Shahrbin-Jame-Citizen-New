@@ -40,6 +40,7 @@ const InitialLoader = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    console.log(currentInstance);
     if (currentInstance?.id) getInitialData();
   }, [currentInstance]);
   return (

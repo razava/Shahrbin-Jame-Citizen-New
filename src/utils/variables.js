@@ -50,6 +50,7 @@ export const appRoutes = {
   reportDetails: "/user/my-report/:id",
   poll: "/user/poll/:id",
   password: "/user/password",
+  FAQ: "/user/FAQ",
   feedback: "/user/feedback/:id",
 };
 
@@ -173,6 +174,7 @@ export const pageTitles = {
   "/user/my-report/:id": "جزئیات درخواست",
   "/user/poll/:id": "نظرسنجی",
   "/user/password": "تغییر رمز عبور",
+  "/user/FAQ": "سوالات متداول",
   "/user/new-complaint": "ثبت شکایت",
   "/user/my-complaints": "شکایات من",
   "/report/finish": "/report/finish",

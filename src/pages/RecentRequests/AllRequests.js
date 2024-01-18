@@ -3,7 +3,7 @@ import RequestList from "./RequestList";
 const AllRequests = () => {
   return (
     <>
-      <RequestList source={{ controller: "CitizenReport" }} />
+      <RequestList source={{ controller: "CitizenReport" , params:"" }} />
     </>
   );
 };

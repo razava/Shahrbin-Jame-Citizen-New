@@ -28,7 +28,8 @@ const Category = ({
       instanceId: city?.id,
     });
     if (success) {
-      setCategories(data[0]);
+      // console.log(data);
+      setCategories(data);
     }
   };
 

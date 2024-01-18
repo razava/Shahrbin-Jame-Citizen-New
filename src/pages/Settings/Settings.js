@@ -33,6 +33,11 @@ const Settings = () => {
             onClick={() => URI.open("https://shahrbinapp.com")}
           />
           <SettingCard
+            title="سوالات متداول"
+            icon={"question-circle"}
+            onClick={() => navigate(appRoutes.FAQ)}
+          />
+          <SettingCard
             title="حریم خصوصی"
             icon={"lock"}
             onClick={() => navigate(appRoutes.pnpUser)}

@@ -17,7 +17,7 @@ const UserContainer = ({ children }) => {
       default: <UserContainerDesktop>{children}</UserContainerDesktop>,
     },
   });
-
+  
   return (
     <>
       <InitialLoader>{render()}</InitialLoader>

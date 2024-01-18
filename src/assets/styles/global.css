@@ -186,3 +186,14 @@ input {
   border-radius: 15px;
   background-color: var(--yellow);
 }
+
+.accordion__button {
+  text-align: right !important;
+  font-size: 15px !important;
+}
+.accordion__button:before {
+  transform: rotate(-225deg) !important;
+  margin-left: 20px !important;
+}
+
+

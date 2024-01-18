@@ -1,0 +1,7 @@
+.container{
+    @apply bg-red-400
+}
+
+.accordion__button {
+    text-align: right !important;
+}

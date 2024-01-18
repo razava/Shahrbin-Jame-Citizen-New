@@ -25,6 +25,7 @@ const RequestComments = ({ request = {} }) => {
     e.stopPropagation();
     open({ renderComponent: () => <Comments request={request} />, style });
   };
+  console.log(request);
   return (
     <>
       <span onClick={onIconClick} className={styles.RequestCardCommentAction}>
@@ -50,7 +51,7 @@ const Comments = ({ request = {} }) => {
   //   functions
   const getComments = async () => {
     const { success, data } = await api.CitizenReport({
-      tail: "Comment",
+      tail: "Comments",
       id: request.id,
     });
     if (success) {
@@ -61,14 +62,15 @@ const Comments = ({ request = {} }) => {
   const addComment = async (e) => {
     if (commentText.trim() === "") return;
     e.stopPropagation();
-    const payload = {
-      reportId: request.id,
-      comment: commentText,
-      isSeen: true,
-      isVerified: true,
-    };
+    // const payload = {
+    //   // reportId: request.id,
+    //   comment: commentText,
+    //   // isSeen: true,
+    //   isVerified: true,
+    // };
+    const payload = { comment: commentText };
     const { success } = await api.CitizenReport({
-      tail: "comment",
+      tail: "Comment",
       id: request.id,
       payload,
       method: httpMethods.post,

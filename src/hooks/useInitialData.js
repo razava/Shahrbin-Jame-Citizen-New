@@ -22,7 +22,9 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   const getInitialData = async () => {
     setDone(false);
     setError(false);
+    console.log(444444);
     try {
+      console.log(isAuthenticated,2222222222);
       const promises = isAuthenticated
         ? [
             fetch(getCategories),

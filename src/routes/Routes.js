@@ -31,6 +31,7 @@ import NewComplaint from "../pages/NewComplaint/NewComplaint";
 import MyComplaints from "../pages/MyComplaints/MyComplaints";
 import Complaint from "../pages/Complaint/Complaint";
 import Feedback from "../pages/Feedback/Feedback";
+import FAQ from "../pages/FAQ/FAQ";
 
 const RateReport = lazy(() => import("../pages/RateReport/RateReport"));
 const LoginGov = lazy(() => import("../pages/LoginGov/LoginGov"));
@@ -110,6 +111,7 @@ const Routes = () => {
             <Route path={appRoutes.news} element={<News />} />
             <Route path={appRoutes.settings} element={<Settings />} />
             <Route path={appRoutes.profile} element={<Profile />} />
+            <Route path={appRoutes.FAQ} element={<FAQ />} />
             <Route path={appRoutes.password} element={<Password />} />
             <Route path={appRoutes.notifications} element={<Notifications />} />
             <Route path={appRoutes.pnpUser} element={<Pnp />} />

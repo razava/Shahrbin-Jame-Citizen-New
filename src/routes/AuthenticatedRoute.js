@@ -11,6 +11,7 @@ const AuthenticatedRoute = ({ context }) => {
   const isDesktop = windowWidth > responsiveBreakPoint;
   const { pathname, search } = useLocation();
   const returnUrl = URI.create(pathname + search).searchParams.get("returnUrl");
+  console.log("sdsssd");
   console.log(isDesktop, pathname === appRoutes.menu);
   if (isAuthenticated) {
     if (pathname === appRoutes.menu && isDesktop) {

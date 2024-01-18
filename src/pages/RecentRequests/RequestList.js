@@ -24,6 +24,7 @@ const RequestList = ({
       pageSize,
     };
     try {
+      console.log(source);
       const { success, data, headers } = await api[source.controller]({
         ...source.params,
         params: { ...params, ...source.params.params },
@@ -31,6 +32,7 @@ const RequestList = ({
       });
       if (success) {
         setData((prev) => [...prev, ...data]);
+        console.log(data);
         extractPaginationData(headers);
       }
     } catch (err) {
@@ -57,7 +59,7 @@ const RequestList = ({
         makeRequest({ pageNumber: CurrentPage + 1, pageSize: PageSize });
     }
   }, [isIntersecting]);
-
+  console.log(data);
   // renders
   const renderRequests = () => {
     if (loading && data.length === 0) return;
