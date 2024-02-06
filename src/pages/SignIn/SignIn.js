@@ -48,16 +48,16 @@ const SignIn = () => {
     const payload = {
       username: values.phoneNumber,
       password: values.password,
-      // captcha: {
-      //   key: captcha.key,
-      //   value: captcha.value,
-      // },
-      // captchaValue: captcha.value,
-      // captchaKey: captcha.key,
+      captcha: {
+        key: captcha.key,
+        value: captcha.value,
+      },
+      captchaValue: captcha.value,
+      captchaKey: captcha.key,
     };
     try {
       const { success, data, status } = await api.CitizenAccount({
-        tail: "LoginApp",
+        tail: "Login",
         payload,
         method: httpMethods.post,
       });

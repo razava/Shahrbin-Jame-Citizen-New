@@ -24,7 +24,8 @@ const createApi = () => {
             cancelTokenBearer = { current: null },
             showMessageOnError = true,
             isPerInstance = true,
-            instanceId = null,
+            // instanceId = null,
+            instanceId = 1,
           } = props || {}; // request props
 
           const cancelToken = axios.CancelToken.source(); // cancel token
