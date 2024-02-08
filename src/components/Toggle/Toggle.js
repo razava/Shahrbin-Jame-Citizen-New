@@ -7,7 +7,7 @@ const Toggle = ({
   onChange = (f) => f,
   name = "",
   classNames = { wrapper: "", thumb: "" },
-  defaultState=false
+  defaultState = false,
 }) => {
   // states
   const [active, setActive] = useState(defaultState);
@@ -24,7 +24,7 @@ const Toggle = ({
           styles.toggle,
           styles[`type${type}`],
           active ? styles.active : "",
-          classNames.wrapper
+          classNames.wrapper,
         ].join(" ")}
         onClick={handleChange}
       >

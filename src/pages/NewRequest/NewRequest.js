@@ -70,7 +70,14 @@ const NewRequest = () => {
         />
       );
     else if (currentStep.id === allSteps[5].id)
-      return <Review values={values} loading={loading} onSubmit={onSubmit} />;
+      return (
+        <Review
+          values={values}
+          loading={loading}
+          onSubmit={onSubmit}
+          onChange={onChange}
+        />
+      );
   };
   return (
     <>

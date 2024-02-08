@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/Button/Button";
 import { DNT } from "../../utils/functions";
 import Toggle from "../../components/Toggle/Toggle";
 import styles from "./styles.module.css";
 
-const Review = ({ values = {}, loading, onSubmit = (f) => f }) => {
+const Review = ({
+  values = {},
+  loading,
+  onSubmit = (f) => f,
+  onChange = (f) => f,
+}) => {
   return (
     <>
       <section className={styles.review}>
@@ -59,7 +64,7 @@ const Review = ({ values = {}, loading, onSubmit = (f) => f }) => {
 
       <div className={styles.identityVisibility}>
         <p>اطلاعات هویتی من را نمایش بده.</p>
-        <Toggle />
+        <Toggle onChange={onChange} name="isIdentityVisible" />
       </div>
       <Button
         className={styles.stepButton}
