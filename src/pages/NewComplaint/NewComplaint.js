@@ -11,6 +11,7 @@ import Details from "../NewRequest/Details";
 import Attachments from "../NewRequest/Attachments";
 import ComplaintReview from "./ComplaintReview";
 import useInstance from "../../hooks/useInstance";
+import ComplaintModal from "../../components/Modals/ComplaintModal";
 
 const NewComplaint = () => {
   // states
@@ -106,6 +107,7 @@ const NewComplaint = () => {
   };
   return (
     <>
+      <ComplaintModal />
       <div
         className={CN.join(
           styles.container,

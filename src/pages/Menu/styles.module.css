@@ -186,6 +186,9 @@
   font-weight: bold;
 }
 
+.boldMenus {
+  font-weight: 810;
+}
 .sideMenu.open .sideMenuItemTitle {
   opacity: 1;
   width: auto;

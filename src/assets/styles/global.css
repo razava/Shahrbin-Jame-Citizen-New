@@ -186,3 +186,18 @@ input {
   border-radius: 15px;
   background-color: var(--yellow);
 }
+
+
+.react-responsive-modal-modal {
+  background: white;
+  max-width: 500px;
+  width: 100%;
+  direction: rtl;
+  text-align: right;
+  padding: 20px;
+  border-radius: 10px
+}
+.react-responsive-modal-modal {
+  @apply rounded-lg;
+}
+

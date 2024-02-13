@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AuthenticationMobile = ({ children }) => {
   // states
-  const [authMode, setAuthMode] = useState(authModes.intro);
+  const [authMode, setAuthMode] = useState(authModes.signin);
   const [overlayPosition, setOverlayPosition] = useState("down");
   const [svgHeight, setSvgHeight] = useState(window.innerHeight / 2);
   const [isNavigating, setIsNavigating] = useState(false);

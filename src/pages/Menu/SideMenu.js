@@ -6,6 +6,7 @@ import { CN } from "../../utils/functions";
 import { AppStore } from "../../store/AppContext";
 import Icon from "../../components/Icon/Icon";
 import { appActions } from "../../utils/variables";
+import classNames from "classnames";
 
 const SideMenu = () => {
   // store
@@ -14,6 +15,7 @@ const SideMenu = () => {
 
   // states
   const [isAnimating, setIsAnimating] = useState(false);
+  const boldMenus = ["ثبت درخواست", "ثبت شکایت"];
 
   // hooks
   const { pathname } = useLocation();
@@ -27,6 +29,10 @@ const SideMenu = () => {
   const onTransitionEnd = () => {
     setIsAnimating(false);
   };
+  const mergedClassNames = classNames(
+    styles.sideMenuItemTitle,
+    boldMenus?.includes()
+  );
 
   return (
     <>
@@ -59,7 +65,15 @@ const SideMenu = () => {
                   {menuItem.icon()}
                 </span>
               </div>
-              <span className={styles.sideMenuItemTitle}>{menuItem.title}</span>
+              {/* {boldMenus.includes(menuItem.title) ? : ""} */}
+              <span
+                className={CN.join(
+                  styles.sideMenuItemTitle,
+                  boldMenus.includes(menuItem.title) && styles.boldMenus
+                )}
+              >
+                {menuItem.title}
+              </span>
             </Link>
           ))}
         </ul>
