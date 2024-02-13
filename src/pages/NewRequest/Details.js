@@ -5,11 +5,13 @@ import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import useValidation from "../../hooks/useValidation";
 import { validationTypes } from "../../utils/variables";
+import CategoryForm from "./CategoryForm";
 
 const Details = ({
   goToNextStep = (f) => f,
   onChange = (f) => f,
   value,
+  values,
   name = "",
 }) => {
   // states
@@ -22,6 +24,7 @@ const Details = ({
     comments: value,
   });
   const { validate, validateOne, errors } = useValidation();
+  console.log(values);
   // functions
   const handleChange = (value) => {
     onChange(value, name.comments);
@@ -68,6 +71,7 @@ const Details = ({
   return (
     <>
       <section className={styles.details}>
+        <CategoryForm data={values} />
         <div className={styles.inputWrapper} style={{ display: "flex" }}>
           {checkField && (
             <>

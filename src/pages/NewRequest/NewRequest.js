@@ -57,6 +57,7 @@ const NewRequest = () => {
         <Details
           goToNextStep={goToNextStep}
           value={values.comments}
+          values={values}
           onChange={onChange}
           name={{ comments: "comments" }}
         />

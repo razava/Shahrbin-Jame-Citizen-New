@@ -50,6 +50,8 @@ dayjs.extend(jalaliday);
 dayjs.extend(utc);
 
 // utility class for classNames
+export const cn = (...arg) => [...arg].join(" ");
+
 export class CN {
   // joins given classNames into one string
   static join(...args) {
@@ -516,3 +518,45 @@ export class FS {
     } else return true;
   }
 }
+
+export const isImage = (path) =>
+  [
+    "jpg",
+    "jpeg",
+    "jpe",
+    "jif",
+    "jfif",
+    "jfi",
+    "png",
+    "gif",
+    "tiff",
+    "tif",
+    "svg",
+    "svgz",
+  ].some((ext) => ext === getExtension(path).toLowerCase());
+
+export const checkOverlAllSize = (attachments, MAX_SIZE) => {
+  const overallSize = attachments.reduce((t, a) => t + a.size, 0);
+  console.log(overallSize, MAX_SIZE);
+  if (overallSize > MAX_SIZE) {
+    return false;
+  } else return true;
+};
+
+export const showSizeError = (maxSize) => {
+  toast(`حجم پیوست‌ها نمی‌تواند از ${maxSize} مگابایت بیشت باشد.`, {
+    type: "error",
+  });
+};
+
+export const getExtension = (path) =>
+  String(path).split(".")[String(path).split(".").length - 1];
+
+export const checkExtension = (path, allowedExtensions = []) => {
+  const extension = getExtension(path);
+  return allowedExtensions.indexOf(extension.toLowerCase()) !== -1;
+};
+
+export const showExtensionError = () => {
+  toast("فرمت فایل انتخابی مجاز نیست.", { type: "error" });
+};
