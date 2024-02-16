@@ -68,10 +68,19 @@ const Details = ({
     if (!validate(validators)) return;
     else goToNextStep();
   };
+
+  const handleCategoryForm = () => {
+    goToNextStep();
+  };
+
   return (
     <>
       <section className={styles.details}>
-        <CategoryForm data={values} />
+        <CategoryForm
+          onChange={(data) => onChange(data, "detail")}
+          requestOnChange={onChange}
+          data={values}
+        />
         <div className={styles.inputWrapper} style={{ display: "flex" }}>
           {checkField && (
             <>
@@ -115,15 +124,18 @@ const Details = ({
             </>
           )}
         </div>
-        <TextArea
-          placeholder="توضیحات"
-          classNames={{
-            wrapper: styles.commentsWrapper,
-            input: styles.commentsInput,
-          }}
-          value={details.comments}
-          onChange={handleChange}
-        />
+        {!values.category.form && (
+          <TextArea
+            placeholder="توضیحات"
+            classNames={{
+              wrapper: styles.commentsWrapper,
+              input: styles.commentsInput,
+            }}
+            value={details.comments}
+            onChange={handleChange}
+          />
+        )}
+
         <Button
           className={styles.detailsButton}
           onClick={() => {

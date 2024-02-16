@@ -68,6 +68,7 @@ const NewRequest = () => {
           goToNextStep={goToNextStep}
           value={values.attachments}
           onChange={onChange}
+          values={values}
         />
       );
     else if (currentStep.id === allSteps[5].id)

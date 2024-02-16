@@ -33,6 +33,7 @@ const CheckBox = ({
   //   states
   //  ** flags
   const [isChecked, setIsChecked] = useState(checked);
+  const [checks, setChecks] = useState([]);
 
   // styles
   const sizeStyle = getSizeStyle(size);
@@ -59,14 +60,18 @@ const CheckBox = ({
   const onCheckBoxClick = () => {
     if (disabled) return;
     setIsChecked(!isChecked);
+    setChecks([...checks, { title, checked: !isChecked }]);
     onChange({ title, checked: !isChecked }, name);
   };
 
   //   effects
+  // useEffect(() => {
+  //   setIsChecked(checked);
+  // }, [checked]);
   useEffect(() => {
-    setIsChecked(checked);
-  }, [checked]);
-
+    console.log(checks);
+    // onChange(checks, name);
+  }, [checks]);
   //   renders
   const renderLabel = () =>
     title ? <span className={labelClassName}>{title}</span> : null;

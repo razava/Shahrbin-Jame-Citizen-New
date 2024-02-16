@@ -122,12 +122,12 @@ const DropDown = ({
   useEffect(() => {
     if (inDialog) {
       const style = {
-        position: "fixed",
+        position: "absolutey",
         zIndex: 10000,
       };
       const boundings = toggleRef.current.getBoundingClientRect();
-      style.top = boundings?.top + boundings?.height;
-      style.left = boundings?.right - boundings.width;
+      style.top = "76px"
+      style.left = "0px";
       style.width = boundings.width;
       setDropdownStyle(style);
     }

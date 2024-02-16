@@ -11,3 +11,10 @@ export async function getFAQ() {
   });
   return data.data;
 }
+
+export async function postFiles(payload) {
+  const data = await axios.post(`/api/Files`, payload, {
+    headers: { Authorization: `Bearer ${Token}` },
+  });
+  return data.data;
+}

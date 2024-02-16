@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import DropDown from "../../DropDown/DropDown";
 import TextInput from "../../TextInput/TextInput";
 
-const Optional = ({ field = {}, handleChange2 }) => {
+const Optional = ({ field = {}, handleChange2, name }) => {
   const [selecteds, setSelecteds] = useState([]);
   console.log(field);
   const handleChange = (selecteds) => {
     setSelecteds(selecteds);
-    handleChange(selecteds);
+    console.log(111);
+    console.log(name);
+    handleChange2(selecteds, name);
   };
+
   return (
     <>
       <DropDown

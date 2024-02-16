@@ -14,6 +14,7 @@ const Attachments = ({
   goToNextStep = (f) => f,
   onChange = (f) => f,
   value,
+  values,
 }) => {
   // states
   const [attachments, setAttachments] = useState(value);
@@ -22,7 +23,7 @@ const Attachments = ({
   // functions
   const handleFileSelection = async (file) => {
     // validations
-    setLoading(true)
+    setLoading(true);
     const newFiles = [...attachments.map((a) => a.file), file];
     const isExtensionOkay = Array.from(newFiles).every((file) =>
       FS.checkExtension(file.name)
@@ -34,7 +35,7 @@ const Attachments = ({
     const headers = {
       "Content-Type": contentTypes.formData,
     };
-    let fileId
+    let fileId;
     try {
       const { data, success } = await api.Files({
         headers,
@@ -44,8 +45,8 @@ const Attachments = ({
         isPerInstance: false,
       });
       if (success) {
-        setLoading(false)
-        fileId = data.id
+        setLoading(false);
+        fileId = data.id;
         console.log(fileId);
         // dispatch({ type: appActions.SET_INSTANCES, payload: data });
         // setAppInstance(getCurrentInstance(data));
@@ -66,7 +67,14 @@ const Attachments = ({
     setAttachments(newAttachments);
     onChange(newAttachments, "attachments");
   };
-
+  console.log(values.category.form?.elements);
+  let hasAttachment;
+  values.category.form?.elements.map((item) => {
+    if (item.elementType == "dropzone") {
+      hasAttachment = true;
+    }
+  });
+  console.log(hasAttachment);
   // renders
   const renderFileAttachment = () => {
     return (
@@ -114,7 +122,11 @@ const Attachments = ({
 
   const renderAttachmentButton = () => {
     return (
-      <Button className={styles.stepButton} disabled={loading} onClick={goToNextStep}>
+      <Button
+        className={styles.stepButton}
+        disabled={loading}
+        onClick={goToNextStep}
+      >
         ادامه
       </Button>
     );
@@ -123,11 +135,11 @@ const Attachments = ({
     <>
       <div className={styles.attachmentsWrapper}>
         <section className={styles.attachmentMethods}>
-          {renderFileAttachment()}
+          {!hasAttachment && renderFileAttachment()}
           {renderCameraAttachment()}
         </section>
         {/* <Uploader /> */}
-        {renderAttachments()}
+        {!hasAttachment && renderAttachments()}
         {loading && <Loader />}
       </div>
       {renderAttachmentButton()}

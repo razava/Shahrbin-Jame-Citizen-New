@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput from "../../components2/TextInput/TextInput";
 import TextArea from "../../components2/TextArea/TextArea";
 import RadioGroup from "../../components2/Radio/RadioGroup";
@@ -8,33 +8,120 @@ import Header from "../../components2/Header/Header";
 import DropZone from "../../components2/FileDrop/DropZone";
 import Message from "../../components2/Message/Message";
 
-export default function CategoryForm({ data }) {
-  console.log(data);
+export default function CategoryForm({ data, onChange , requestOnChange }) {
+  console.log(data.category.form.elements);
+  let obj = {};
+  const names = data.category.form.elements.map((item) => {
+    if (item.elementType !== "message" || item.elementType !== "header")
+      obj[item.name] = "";
+  });
+  const [values, setValues] = useState(obj);
+  console.log(obj);
+  console.log(values);
   const { category } = data;
-  const handleChange = (e) => {
-    console.log(e);
+  const handleChange = (e, name) => {
+    console.log(e, name);
+    setValues({ ...values, [name]: e });
+    if (name == "dropzone") {
+      console.log("44444");
+      requestOnChange(e, "attachments");
+    } else {
+      onChange({ ...values, [name]: e });
+    }
   };
 
   return (
-    <div className=" !mr-10 !bg-red-300">
+    <div className="w-full flex flex-col gap-2">
       {category?.form?.elements.map((item) => {
         const meta = JSON.parse(item.meta);
         if (item.elementType === "text") {
-          return <TextInput onChange={handleChange} {...meta.props} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <TextInput
+                name={item.name}
+                onChange={handleChange}
+                {...meta.props}
+              />
+            </div>
+          );
         } else if (item.elementType == "select") {
-          return <Optional handleChange2={handleChange} field={meta} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <Optional
+                handleChange2={handleChange}
+                name={item.name}
+                field={meta}
+              />
+            </div>
+          );
         } else if (item.elementType == "textarea") {
-          return <TextArea {...meta.props} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <TextArea
+                name={item.name}
+                onChange={handleChange}
+                {...meta.props}
+              />
+            </div>
+          );
         } else if (item.elementType == "radio") {
-          return <RadioGroup {...meta.props} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <RadioGroup
+                onChange={(value) => handleChange(value, item.name)}
+                {...meta.props}
+              />
+            </div>
+          );
         } else if (item.elementType == "checkbox") {
-          return <CheckBoxGroup {...meta.props} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <CheckBoxGroup
+                name={item.name}
+                onChange={handleChange}
+                {...meta.props}
+              />
+            </div>
+          );
         } else if (item.elementType == "header") {
-          return <Header {...meta.props} />;
+          return (
+            <div
+              //   style={{ order: item.order }}
+              className={` order-${item.order}`}
+            >
+              <Header {...meta.props} />
+            </div>
+          );
         } else if (item.elementType == "dropzone") {
-          return <DropZone {...meta.props} />;
+          return (
+            <div className={` order-${item.order}`}>
+              <DropZone
+                onChange={(value) => handleChange(value, "dropzone")}
+                {...meta.props}
+              />
+            </div>
+          );
         } else if (item.elementType == "message") {
-          return <Message {...meta.props} />;
+          return (
+            <div className={` order-${item.order}`}>
+              <Message {...meta.props} />
+            </div>
+          );
         }
       })}
     </div>

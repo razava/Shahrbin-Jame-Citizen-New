@@ -14,14 +14,17 @@ const CheckBoxGroup = ({
 
   const handleChange = (value, index) => {
     const newValues = values;
+    console.log(newValues);
+    console.log(value);
     newValues[index] = value;
+    console.log(values);
     setValues(newValues);
     onChange(newValues, name);
   };
 
-  useEffect(() => {
-    setValues(defaultSelecteds);
-  }, [defaultSelecteds]);
+  // useEffect(() => {
+  //   setValues(defaultSelecteds);
+  // }, [defaultSelecteds]);
   return (
     <>
       <section className={styles.checkBoxGroup}>
