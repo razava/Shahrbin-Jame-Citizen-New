@@ -9,7 +9,7 @@ const RedirectRoute = ({ redirectTo = "" }) => {
 
   return (
     <Navigate
-      to={redirectTo || isAuthenticated ? appRoutes.menu : appRoutes.singin}
+      to={redirectTo || isAuthenticated ? appRoutes.menu : appRoutes.signin}
     />
   );
 };

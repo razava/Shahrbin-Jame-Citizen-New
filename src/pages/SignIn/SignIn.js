@@ -141,7 +141,7 @@ const SignIn = () => {
             ورود با دولت من
           </a>
         )}
-        <AuthLink to={authModes.signup}>حساب جدیدی ایجاد کند.</AuthLink>
+        <AuthLink to={authModes.signup}>حساب جدیدی ایجاد کنید.</AuthLink>
         <AuthLink to={authModes.forgotpass}>
           رمز عبور خود را فراموش کرده‌اید؟
         </AuthLink>

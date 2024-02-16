@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import image1 from "../../assets/images/auth_image_1.png";
 import image2 from "../../assets/images/auth_image_2.png";
-import image3 from "../../assets/images/auth_image_3.png";
+import image3 from "../../assets/images/auth_image_6.png";
 import image4 from "../../assets/images/auth_image_4.png";
 import Supporters from "./Supporters";
 import ExternalLinks from "./ExternalLinks";
@@ -36,7 +36,7 @@ const AuthenticationDesktop = ({ children }) => {
     setAuthMode(authMode);
     setIsNavigating(false);
     // setTimeout(() => {
-      navigate(appRoutes[authMode]);
+    navigate(appRoutes[authMode]);
     // }, 300);
   };
 

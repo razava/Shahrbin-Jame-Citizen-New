@@ -15,7 +15,7 @@ export default function ComplaintModal() {
       <Modal open={open} onClose={onCloseModal} center>
         <h1 style={{ textAlign: "center", marginTop: "30px" }}>توجه!</h1>
         <h2 style={{ textAlign: "center", marginTop: "20px" }}>
-          این صفحه برای ثبت شکایات از عملکرد شهرداری یزد میباشد.
+          این صفحه برای ثبت شکایات از عملکرد شهرداری است.
         </h2>
         <h3
           style={{
