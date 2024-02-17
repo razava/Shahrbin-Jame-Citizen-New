@@ -24,7 +24,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
     setError(false);
     console.log(444444);
     try {
-      console.log(isAuthenticated,2222222222);
+      console.log(isAuthenticated, 2222222222);
       const promises = isAuthenticated
         ? [
             fetch(getCategories),
@@ -64,11 +64,10 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   };
 
   const getUser = () => {
-    return api.CitizenAccount({
+    return api.Authenticate({
       showMessageOnError: false,
       isPerInstance: true,
     });
-
   };
 
   const getViolationTypes = () => {

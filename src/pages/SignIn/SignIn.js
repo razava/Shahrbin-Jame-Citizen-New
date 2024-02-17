@@ -7,6 +7,7 @@ import Captcha from "../../components/Captcha/Captcha";
 import Button from "../../components/Button/Button";
 import AuthLink from "../../components/Authentication/AuthLink";
 import {
+  appConstants,
   appRoutes,
   authModes,
   httpMethods,
@@ -17,12 +18,13 @@ import { api } from "../../services/http";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import useValidation from "../../hooks/useValidation";
+import { LS } from "../../utils/functions";
 
 const SignIn = () => {
   // states
   const [values, setValues] = useState({
     phoneNumber: "",
-    password: "",
+    // password: "",
   });
 
   // functions
@@ -46,24 +48,25 @@ const SignIn = () => {
 
   const signin = async (captcha) => {
     const payload = {
-      username: values.phoneNumber,
-      password: values.password,
+      phoneNumber: values.phoneNumber,
       captcha: {
         key: captcha.key,
         value: captcha.value,
       },
-      captchaValue: captcha.value,
-      captchaKey: captcha.key,
     };
     try {
-      const { success, data, status } = await api.CitizenAccount({
-        tail: "Login",
+      const { success, data, status } = await api.Authenticate({
+        tail: "LogisterCitizen",
         payload,
         method: httpMethods.post,
       });
       captcha.refresh();
       captcha.setValue("");
-      if (success) onSignInSuccess(data);
+      if (success) {
+        navigate(appRoutes.verify);
+        LS.save(appConstants.SH_CT_OTP_TOKEN, data);
+      }
+      // if (success) onSignInSuccess(data);
     } catch (err) {
       if (err.status === statusCodes.requireVerification)
         navigate(appRoutes.verify, { state: { ...values, type: "signin" } });
@@ -98,7 +101,7 @@ const SignIn = () => {
           }}
           error={errors.phoneNumber}
         />
-        <TextInput
+        {/* <TextInput
           label="گذرواژه"
           type="password"
           name="password"
@@ -110,7 +113,7 @@ const SignIn = () => {
             input: authStyles.authInput,
           }}
           error={errors.password}
-        />
+        /> */}
       </>
     );
   };

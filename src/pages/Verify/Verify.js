@@ -6,9 +6,10 @@ import useAuthenticate from "../../hooks/useAuthenticate";
 import useFetch from "../../hooks/useFetch";
 import useResize from "../../hooks/useResize";
 import { api } from "../../services/http";
-import { appRoutes, httpMethods } from "../../utils/variables";
+import { appConstants, appRoutes, httpMethods } from "../../utils/variables";
 import styles from "./styles.module.css";
 import VerifyInput from "./VerifyInput";
+import { LS } from "../../utils/functions";
 
 const total = 6;
 
@@ -68,22 +69,24 @@ const Verify = () => {
 
   const handleVerify = async (e) => {
     const payload = {
-      username: state.phoneNumber,
       verificationCode: verificationCode.current.reverse().join(""),
-      password: state.password || "string",
+      otpToken: LS.read(appConstants.SH_CT_OTP_TOKEN),
     };
     try {
-      const { success, data } = await api.CitizenAccount({
-        tail: state.type === "signin" ? "Verify" : "RequestToken",
+      const { success, data } = await api.Authenticate({
+        // tail: state.type === "signin" ? "Verify" : "RequestToken",
+        tail: "VerifyCitizen",
         payload,
         method: httpMethods.post,
       });
       if (success) {
-        if (state.type === "signin") onSignInSuccess(data);
-        else
-          navigate(appRoutes.resetpass, {
-            state: { token: data, userName: state.phoneNumber },
-          });
+        // if (state.type === "signin") onSignInSuccess(data);
+        // else
+        //   navigate(appRoutes.resetpass, {
+        //     state: { token: data, userName: state.phoneNumber },
+        //   });
+        onSignInSuccess(data);
+        navigate(appRoutes.menu);
       }
     } catch (err) {}
   };

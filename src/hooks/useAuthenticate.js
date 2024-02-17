@@ -10,10 +10,9 @@ const useAuthenticate = () => {
 
   //   variables
   // const { currentAuthMode } = store;
-  const isAuthenticated =
-    !!LS.read(appConstants.SH_CT_ACCESS_TOKEN)
+  const isAuthenticated = !!LS.read(appConstants.SH_CT_ACCESS_TOKEN);
   //&&
-    // !AUTHENTICATOR.isTokenExpired();
+  // !AUTHENTICATOR.isTokenExpired();
   console.log(isAuthenticated);
   // functions
   // const changeAuthMode = (to = {}) => {
@@ -23,7 +22,9 @@ const useAuthenticate = () => {
   // };
 
   const saveUserData = (data) => {
-    LS.save(appConstants.SH_CT_ACCESS_TOKEN, data);
+    LS.save(appConstants.SH_CT_ACCESS_TOKEN, data.jwtToken);
+    LS.save(appConstants.SH_CT_REFRESH_TOKEN, data.refreshToken);
+
     // LS.save(appConstants.SH_CT_USER_ROLES, data.roles);
     // LS.save(appConstants.SH_CT_CURRENT_TIME, data.currentTime);
     // LS.save(appConstants.SH_CT_EXPIRATION, data.expiration);
