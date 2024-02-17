@@ -107,7 +107,7 @@ const NewComplaint = () => {
   };
   return (
     <>
-      <ComplaintModal />
+      <ComplaintModal currentStep={currentStep.id} />
       <div
         className={CN.join(
           styles.container,
