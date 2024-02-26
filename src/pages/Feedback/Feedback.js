@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../services/http";
@@ -12,6 +12,11 @@ import Rating from "../../components/Rating/Rating";
 import Button from "../../components/Button/Button";
 import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
 import { toast } from "react-toastify";
+import RadioGroup from "../../components2/Radio/RadioGroup";
+import TextInput from "../../components2/TextInput/TextInput";
+import DropZone from "../../components2/FileDrop/DropZone";
+import { postFeedback, postObjection } from "../../services/CitizenReport";
+import { useMutation } from "@tanstack/react-query";
 
 const Feedback = () => {
   // store
@@ -20,38 +25,44 @@ const Feedback = () => {
 
   // states
   const [complaint, setComplaint] = useState({});
+  const [satisfaction, setSatisfaction] = useState();
   const [values, setValues] = useState({
-    isObjection: false,
-    description: "",
+    comments: "",
     attachments: [],
     rating: 1,
   });
 
   // functions
   const getComplaint = async () => {
-    const { success, data } = await api.complaint({
+    const { success, data } = await api.CitizenReport({
+      tail: "Mine",
       id: complaintId,
-      isPerInstance: false,
+      isPerInstance: true,
     });
     if (success) {
       setComplaint(data);
     }
   };
 
-  const hanldeChange = (value, name) => {
-    setValues({ ...values, [name]: value });
+  const hanldeChange = (e, name) => {
+    setValues({ ...values, [name]: e });
+  };
+
+  const handleRadioChange = (e, name) => {
+    console.log(e.value);
+    setSatisfaction(e.value);
   };
 
   const submit = async () => {
     const payload = {
       id: complaintId,
       ...values,
-      attachments: values.attachments.map(a => a.file)
+      attachments: values.attachments.map((a) => a.file),
     };
     const headers = {
       "Content-Type": contentTypes.formData,
     };
-    const { success } = await api.complaint({
+    const { success } = await api.CitizenReport({
       tail: "Feedback",
       payload: DS.toFormData(payload),
       method: httpMethods.post,
@@ -60,10 +71,31 @@ const Feedback = () => {
     });
     if (success) {
       toast("بازخورد شما ثبت شد.", { type: "success" });
-      navigate(appRoutes.myComplaints);
+      navigate(appRoutes.myRequests);
     }
   };
 
+  const postFeedbackMutation = useMutation({
+    mutationKey: ["postFeedback"],
+    mutationFn: postFeedback,
+    onSuccess: (res) => {
+      if (satisfaction !== 0) {
+        toast("بازخورد شما ثبت شد.", { type: "success" });
+        navigate(appRoutes.myRequests);
+      }
+    },
+    onError: (err) => {},
+  });
+
+  const postObjectionMutation = useMutation({
+    mutationKey: ["postObjection"],
+    mutationFn: postObjection,
+    onSuccess: (res) => {
+      toast("بازخورد شما ثبت شد.", { type: "success" });
+      navigate(appRoutes.myRequests);
+    },
+    onError: (err) => {},
+  });
   // variables
 
   // hooks
@@ -71,6 +103,23 @@ const Feedback = () => {
   const { loading } = useFetch({ fn: getComplaint, auto: true });
   const { loading: submitLoading, makeRequest } = useFetch({ fn: submit });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
+
+  const handelSubmit = () => {
+    postFeedbackMutation.mutate({
+      payload: { rating: values.rating },
+      id: complaintId,
+    });
+    if (satisfaction == 0) {
+      postObjectionMutation.mutate({
+        id: complaintId,
+        payload: { attachments: values.attachments, comments: values.comments },
+      });
+    }
+  };
 
   // renders
   return (
@@ -81,39 +130,67 @@ const Feedback = () => {
         ) : (
           <>
             <p>
-              شهروند گرامی، شکایت شما با کد رهگیری{" "}
+              شهروند گرامی، درخواست شما با کد رهگیری{" "}
               <span className={styles.trackingNumber}>
                 {complaint.trackingNumber}
               </span>{" "}
-              و دسته بندی{" "}
-              <span className={styles.category}>
-                {complaint.category?.title}
-              </span>{" "}
+              و مربوط به گروه موضوعی{" "}
+              <span className={styles.category}>{complaint.categoryTitle}</span>{" "}
               ثبت شده در تاریخ{" "}
               <span className={styles.date}>
-                {DNT.toJalaliString(complaint.created)}
+                {DNT.toJalaliString(complaint.sent)}
               </span>{" "}
-              به پایان رسید. آیا صحت بررسی شکایت خود را تایید می‌نمایید؟
+              پیگیری و رسیدگی شد.
+              {/* آیا صحت بررسی شکایت خود را تایید می‌نمایید */}
             </p>
 
-            <p className={styles.warning}>
+            <p className=" text-right w-full">
+              لطفا میزان رضایتمندی خود را از فرآیند رسیدگی اعلام نمایید.
+            </p>
+            <p className=" text-right w-full">
+              نظرات شما باعث ارتقای سطح خدمت رسانی ما خواهد شد.
+            </p>
+            {/* <p className={styles.warning}>
               توجه: در صورت عدم تایید صحت، شکایت شما به واحد بازرسی استان ارجاع
               داده شده و بررسی نهایی اعمال می‌گردد.
-            </p>
-
+            </p> */}
             <div className={styles.form}>
-              <div className={styles.confirmation}>
+              {/* <div className={styles.confirmation}>
                 <p>صحت بررسی شکایت را تایید می‌نمایم.</p>
                 <Toggle
-                  defaultState={true}
-                  onChange={(value, name) => hanldeChange(!value, name)}
-                  name="isObjection"
+                defaultState={true}
+                onChange={(value, name) => hanldeChange(!value, name)}
+                name="isObjection"
                 />
-              </div>
+              </div> */}
 
               <Rating name="rating" onChange={hanldeChange} />
+              <p>آیا از نحوه ی پاسخگویی راضی بودید؟</p>
+              <div className=" mb-5">
+                <RadioGroup
+                  options={[
+                    { value: 0, title: "بله" },
+                    { value: 1, title: "خیر" },
+                  ]}
+                  onChange={(value) => handleRadioChange(value, "")}
+                  // {...meta.props}
+                />
+              </div>
+              {satisfaction == 0 && (
+                <>
+                  <TextInput
+                    name={"comments"}
+                    onChange={hanldeChange}
+                    label="توضیحات"
+                  />
+                  <DropZone
+                    onChange={(value) => hanldeChange(value, "attachments")}
+                    label="پیوست‌ها"
+                  />
+                </>
+              )}
 
-              {values.isObjection && (
+              {/* {satisfaction == 0 && (
                 <div className={styles.objection}>
                   <TextArea
                     placeholder="توضیحات"
@@ -124,13 +201,13 @@ const Feedback = () => {
 
                   <AddAttahment name="attachments" onChange={hanldeChange} />
                 </div>
-              )}
+              )} */}
             </div>
 
             <Button
               className={styles.btn}
               loading={submitLoading}
-              onClick={makeRequest}
+              onClick={handelSubmit}
             >
               ثبت
             </Button>

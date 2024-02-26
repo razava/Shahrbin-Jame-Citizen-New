@@ -76,11 +76,14 @@ const Details = ({
   return (
     <>
       <section className={styles.details}>
-        <CategoryForm
-          onChange={(data) => onChange(data, "detail")}
-          requestOnChange={onChange}
-          data={values}
-        />
+        {values.category?.form && (
+          <CategoryForm
+            onChange={(data) => onChange(data, "detail")}
+            requestOnChange={onChange}
+            data={values}
+          />
+        )}
+
         <div className={styles.inputWrapper} style={{ display: "flex" }}>
           {checkField && (
             <>

@@ -106,8 +106,8 @@ const createApi = () => {
             // handle server messages
             if (!isSuccess && showMessageOnError) ERROR.show(response);
             else toast(response.message, { type: "success" });
-            if (status === statusCodes.unAuthorized && isAuthenticated)
-              return logout();
+              // if (status === statusCodes.unAuthorized && isAuthenticated)
+              //   return logout();
             const resolveTo = {
               success: isSuccess,
               headers: responseHeaders,

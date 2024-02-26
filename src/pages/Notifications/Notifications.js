@@ -6,6 +6,9 @@ import { api } from "../../services/http";
 import styles from "./styles.module.css";
 import NotificationCard from "./NotificationCard";
 import { CN } from "../../utils/functions";
+import useSignalR from "../../hooks/useSignalR";
+import { appConstants } from "../../utils/variables";
+import useNotification from "../../hooks/useNotification";
 
 const Notifications = () => {
   // states
@@ -25,10 +28,10 @@ const Notifications = () => {
     });
     if (success) {
       extractPaginationData(headers);
-      setMessages((prev) => [...prev, ...data]);
+      setMessages((prev) => [...prev, ...data.value]);
     }
   };
-
+  const deleteNotificationState = useNotification((state) => state.delete);
   // hooks
   const { loading, makeRequest } = useFetch({ fn: getData });
   const {
@@ -47,7 +50,14 @@ const Notifications = () => {
       makeRequest({ pageNumber: CurrentPage + 1, pageSize: PageSize });
     }
   }, [isIntersecting]);
-
+  const refresh = () => {
+    makeRequest({ pageNumber: 1, pageSize: 10 });
+  };
+  // const signalr = useSignalR(refresh);
+  useEffect(() => {
+    localStorage.removeItem(appConstants.SH_CT_NOTIFICATION_STATE);
+    deleteNotificationState();
+  }, []);
   // renders
   const renderLoader = () => {
     if (loading) return <Loader />;

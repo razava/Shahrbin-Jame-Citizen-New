@@ -6,11 +6,12 @@ import { appRoutes } from "../utils/variables";
 const RedirectRoute = ({ redirectTo = "" }) => {
   // hooks
   const { isAuthenticated } = useAuthenticate();
-
+  console.log(isAuthenticated);
   return (
     <Navigate
-      to={redirectTo || isAuthenticated ? appRoutes.menu : appRoutes.intro}
+      to={redirectTo || isAuthenticated ? appRoutes.menu : appRoutes.signin}
     />
+    // <></>
   );
 };
 

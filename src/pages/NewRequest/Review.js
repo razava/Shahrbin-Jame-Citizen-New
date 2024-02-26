@@ -12,9 +12,7 @@ const Review = ({
 }) => {
   console.log(values);
   localStorage.setItem("val", JSON.stringify(values.detail));
-  useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem("val")));
-  }, []);
+  
   return (
     <>
       <section className={styles.review}>
@@ -40,41 +38,51 @@ const Review = ({
                 ? String(values.comments).slice(0, 50) + "..."
                 : values.comments}
             </span>
-            <div className=" flex flex-col gap-2">
-              {Object.keys(values.detail).map((key, item) => {
-                console.log(Array.isArray(values.detail[key]));
-                if (typeof values.detail[key] == "string") {
-                  return (
-                    <div className="">
-                      {key}:{values.detail[key]}
-                    </div>
-                  );
-                } else if (
-                  typeof values.detail[key] == "object" &&
-                  !Array.isArray(values.detail[key])
-                ) {
-                  return (
-                    <div>
-                      {key}:{values.detail[key].title}
-                    </div>
-                  );
-                } else if (Array.isArray(values.detail[key])) {
-                  return (
-                    <div>
-                      <div>{key}:</div>
-                      <div className=" flex flex-col gap-1">
-                        {values.detail[key].map((item) => {
-                          if (item.name) {
-                            return <div>{item.name}</div>;
-                          } else {
-                            return <div>{item.title}</div>;
-                          }
-                        })}
-                      </div>
-                    </div>
-                  );
-                }
-              })}
+            <div className=" flex flex-col gap-2 text-xl">
+              {values?.detail && (
+                <>
+                  {Object.keys(values.detail).map((key, item) => {
+                    console.log(Array.isArray(values.detail[key]));
+                    if (typeof values.detail[key] == "string") {
+                      return (
+                        <div className="">
+                          <span>{key}</span>:{" "}
+                          <span className=" text-gray-500">
+                            {values.detail[key]}
+                          </span>
+                        </div>
+                      );
+                    } else if (
+                      typeof values.detail[key] == "object" &&
+                      !Array.isArray(values.detail[key])
+                    ) {
+                      return (
+                        <div>
+                          {key}:{" "}
+                          <span className=" text-gray-500">
+                            {values.detail[key].title}
+                          </span>
+                        </div>
+                      );
+                    } else if (Array.isArray(values.detail[key])) {
+                      return (
+                        <div>
+                          <div>{key}:</div>
+                          <div className=" flex flex-col gap-1 text-gray-500">
+                            {values.detail[key].map((item) => {
+                              if (item.name) {
+                                return <div>{item.name}</div>;
+                              } else {
+                                return <div>{item.title}</div>;
+                              }
+                            })}
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
+                </>
+              )}
             </div>
           </li>
 

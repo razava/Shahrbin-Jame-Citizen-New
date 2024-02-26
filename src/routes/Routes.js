@@ -32,11 +32,13 @@ import MyComplaints from "../pages/MyComplaints/MyComplaints";
 import Complaint from "../pages/Complaint/Complaint";
 import Feedback from "../pages/Feedback/Feedback";
 import FAQ from "../pages/FAQ/FAQ";
+import useSignalR from "../hooks/useSignalR";
 
 const RateReport = lazy(() => import("../pages/RateReport/RateReport"));
 const LoginGov = lazy(() => import("../pages/LoginGov/LoginGov"));
 
 const Routes = () => {
+  const signalr = useSignalR();
   // renders
   const renderRedirectRoutes = () => {
     return (

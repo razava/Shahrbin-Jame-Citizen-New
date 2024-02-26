@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useMe from "../../hooks/useMe";
 import { CN } from "../../utils/functions";
 import Icon from "../Icon/Icon";
 import styles from "./styles.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { appRoutes, pageTitles } from "../../utils/variables";
+import { appConstants, appRoutes, pageTitles } from "../../utils/variables";
 import { menuItems } from "../../pages/Menu/constants";
 import Avatar from "../Avatar/Avatar";
 import DropDown from "../DropDown/DropDown";
 import useInstance from "../../hooks/useInstance";
 import { AppStore } from "../../store/AppContext";
 import useResize from "../../hooks/useResize";
+import useNotification from "../../hooks/useNotification";
 
 const UserHeader = ({ position }) => {
   // store
@@ -23,10 +24,12 @@ const UserHeader = ({ position }) => {
   const navigate = useNavigate();
   const { currentInstance, instances, setAppInstance } = useInstance();
   const { isDesktop } = useResize();
-
+  const [notifState, setNotifState] = useState(false);
+  const NotificationState = useNotification((state) => state.notification);
+  const updateNotificationState = useNotification((state) => state.update);
   // variables
   const isMenupage = appRoutes.menu === pathname;
-
+  console.log(NotificationState);
   // functions
   const handleLeftIconClick = (e) => {
     e.stopPropagation();
@@ -40,6 +43,19 @@ const UserHeader = ({ position }) => {
     }
   };
   console.log(instances);
+
+  useEffect(() => {
+    const hasNotification = localStorage.getItem(
+      appConstants.SH_CT_NOTIFICATION_STATE
+    );
+    if (hasNotification) {
+      updateNotificationState();
+    }
+  }, []);
+
+  useEffect(() => {
+    setNotifState(NotificationState);
+  }, [NotificationState]);
   // renders
   const renderCurrentInstance = () => {
     return (
@@ -84,6 +100,14 @@ const UserHeader = ({ position }) => {
               className={styles.userHeaderIcon}
               onClick={() => navigate(appRoutes.notifications)}
             />
+            {notifState && (
+              <div className=" absolute top-0 right-0">
+                <span class="relative flex h-4 w-4">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+                </span>
+              </div>
+            )}
           </div>
 
           {renderCurrentInstance()}

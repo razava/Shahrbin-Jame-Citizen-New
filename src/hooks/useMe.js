@@ -51,7 +51,7 @@ const useMe = () => {
       "Content-Type": contentTypes.formData,
     };
     try {
-      const { success } = await api.CitizenAccount({
+      const { success } = await api.Authenticate({
         method: httpMethods.put,
         payload: DS.toFormData({ File: value, AttachmentType: 1 }),
         headers,
@@ -68,7 +68,7 @@ const useMe = () => {
     }
   };
   const getUserData = async () => {
-    const { success, data } = await api.CitizenAccount({
+    const { success, data } = await api.Authenticate({
       isPerInstance: true,
     });
     if (success) {
@@ -98,7 +98,7 @@ const useMe = () => {
     delete editedValues.avatarFile;
     setLoading(true);
     try {
-      const { success } = await api.CitizenAccount({
+      const { success } = await api.Authenticate({
         method: httpMethods.put,
         payload: editedValues,
         isPerInstance: true,
@@ -115,7 +115,7 @@ const useMe = () => {
 
   const changeUserPassword = async () => {
     setLoading(true);
-    const { success } = await api.CitizenAccount({
+    const { success } = await api.Authenticate({
       tail: "Password",
       method: httpMethods.put,
       payload: passwordValues,

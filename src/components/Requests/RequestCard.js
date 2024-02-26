@@ -98,6 +98,20 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
               <RequestComments request={request} />
             </div>
           </div>
+          {request.reportState == 1 && (
+            <div className=" flex gap-2  justify-center items-center bg-blue-100 transition delay-75 rounded-lg py-2">
+              <i className="fas fa-comment text-[var(--blue)]"></i>
+              <p
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/user/feedback/${request.id}`);
+                }}
+                className=" text-center font-bold text-[var(--blue)] text-lg "
+              >
+                ثبت بازخورد
+              </p>
+            </div>
+          )}
         </div>
       </article>
     </>

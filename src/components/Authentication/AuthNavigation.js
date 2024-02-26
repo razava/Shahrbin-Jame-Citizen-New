@@ -51,7 +51,13 @@ const AuthNavigation = ({ changeAuthMode = (f) => f }) => {
         </div>
       );
   };
-  return <>{renderNavigationLinks()}</>;
+  return (
+    <>
+      {
+        // renderNavigationLinks()
+      }
+    </>
+  );
 };
 
 export default AuthNavigation;

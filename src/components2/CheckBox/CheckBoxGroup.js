@@ -13,11 +13,12 @@ const CheckBoxGroup = ({
   const [values, setValues] = useState(defaultSelecteds);
 
   const handleChange = (value, index) => {
+    console.log(value);
     const newValues = values;
     console.log(newValues);
-    console.log(value);
+    // console.log(value);
     newValues[index] = value;
-    console.log(values);
+    console.log(newValues, "za");
     setValues(newValues);
     onChange(newValues, name);
   };

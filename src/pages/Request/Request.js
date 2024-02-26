@@ -36,7 +36,16 @@ const Request = () => {
         </>
       );
   };
-
+  const a = request?.comments;
+  let forms;
+  if (a) {
+    console.log(a[0]);
+    if (a[0] == "{") {
+      forms = JSON.parse(request.comments);
+    }
+  }
+  console.log(forms);
+  //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
     console.log(request);
     const images = request.medias.filter((media) => media.mediaType === 0);
@@ -51,7 +60,55 @@ const Request = () => {
         <div className={styles.cardBody}>
           <RequestStatus lastStatus={request.lastStatus} />
           <p className={styles.requestCategory}>{request.category?.title}</p>
-          <p className={styles.requestComments}>{request.comments}</p>
+
+          {forms ? (
+            <>
+              {" "}
+              <div className=" flex flex-col gap-2 text-xl">
+                {Object.keys(forms).map((key, item) => {
+                  console.log(Array.isArray(forms[key]));
+                  if (typeof forms[key] == "string") {
+                    return (
+                      <div className="">
+                        <span>{key}</span>:{" "}
+                        <span className=" text-gray-500">{forms[key]}</span>
+                      </div>
+                    );
+                  } else if (
+                    typeof forms[key] == "object" &&
+                    !Array.isArray(forms[key])
+                  ) {
+                    return (
+                      <div>
+                        {key}:{" "}
+                        <span className=" text-gray-500">
+                          {forms[key].title}
+                        </span>
+                      </div>
+                    );
+                  } else if (Array.isArray(forms[key])) {
+                    return (
+                      <div>
+                        <div>{key}:</div>
+                        <div className=" flex flex-col gap-1 text-gray-500">
+                          {forms[key].map((item) => {
+                            console.log(forms[key]);
+                            if (item?.name) {
+                              return <div>{item.name}</div>;
+                            } else if (item?.title && item.checked) {
+                              return <div>{item.title}</div>;
+                            }
+                          })}
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+            </>
+          ) : (
+            <p className={styles.requestComments}>{request.comments}</p>
+          )}
           <div className={styles.requestDetails}>
             <p className={styles.requestTrackingNumber}>
               <span>کد رهگیری: </span>

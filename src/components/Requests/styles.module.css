@@ -6,6 +6,7 @@
   align-items: stretch;
   margin-bottom: 10px;
   cursor: pointer;
+  min-height: 170px;
 }
 
 .requestCardThumbnailWrapper {

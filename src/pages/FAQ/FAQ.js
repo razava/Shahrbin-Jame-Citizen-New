@@ -19,7 +19,7 @@ function FAQ() {
   });
   console.log(data);
   return (
-    <div className={styles.co}>
+    <div className={styles.co}> 
       <Accordion allowZeroExpanded dir="rtl">
         {data?.map((item) => {
           return (

@@ -173,6 +173,7 @@ export class USER {
   // clears user related data from localstorage
   static clear() {
     LS.remove(appConstants.SH_CT_ACCESS_TOKEN);
+    LS.remove(appConstants.SH_CT_REFRESH_TOKEN);
     LS.remove(appConstants.SH_CT_CURRENT_TIME);
     LS.remove(appConstants.SH_CT_EXPIRATION);
     LS.remove(appConstants.SH_CT_USER_ROLES);
