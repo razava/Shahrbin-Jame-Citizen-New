@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import authStyles from "../../components/Authentication/styles.module.css";
 import TextInput from "../../components/TextInput/TextInput";
@@ -26,6 +26,11 @@ const SignIn = () => {
     phoneNumber: "",
     // password: "",
   });
+  useEffect(() => {
+    localStorage.removeItem("countdownTime");
+    localStorage.removeItem("CountDownCompleted");
+    localStorage.removeItem(appConstants.SH_CT_OTP_TOKEN);
+  }, []);
 
   // functions
   const handleChange = (value, name) => {
@@ -145,13 +150,13 @@ const SignIn = () => {
             href={process.env.REACT_APP_MY_GOV_LINK}
             className={authStyles.authLink}
           >
-            ورود با دولت من
+            ورود با یزد من
           </a>
         )}
-        <AuthLink to={authModes.signup}>حساب جدیدی ایجاد کنید.</AuthLink>
+        {/* <AuthLink to={authModes.signup}>حساب جدیدی ایجاد کنید.</AuthLink>
         <AuthLink to={authModes.forgotpass}>
           رمز عبور خود را فراموش کرده‌اید؟
-        </AuthLink>
+        </AuthLink> */}
       </div>
     );
   };
@@ -160,7 +165,7 @@ const SignIn = () => {
       <form className={authStyles.form}>
         {renderFormInputs()}
         {renderCaptcha()}
-        {/* {renderLinks()} */}
+        {renderLinks()}
       </form>
     </>
   );

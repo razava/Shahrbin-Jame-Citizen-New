@@ -9,11 +9,7 @@ import useClick from "../../hooks/useClick";
 import { CN } from "../../utils/functions";
 import RequestCard from "../../components/Requests/RequestCard";
 import { AppStore } from "../../store/AppContext";
-
-const defaultCoords = {
-  latitude: process.env.REACT_APP_LATITUDE,
-  longitude: process.env.REACT_APP_LONGITUDE,
-};
+import useInstance from "../../hooks/useInstance";
 
 const MapContainer = ReactMapboxGl({
   accessToken: process.env.REACT_APP_ACCESS_TOKEN,
@@ -23,6 +19,12 @@ const MapContainer = ReactMapboxGl({
 const OnMapRequests = () => {
   // store
   const [store] = useContext(AppStore);
+  const { currentInstance, instances, setAppInstance } = useInstance();
+
+  const defaultCoords = {
+    latitude: instances[0].latitude,
+    longitude: instances[0].longitude,
+  };
 
   // refs
   const detailsRef = useRef(null);

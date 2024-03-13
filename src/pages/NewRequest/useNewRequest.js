@@ -5,6 +5,7 @@ import Icon from "../../components/Icon/Icon";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
 import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import useInstance from "../../hooks/useInstance";
 
 const allStepsDefault = [
   {
@@ -61,6 +62,7 @@ const useNewRequest = () => {
   // states
   const [currentStep, setCurrentStep] = useState(allStepsDefault[0]);
   const [allSteps, setAllSteps] = useState(allStepsDefault);
+
   const [values, setValues] = useState({
     category: {},
     address: {
@@ -75,6 +77,8 @@ const useNewRequest = () => {
     isIdentityVisible: false,
     city: null,
   });
+  //hooks
+  const { currentInstance, instances, setAppInstance } = useInstance();
 
   // functions
   const goToNextStep = () => {
@@ -142,15 +146,17 @@ const useNewRequest = () => {
   };
 
   const onSubmit = async () => {
+    console.log("gggg");
     const payload = getPayload();
     // const headers = {
     //   "Content-Type": contentTypes.formData,
     // };
+    console.log(instances[0]);
     const { success } = await api.CitizenReport({
       payload,
       method: httpMethods.post,
       // headers,
-      instanceId: values.city.id,
+      instanceId: values?.city?.id ? values.city.id : instances[0].cityId,
     });
     if (success) {
       navigate(appRoutes.myRequests);

@@ -7,10 +7,10 @@ import RedirectRoute from "./RedirectRoute";
 import Authentication from "../components/Authentication/Authentication";
 
 import SignIn from "../pages/SignIn/SignIn";
-import SignUp from "../pages/SignUp/SignUp";
+// import SignUp from "../pages/SignUp/SignUp";
 import Verify from "../pages/Verify/Verify";
-import ForgotPass from "../pages/ForgotPass/ForgotPass";
-import ResetPass from "../pages/ResetPass/ResetPass";
+// import ForgotPass from "../pages/ForgotPass/ForgotPass";
+// import ResetPass from "../pages/ResetPass/ResetPass";
 import Intro from "../pages/Intro/Intro";
 import Pnp from "../pages/Pnp/Pnp";
 import UserContainer from "../components/User/UserContainer";
@@ -36,6 +36,7 @@ import useSignalR from "../hooks/useSignalR";
 
 const RateReport = lazy(() => import("../pages/RateReport/RateReport"));
 const LoginGov = lazy(() => import("../pages/LoginGov/LoginGov"));
+const LoginYazd = lazy(() => import("../pages/LoginYazd/LoginYazd"));
 
 const Routes = () => {
   const signalr = useSignalR();
@@ -75,13 +76,14 @@ const Routes = () => {
           >
             <Route path={appRoutes.intro} element={<Intro />} />
             <Route path={appRoutes.signin} element={<SignIn />} />
-            <Route path={appRoutes.signup} element={<SignUp />} />
+            {/* <Route path={appRoutes.signup} element={<SignUp />} /> */}
             <Route path={appRoutes.verify} element={<Verify />} />
-            <Route path={appRoutes.forgotpass} element={<ForgotPass />} />
-            <Route path={appRoutes.resetpass} element={<ResetPass />} />
+            {/* <Route path={appRoutes.forgotpass} element={<ForgotPass />} /> */}
+            {/* <Route path={appRoutes.resetpass} element={<ResetPass />} /> */}
             <Route path={appRoutes.signinGov} element={<LoginGov />} />
             <Route path={appRoutes.pnpAuth} element={<Pnp />} />
           </Route>
+          <Route path={appRoutes.yazd} element={<LoginYazd />} />
 
           {/* user routes */}
           <Route

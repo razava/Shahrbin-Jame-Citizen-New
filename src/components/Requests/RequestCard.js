@@ -21,10 +21,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
       : noThumbnail;
   const [store] = useContext(AppStore);
   const categories = store.initialData.categories || {};
-  console.log(categories);
-  // const categoryTitle = categories.find((item) => item.id == request.categoryId)
-  // console.log(categoryTitle);
-  console.log(request);
+
   let categoryTitle;
   categories.categories.map((item) => {
     if (item.id == request.categoryId) {
@@ -38,7 +35,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
       });
     }
   });
-  console.log(request);
+  
   // hooks
   const navigate = useNavigate();
 
@@ -102,15 +99,15 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           {request.reportState == 1 &&
             !request?.isFeedbacked &&
             pathname == "/user/my-requests" && (
-              <div className=" flex gap-2  justify-center items-center bg-blue-100 transition delay-75 rounded-lg py-2">
+              <div
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`/user/feedback/${request.id}`);
+                }}
+                className=" flex gap-2  justify-center items-center bg-blue-100 transition delay-75 rounded-lg py-2"
+              >
                 <i className="fas fa-comment text-[var(--blue)]"></i>
-                <p
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    navigate(`/user/feedback/${request.id}`);
-                  }}
-                  className=" text-center font-bold text-[var(--blue)] text-lg "
-                >
+                <p className=" text-center font-bold text-[var(--blue)] text-lg ">
                   ثبت بازخورد
                 </p>
               </div>

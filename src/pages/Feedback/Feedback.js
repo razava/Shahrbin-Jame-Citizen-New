@@ -45,6 +45,7 @@ const Feedback = () => {
   };
 
   const hanldeChange = (e, name) => {
+    console.log(e);
     setValues({ ...values, [name]: e });
   };
 
@@ -54,10 +55,11 @@ const Feedback = () => {
   };
 
   const submit = async () => {
+    console.log(values.attachments);
     const payload = {
       id: complaintId,
       ...values,
-      attachments: values.attachments.map((a) => a.file),
+      attachments: values.attachments.map((a) => a.id),
     };
     const headers = {
       "Content-Type": contentTypes.formData,
@@ -79,10 +81,10 @@ const Feedback = () => {
     mutationKey: ["postFeedback"],
     mutationFn: postFeedback,
     onSuccess: (res) => {
-      if (satisfaction !== 0) {
-        toast("بازخورد شما ثبت شد.", { type: "success" });
-        navigate(appRoutes.myRequests);
-      }
+      // if (satisfaction !== 0) {
+      toast("بازخورد شما ثبت شد.", { type: "success" });
+      navigate(appRoutes.myRequests);
+      // }
     },
     onError: (err) => {},
   });
@@ -109,14 +111,18 @@ const Feedback = () => {
   }, [values]);
 
   const handelSubmit = () => {
-    postFeedbackMutation.mutate({
-      payload: { rating: values.rating },
-      id: complaintId,
-    });
-    if (satisfaction == 0) {
+    if (satisfaction == 1) {
       postObjectionMutation.mutate({
         id: complaintId,
-        payload: { attachments: values.attachments, comments: values.comments },
+        payload: {
+          attachments: values.attachments.map((item) => item.id),
+          comments: values.comments,
+        },
+      });
+    } else {
+      postFeedbackMutation.mutate({
+        payload: { rating: values.rating },
+        id: complaintId,
       });
     }
   };
@@ -163,8 +169,9 @@ const Feedback = () => {
                 name="isObjection"
                 />
               </div> */}
-
-              <Rating name="rating" onChange={hanldeChange} />
+              {satisfaction !== 1 && (
+                <Rating name="rating" onChange={hanldeChange} />
+              )}
               <p>آیا از نحوه ی پاسخگویی راضی بودید؟</p>
               <div className=" mb-5">
                 <RadioGroup
@@ -176,7 +183,7 @@ const Feedback = () => {
                   // {...meta.props}
                 />
               </div>
-              {satisfaction == 0 && (
+              {satisfaction == 1 && (
                 <>
                   <TextInput
                     name={"comments"}

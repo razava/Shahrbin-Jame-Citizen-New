@@ -198,8 +198,8 @@
 }
 
 .sideMenuToggle {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background-color: var(--white);
@@ -213,6 +213,7 @@
   transition: all 0.8s;
   cursor: pointer;
   box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+  z-index: 400;
 }
 
 .sideMenu.open .sideMenuToggle {

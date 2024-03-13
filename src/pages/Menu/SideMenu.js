@@ -60,7 +60,7 @@ const SideMenu = () => {
                   {menuItem.icon()}
                 </span>
               </div>
-              <span className={styles.sideMenuItemTitle}>{menuItem.title}</span>
+              {/* <span className={styles.sideMenuItemTitle}>{menuItem.title}</span> */}
               {/* {boldMenus.includes(menuItem.title) ? : ""} */}
               <span
                 className={CN.join(

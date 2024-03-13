@@ -52,6 +52,7 @@ export const appRoutes = {
   password: "/user/password",
   FAQ: "/user/FAQ",
   feedback: "/user/feedback/:id",
+  yazd: "/signin-yazd",
 };
 
 export const appConstants = {
@@ -102,6 +103,7 @@ export const statusColors = {
   "ارجاع به پیمانکار": "var(--purple-scale-4)",
   "پایان یافته": "var(--green-scale-4)",
   "ارجاع به واحد بازرسی": "var(--red-scale-4)",
+  "بررسی توسط واحد بازرسی": "var(--red-scale-4)",
   "ثبت درخواست در سامانه": "var(--blue)",
   "تأیید درخواست در سامانه": "#79B473",
   "ارجاع به شهروند": "var(--purple)",

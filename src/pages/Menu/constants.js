@@ -12,17 +12,17 @@ export const menuItems = [
     // icon: () => <FontAwesomeIcon icon={"list"} size={"6x"} />,
     to: appRoutes.recentRequests,
   },
-  {
-    id: "new-complaint",
-    title: "ثبت شکایت",
-    icon: () => (
-      // <span>
-      <i className="fas fa-folder-plus"></i>
-      // </span>
-    ),
-    // icon: () => <FontAwesomeIcon icon={"plus"} size={"6x"} />,
-    to: appRoutes.newComplaint,
-  },
+  // {
+  //   id: "new-complaint",
+  //   title: "ثبت شکایت",
+  //   icon: () => (
+  //     // <span>
+  //     <i className="fas fa-folder-plus"></i>
+  //     // </span>
+  //   ),
+  //   // icon: () => <FontAwesomeIcon icon={"plus"} size={"6x"} />,
+  //   to: appRoutes.newComplaint,
+  // },
   {
     id: "new-request",
     title: "ثبت درخواست",
@@ -34,17 +34,17 @@ export const menuItems = [
     // icon: () => <FontAwesomeIcon icon={"plus"} size={"6x"} />,
     to: appRoutes.newRequest,
   },
-  {
-    id: "my-complaints",
-    title: "شکایات من",
-    icon: () => (
-      // <span>
-      <i className="fas fa-grip-horizontal"></i>
-      // </span>
-    ),
-    // icon: () => <FontAwesomeIcon icon={"th-large"} size={"6x"} />,
-    to: appRoutes.myComplaints,
-  },
+  // {
+  //   id: "my-complaints",
+  //   title: "شکایات من",
+  //   icon: () => (
+  //     // <span>
+  //     <i className="fas fa-grip-horizontal"></i>
+  //     // </span>
+  //   ),
+  //   // icon: () => <FontAwesomeIcon icon={"th-large"} size={"6x"} />,
+  //   to: appRoutes.myComplaints,
+  // },
   {
     id: "my-requests",
     title: "درخواست‌های من",

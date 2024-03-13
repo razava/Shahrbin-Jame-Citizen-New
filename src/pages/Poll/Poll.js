@@ -33,8 +33,8 @@ const Poll = () => {
 
   const submitPoll = async () => {
     const payload = {
-      ...values,
-      selectedChoices: values.selectedChoices.map((s) => s.id),
+      text: values.text,
+      choicesIds: values.selectedChoices.map((s) => s.id),
     };
     const { success, data } = await api.CitizenPolls({
       tail: "Polls/Answer",

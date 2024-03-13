@@ -22,11 +22,11 @@ const Settings = () => {
             icon={"user"}
             onClick={() => navigate(appRoutes.profile)}
           />
-          <SettingCard
+          {/* <SettingCard
             title="تغییر رمز عبور"
             icon={"key"}
             onClick={() => navigate(appRoutes.password)}
-          />
+          /> */}
           <SettingCard
             title="درباره ما"
             icon={"info"}

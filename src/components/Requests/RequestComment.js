@@ -22,15 +22,24 @@ const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
       onDeleteCommentSuccess();
     }
   };
+  console.log(comment.canDelete);
 
   // hooks
   const { getUserTitle } = useMe();
   const { makeRequest, loading } = useFetch({ fn: deleteComment });
+  console.log(URI.createMediaUri(comment.user?.avatar?.url3));
   return (
     <>
       <div className={styles.requestComment}>
         <div className={styles.requestCommentAvatar}>
-          <img src={URI.createMediaUri(comment.user?.avatar?.url3) || ph} />
+          <img
+            src={
+              URI.createMediaUri(comment.user?.avatar?.url3).pathname !==
+              "/undefined"
+                ? URI.createMediaUri(comment.user?.avatar?.url3)
+                : ph
+            }
+          />
         </div>
 
         <div className={styles.requestCommentDetails}>
@@ -44,9 +53,8 @@ const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
           </div>
           <div className={styles.requestCommentTextWrapper}>
             <p className={styles.requestCommentText}>{comment.text}</p>
-            {comment.canDelete && loading ? (
-              <DualRingLoader size="small" />
-            ) : (
+            {loading && <DualRingLoader size="small" />}
+            {comment.canDelete && (
               <Icon
                 type="far"
                 name="trash"

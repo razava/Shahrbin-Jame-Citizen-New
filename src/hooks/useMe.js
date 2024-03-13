@@ -25,7 +25,7 @@ const useMe = () => {
     gender: store?.initialData?.user?.gender,
     educationId: store?.initialData?.user?.education?.id || "",
     birthDate: store?.initialData?.user?.birthDate || "",
-    phoneNumber2: store?.initialData?.user?.phoneNumber2 || "",
+    phoneNumber: store?.initialData?.user?.phoneNumber || "",
   });
 
   const passwordValues = useState({
@@ -93,7 +93,7 @@ const useMe = () => {
       }
       return obj;
     }
-    clean(values)
+    clean(values);
     const editedValues = values;
     delete editedValues.avatarFile;
     setLoading(true);
@@ -150,7 +150,7 @@ const useMe = () => {
       gender: store?.initialData?.user?.gender,
       educationId: store?.initialData?.user?.educacation?.id || "",
       birthDate: store?.initialData?.user?.birthDate || "",
-      phoneNumber2: store?.initialData?.user?.phoneNumber2 || "",
+      phoneNumber: store?.initialData?.user?.phoneNumber || "",
     });
   }, [store.initialData?.user]);
 

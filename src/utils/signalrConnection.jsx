@@ -5,12 +5,12 @@ import {
   LogLevel,
 } from "@microsoft/signalr";
 import { LS } from "./functions";
-import { appConstants } from "./variables"; 
+import { appConstants } from "./variables";
 
 const token = LS.read(appConstants.SH_CT_ACCESS_TOKEN);
 
 const connection = new HubConnectionBuilder()
-  .withUrl("https://shahrbinapi.shetabdahi.ir/notifhub", {
+  .withUrl(`${process.env.REACT_APP_API_URL_DEV}/notifhub`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

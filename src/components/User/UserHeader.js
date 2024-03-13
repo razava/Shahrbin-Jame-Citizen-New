@@ -42,7 +42,7 @@ const UserHeader = ({ position }) => {
       }
     }
   };
-  console.log(instances);
+  console.log(instances, "rr");
 
   useEffect(() => {
     const hasNotification = localStorage.getItem(
@@ -109,9 +109,7 @@ const UserHeader = ({ position }) => {
               </div>
             )}
           </div>
-
-          {renderCurrentInstance()}
-
+          {instances.length > 1 && renderCurrentInstance()}
           <div className={styles.userHeader_card}>
             <span
               className={styles.userHeader_currentUser}

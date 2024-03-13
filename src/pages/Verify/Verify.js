@@ -10,6 +10,10 @@ import { appConstants, appRoutes, httpMethods } from "../../utils/variables";
 import styles from "./styles.module.css";
 import VerifyInput from "./VerifyInput";
 import { LS } from "../../utils/functions";
+import { useMutation } from "@tanstack/react-query";
+import { resendOtp } from "../../services/AuthenticateApi";
+import { toast } from "react-toastify";
+import CountdownTimer from "./CountDown";
 
 const total = 6;
 
@@ -17,9 +21,10 @@ const Verify = () => {
   // refs
   const inputsRef = useRef();
   const verificationCode = useRef([...Array(6)]);
-
+  console.log(verificationCode);
   // states
   const [parentWidth, setParentWidth] = useState();
+  const [isShow, setIsShow] = useState(true);
 
   // variables
   const length = parentWidth ? (parentWidth - (total - 1) * 10) / total : 40;
@@ -67,10 +72,34 @@ const Verify = () => {
     verificationCode.current[index] = value;
   };
 
+  const resendOtpMutation = useMutation({
+    mutationKey: ["resendOtp"],
+    mutationFn: resendOtp,
+    onSuccess: (res) => {},
+    onError: (err) => {
+      if (err.response.status === 428) {
+        localStorage.setItem(appConstants.SH_CT_OTP_TOKEN, err.response.data);
+        toast("کد تایید مجدد ارسال شد.", { type: "info" });
+        localStorage.removeItem("countdownTime");
+        localStorage.removeItem("CountDownCompleted");
+        setIsShow(true);
+      } else {
+        toast("مشکلی در ارسال درخواست به وجود آمد.", { type: "error" });
+      }
+    },
+  });
+
+  const handelResendOtp = () => {
+    console.log(11);
+    resendOtpMutation.mutate({
+      otpToken: JSON.parse(localStorage.getItem(appConstants.SH_CT_OTP_TOKEN)),
+    });
+  };
+
   const handleVerify = async (e) => {
     const payload = {
       verificationCode: verificationCode.current.reverse().join(""),
-      otpToken: LS.read(appConstants.SH_CT_OTP_TOKEN),
+      otpToken: JSON.parse(localStorage.getItem(appConstants.SH_CT_OTP_TOKEN)),
     };
     try {
       const { success, data } = await api.Authenticate({
@@ -148,6 +177,21 @@ const Verify = () => {
           کد تایید ارسالی به تلفن خود را وارد نمایید.
         </p>
         {renderVerifyInputs()}
+        <div className="mx-auto w-full text-center text-xl mt-10">
+          {" "}
+          <CountdownTimer
+            setIsShow={(state) => setIsShow(state)}
+            isShow={isShow}
+          />
+          {!isShow && (
+            <p
+              onClick={handelResendOtp}
+              className=" text-[var(--blue)] text-xl cursor-pointer"
+            >
+              ارسال مجدد کد تایید
+            </p>
+          )}
+        </div>
         {renderButton()}
       </form>
     </>

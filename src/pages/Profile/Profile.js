@@ -28,6 +28,7 @@ const Profile = () => {
     updateUserData,
     handelAvatar,
   } = useMe();
+  console.log(values);
   // const { loading: loading2 } = useFetch({ fn: getEducations, auto: true });
   return (
     <>
@@ -88,15 +89,16 @@ const Profile = () => {
             isInDialog
           />
           <TextInput
-            label="شماره ثابت"
+            editable={false}
+            label="شماره موبایل"
             floatingLabel
-            name="phoneNumber2"
+            name="phoneNumber"
             onChange={handleUserDataChange}
             digitsOnly
             classNames={{
               wrapper: styles.profileFieldWrapper,
             }}
-            value={values.phoneNumber2}
+            value={values.phoneNumber}
           />
           <TextInput
             label="آدرس"

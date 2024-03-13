@@ -54,7 +54,6 @@ let isRefreshing = false;
 // );
 
 export async function GetCaptcha() {
-  console.log("mycaptcah");
   const data = await axios.get(`/api/${instance.id}/Authenticate/Captcha`, {
     responseType: "blob",
   });
@@ -77,4 +76,9 @@ export async function RefreshToken(payload) {
     USER.clear();
     window.location.href = "/";
   }
+}
+
+export async function resendOtp(payload) {
+  const data = await axios.post(`/api/1/Authenticate/ResendOtp`, payload);
+  return data.data;
 }

@@ -37,6 +37,12 @@ const NewComplaint = () => {
     else setIsDesktop(false);
   }, [windowWidth]);
 
+
+  useEffect(() => {
+    if (instances.length == 1) {
+      goToNextStep();
+    }
+  }, []);
   // useEffect(() => {
   //   if ((currentStep.id = "category")) {
   //      setTimeout(function () {

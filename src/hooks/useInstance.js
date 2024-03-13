@@ -18,11 +18,13 @@ const useInstance = () => {
         tail: "ShahrbinInstances",
         showMessageOnError: false,
         // isPerInstance: false,
-        instanceId:1,
+        instanceId: 1,
       });
       if (success) {
         dispatch({ type: appActions.SET_INSTANCES, payload: data });
-        setAppInstance(getCurrentInstance(data));
+        console.log(data);
+        // setAppInstance(getCurrentInstance(data));
+        setAppInstance(data[0]);
         setIsSuccess(true);
       } else {
         setIsSuccess(false);

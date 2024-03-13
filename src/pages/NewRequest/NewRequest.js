@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Address from "./Address";
 import Attachments from "./Attachments";
 import Category from "./Category";
@@ -10,8 +10,13 @@ import useNewRequest from "./useNewRequest";
 import useResize from "../../hooks/useResize";
 import { CN } from "../../utils/functions";
 import City from "./City";
+import { AppStore } from "../../store/AppContext";
+import useInstance from "../../hooks/useInstance";
 
 const NewRequest = () => {
+  //store
+  const [store, dispatch] = useContext(AppStore);
+  const { currentInstance, instances, setAppInstance } = useInstance();
   // hooks
   const {
     currentStep,
@@ -24,6 +29,12 @@ const NewRequest = () => {
     onSubmit,
   } = useNewRequest();
   const { isDesktop } = useResize();
+  //
+  useEffect(() => {
+    if (instances.length == 1) {
+      goToNextStep();
+    }
+  }, []);
   //   renders
   const renderCurrentStep = () => {
     if (currentStep.id === allSteps[0].id)
