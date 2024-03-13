@@ -14,6 +14,7 @@ const SideMenu = () => {
 
   // states
   const [isAnimating, setIsAnimating] = useState(false);
+  const boldMenus = ["ثبت درخواست", "ثبت شکایت"];
 
   // hooks
   const { pathname } = useLocation();
@@ -60,6 +61,15 @@ const SideMenu = () => {
                 </span>
               </div>
               <span className={styles.sideMenuItemTitle}>{menuItem.title}</span>
+              {/* {boldMenus.includes(menuItem.title) ? : ""} */}
+              <span
+                className={CN.join(
+                  styles.sideMenuItemTitle,
+                  boldMenus.includes(menuItem.title) && styles.boldMenus
+                )}
+              >
+                {menuItem.title}
+              </span>
             </Link>
           ))}
         </ul>

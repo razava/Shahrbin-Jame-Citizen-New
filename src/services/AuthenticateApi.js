@@ -1,9 +1,9 @@
 import axios from "axios";
 import { LS, USER } from "../utils/functions";
 import { appConstants } from "../utils/variables";
-axios.defaults.baseURL = process.env.REACT_APP_API_URL_DEV;
+axios.defaults.baseURL = "https://shahrbinapi.shetabdahi.ir";
 const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
-const instance = LS.read(appConstants.SH_CT_INSTANCE);
+const instance = LS.read(appConstants.SH_CT_INSTANCE) || { id: 1 };
 let isRefreshing = false;
 
 // axios.interceptors.response.use(
@@ -54,11 +54,10 @@ let isRefreshing = false;
 // );
 
 export async function GetCaptcha() {
-  console.log("ccc");
+  console.log("mycaptcah");
   const data = await axios.get(`/api/${instance.id}/Authenticate/Captcha`, {
     responseType: "blob",
   });
-  console.log(data);
   return data;
 }
 

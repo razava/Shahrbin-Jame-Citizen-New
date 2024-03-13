@@ -218,3 +218,7 @@
 .sideMenu.open .sideMenuToggle {
   transform: rotate(180deg);
 }
+
+.boldMenus {
+  font-weight: 810;
+}

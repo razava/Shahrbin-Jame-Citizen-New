@@ -8,12 +8,13 @@ import RequestLike from "./RequestLike";
 import RequestComments from "./RequestComments";
 import RequestViolation from "./RequestViolation";
 import RequestProcessIcon from "./RequestProcessIcon";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import RequestStatus from "./RequestStatus";
 import { AppStore } from "../../store/AppContext";
 
 const RequestCard = ({ request, isSelfRequest = false }) => {
   // variables
+  const { pathname, search } = useLocation();
   const thumbnail =
     request?.medias?.length > 0
       ? URI.createMediaUri(request.medias[0].url3)
@@ -73,7 +74,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
                 name="map-marker-alt"
                 className={styles.RequestCardAddressIcon}
               />
-              <p>{request?.address?.detail}</p>
+              <p>{request?.addressDetail}</p>
             </div>
           </div>
 
@@ -98,20 +99,22 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
               <RequestComments request={request} />
             </div>
           </div>
-          {request.reportState == 1 && (
-            <div className=" flex gap-2  justify-center items-center bg-blue-100 transition delay-75 rounded-lg py-2">
-              <i className="fas fa-comment text-[var(--blue)]"></i>
-              <p
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/user/feedback/${request.id}`);
-                }}
-                className=" text-center font-bold text-[var(--blue)] text-lg "
-              >
-                ثبت بازخورد
-              </p>
-            </div>
-          )}
+          {request.reportState == 1 &&
+            !request?.isFeedbacked &&
+            pathname == "/user/my-requests" && (
+              <div className=" flex gap-2  justify-center items-center bg-blue-100 transition delay-75 rounded-lg py-2">
+                <i className="fas fa-comment text-[var(--blue)]"></i>
+                <p
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/user/feedback/${request.id}`);
+                  }}
+                  className=" text-center font-bold text-[var(--blue)] text-lg "
+                >
+                  ثبت بازخورد
+                </p>
+              </div>
+            )}
         </div>
       </article>
     </>
