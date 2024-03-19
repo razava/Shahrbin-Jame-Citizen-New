@@ -13,7 +13,7 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <AppContext>
-          <BrowserRouter basename="/137">
+          <BrowserRouter>
             <BottomSheet />
             <ToastContainer rtl={true} theme="colored" />
             <ErrorBoundary>

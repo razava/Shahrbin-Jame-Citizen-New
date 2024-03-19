@@ -18,3 +18,10 @@ export async function postFiles(payload) {
   });
   return data.data;
 }
+
+export async function getRegions(cityId) {
+  const data = await axios.get(`/api/${instance.id}/StaffCommon/Regions/${cityId}`, {
+    headers: { Authorization: `Bearer ${Token}` },
+  });
+  return data.data;
+}

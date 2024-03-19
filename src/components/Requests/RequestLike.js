@@ -21,6 +21,10 @@ const RequestLike = ({ request = {} }) => {
         tail: "like",
         id: params.reportId,
         method: httpMethods.put,
+        isPerInstance: true,
+        params: {
+          isLiked: params.isLiked,
+        },
       });
       if (success) {
         setLikes(data);

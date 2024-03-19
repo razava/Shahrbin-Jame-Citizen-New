@@ -4,6 +4,7 @@ import Radio from "../../components/Radio/Radio";
 import styles from "./styles.module.css";
 
 const SelectivePoll = ({
+  disabled = false,
   multiple = false,
   choices = [],
   selecteds = [],
@@ -11,6 +12,7 @@ const SelectivePoll = ({
 }) => {
   // functions
   const handleClick = (choice) => {
+    if (disabled) return;
     const newSelecteds = selecteds.slice();
     const exists = newSelecteds.find((s) => s.id === choice.id);
     if (multiple) {

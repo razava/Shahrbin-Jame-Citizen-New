@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { api } from "../../services/http";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import TextInput from "../TextInput/TextInput";
@@ -8,6 +8,7 @@ import { CN } from "../../utils/functions";
 import useClick from "../../hooks/useClick";
 import marker from "../../assets/images/location.svg";
 import { AppStore } from "../../store/AppContext";
+import useInstance from "../../hooks/useInstance";
 
 const MapContainer = ReactMapboxGl({
   accessToken: process.env.REACT_APP_ACCESS_TOKEN,
@@ -24,6 +25,7 @@ const Map = ({
   width = "100%",
   containerStyle = {},
   onSave = (f) => f,
+  onChange,
 }) => {
   // refs
   const searchResultsRef = useRef(null);
@@ -41,6 +43,7 @@ const Map = ({
     !coords.latitude || !coords.longitude ? defaultCoords : coords
   );
   const [searchText, setSearchText] = useState(address);
+  const [geofences, setGeofences] = useState(address);
   const [searchResults, setSearchResults] = useState([]);
 
   // hooks
@@ -48,6 +51,13 @@ const Map = ({
     element: searchResultsRef,
     whitelists: [searchInputRef],
   });
+  const {
+    isSuccess,
+    currentInstance,
+    getInstances,
+    setAppInstance,
+    getCurrentInstance,
+  } = useInstance();
 
   //   functions
   const onMapClicked = (_, e) => {
@@ -62,14 +72,25 @@ const Map = ({
   const getAddressByCoordinates = async ({ longitude, latitude } = {}) => {
     const { success, data } = await api.map({
       tail: "backward",
-      id: `${longitude}/${latitude}`,
+      id: `${store.instance?.id}/${longitude}/${latitude}`,
       isPerInstance: false,
     });
     if (success) {
+      console.log(data.regionId);
+      console.log(getCurrentInstance());
+      const instance = getCurrentInstance();
+      console.log({ ...instance, id: data.instanceId });
+      // setAppInstance({ ...instance, id: data.instanceId });
+      // setAppins
+      onChange({ instanceId: data.instanceId, regionId: data.regionId }, "map");
+      // onChange(data.instanceId, "instanceId");
+      // onChange(data.regionId, "regionId");
+      setGeofences(data.regionId);
       setSearchText(data.address);
     }
   };
 
+  useEffect(() => {}, []);
   const getCoordinatesByAddress = async (address = "") => {
     setSearchText(address);
     const { success, data } = await api.map({
@@ -79,6 +100,7 @@ const Map = ({
       isPerInstance: false,
     });
     if (success) {
+      console.log(data.results);
       setSearchResults(data.results);
       toggleSearchResults(true);
     }

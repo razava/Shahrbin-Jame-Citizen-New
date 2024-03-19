@@ -13,7 +13,8 @@
   --lightGreen: #06d6a0;
 
   --blue: #003aa3;
-
+  --blue-2: #3b82f6;
+  --blue-3: #0ea5e9;
   --purple: hsl(300, 51%, 20%);
   --purple-scale-4: hsl(317, 93%, 39%);
 
@@ -50,5 +51,5 @@
 
 [data-color-mode="light"] {
   /* body */
-  --main-bg: #F5F7FA;
+  --main-bg: #f5f7fa;
 }

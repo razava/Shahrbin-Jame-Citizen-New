@@ -2,10 +2,12 @@ import React from "react";
 import TextArea from "../../components/TextArea/TextArea";
 import styles from "./styles.module.css";
 
-const DescriptivePoll = ({ onChange = (f) => f, value = "" }) => {
+const DescriptivePoll = ({ onChange = (f) => f, value = "" , editable = true }) => {
+  console.log(value);
   return (
     <>
-      <TextArea
+      <TextArea 
+        editable={editable}
         placeholder="نظر خود را اینجا بنویسید..."
         classNames={{
           input: styles.pollInput,

@@ -9,6 +9,7 @@ import Uploader from "../../components/Uploader/Uploader";
 import { api } from "../../services/http";
 import { contentTypes, httpMethods } from "../../utils/variables";
 import Loader from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const Attachments = ({
   goToNextStep = (f) => f,
@@ -47,19 +48,18 @@ const Attachments = ({
       if (success) {
         setLoading(false);
         fileId = data.id;
-        console.log(fileId);
+        const newAttachments = [...attachments, { id: fileId, file }];
+        setAttachments(newAttachments);
+        onChange(newAttachments, "attachments");
         // dispatch({ type: appActions.SET_INSTANCES, payload: data });
         // setAppInstance(getCurrentInstance(data));
         // setIsSuccess(true);
       }
     } catch (err) {
       setLoading(false);
+      toast("مشکلی در ارسال درخواست به وجود آمد.", { type: "error" });
       // setIsSuccess(false);
     }
-    const newAttachments = [...attachments, { id: fileId, file }];
-    console.log(newAttachments);
-    setAttachments(newAttachments);
-    onChange(newAttachments, "attachments");
   };
 
   const removeAttachment = (attachment) => {

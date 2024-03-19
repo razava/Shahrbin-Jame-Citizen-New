@@ -71,6 +71,7 @@ const createApi = () => {
                 secondArg,
                 thirdArg
               ); // request response
+              console.log(response);
               return handleResponse(response);
             } catch (err) {
               const { status } = err.response || {};
@@ -106,8 +107,8 @@ const createApi = () => {
             // handle server messages
             if (!isSuccess && showMessageOnError) ERROR.show(response);
             else toast(response.message, { type: "success" });
-              // if (status === statusCodes.unAuthorized && isAuthenticated)
-              //   return logout();
+            // if (status === statusCodes.unAuthorized && isAuthenticated)
+            //   return logout();
             const resolveTo = {
               success: isSuccess,
               headers: responseHeaders,
@@ -115,6 +116,11 @@ const createApi = () => {
               isCancelled: false,
               ...response,
             };
+            resolveTo.data = response.data.data;
+            resolveTo.message = response.data.message;
+            console.log(response);
+            console.log(response.data.data);
+            console.log(resolveTo);
 
             return Promise.resolve(resolveTo);
           };

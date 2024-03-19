@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from "./styles.module.css";
 import noThumbnail from "../../assets/images/no-image.jpeg";
-import { DNT, URI } from "../../utils/functions";
+import { DNT, URI, cn } from "../../utils/functions";
 import Icon from "../Icon/Icon";
 import { appRoutes, statusColors } from "../../utils/variables";
 import RequestLike from "./RequestLike";
@@ -35,7 +35,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
       });
     }
   });
-  
+
   // hooks
   const navigate = useNavigate();
 
@@ -66,12 +66,12 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           </div>
 
           <div className={styles.requestCardInfoRow}>
-            <div className={styles.RequestCardAddress}>
+            <div className={cn(styles.RequestCardAddress)}>
               <Icon
                 name="map-marker-alt"
                 className={styles.RequestCardAddressIcon}
               />
-              <p>{request?.addressDetail}</p>
+              <p className=" line-clamp-1">{request?.addressDetail}</p>
             </div>
           </div>
 

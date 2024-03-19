@@ -188,10 +188,10 @@ export class ERROR {
       backgroundColor: "var(--red)",
       duration: 5000,
     };
-
+    console.log(response);
     // Error 500
     if (!response || String(response.status).startsWith("5")) {
-      toast(response?.data?.message || errorMessages[500], {
+      toast(response?.data?.detail || errorMessages[500], {
         type: "error",
       });
       // SnackBar.show({
@@ -212,7 +212,7 @@ export class ERROR {
     }
 
     if (response && response.status === 428) {
-      toast(response?.data?.message, { type: "success" });
+      toast(response?.data?.detail, { type: "success" });
       // SnackBar.show({
       //   text: response?.data?.message,
       //   ...snackOptions,
@@ -222,7 +222,7 @@ export class ERROR {
 
     // Bad Requests
     toast(
-      response?.data?.message ? response.data.message : errorMessages[400],
+      response?.data?.detail ? response.data.message : errorMessages[400],
       {
         type: "error",
       }

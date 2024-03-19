@@ -69,7 +69,8 @@ const SignIn = () => {
       captcha.setValue("");
       if (success) {
         navigate(appRoutes.verify);
-        LS.save(appConstants.SH_CT_OTP_TOKEN, data);
+        // LS.save(appConstants.SH_CT_OTP_TOKEN, data);
+        localStorage.setItem(appConstants.SH_CT_OTP_TOKEN,data);
       }
       // if (success) onSignInSuccess(data);
     } catch (err) {

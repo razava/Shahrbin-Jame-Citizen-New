@@ -24,13 +24,16 @@ const Poll = () => {
     const { success, data } = await api.CitizenPolls({ id });
     if (success) {
       setPoll(data);
+      console.log(data);
+      console.log(data.answer?.choices);
       setValues({
-        ...values,
-        selectedChoices: data.answers?.[0]?.choices || [],
+        text: data.answer?.text || "",
+        selectedChoices: data.answer?.choices || [],
       });
     }
   };
 
+  useEffect(() => {});
   const submitPoll = async () => {
     const payload = {
       text: values.text,
@@ -57,7 +60,7 @@ const Poll = () => {
   const { loading } = useFetch({ fn: getData, auto: id });
   const { makeRequest, loading: submitLoading } = useFetch({ fn: submitPoll });
   const navigate = useNavigate();
-
+  console.log(values.selectedChoices);
   //   renders
   const renderPoll = () => {
     if (loading) return <Loader />;
@@ -72,6 +75,7 @@ const Poll = () => {
             <SelectivePoll
               {...poll}
               multiple={false}
+              disabled={poll.answer ? true : false}
               onChange={(values) => handleChange(values, "selectedChoices")}
               selecteds={values.selectedChoices}
             />
@@ -80,6 +84,7 @@ const Poll = () => {
             <SelectivePoll
               multiple
               {...poll}
+              disabled={poll.answer ? true : false}
               onChange={(values) => handleChange(values, "selectedChoices")}
               selecteds={values.selectedChoices}
             />
@@ -87,17 +92,25 @@ const Poll = () => {
           {poll.pollType === 2 && (
             <DescriptivePoll
               {...poll}
+              editable={poll.answer ? false : true}
               value={values.text}
               onChange={(value) => handleChange(value, "text")}
             />
           )}
-          <Button
-            onClick={makeRequest}
-            className={styles.pollButton}
-            loading={submitLoading}
-          >
-            ارسال
-          </Button>
+          {!poll.answer && (
+            <Button
+              onClick={makeRequest}
+              className={styles.pollButton}
+              loading={submitLoading}
+            >
+              ارسال
+            </Button>
+          )}
+          {poll.answer && (
+            <p className="mt-8 text-red-600">
+              شما قبلا در این نظرسنجی شرکت کرده اید.
+            </p>
+          )}
         </>
       );
   };

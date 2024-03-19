@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { resendOtp } from "../../services/AuthenticateApi";
 import { toast } from "react-toastify";
 import CountdownTimer from "./CountDown";
+import OTPInput from "react-otp-input";
 
 const total = 6;
 
@@ -25,6 +26,8 @@ const Verify = () => {
   // states
   const [parentWidth, setParentWidth] = useState();
   const [isShow, setIsShow] = useState(true);
+  const [otp, setOtp] = useState("");
+  const space = "\xa0";
 
   // variables
   const length = parentWidth ? (parentWidth - (total - 1) * 10) / total : 40;
@@ -78,7 +81,11 @@ const Verify = () => {
     onSuccess: (res) => {},
     onError: (err) => {
       if (err.response.status === 428) {
-        localStorage.setItem(appConstants.SH_CT_OTP_TOKEN, err.response.data);
+        console.log(err.response);
+        localStorage.setItem(
+          appConstants.SH_CT_OTP_TOKEN,
+          err.response.data.value
+        );
         toast("کد تایید مجدد ارسال شد.", { type: "info" });
         localStorage.removeItem("countdownTime");
         localStorage.removeItem("CountDownCompleted");
@@ -92,14 +99,14 @@ const Verify = () => {
   const handelResendOtp = () => {
     console.log(11);
     resendOtpMutation.mutate({
-      otpToken: JSON.parse(localStorage.getItem(appConstants.SH_CT_OTP_TOKEN)),
+      otpToken: localStorage.getItem(appConstants.SH_CT_OTP_TOKEN),
     });
   };
 
   const handleVerify = async (e) => {
     const payload = {
-      verificationCode: verificationCode.current.reverse().join(""),
-      otpToken: JSON.parse(localStorage.getItem(appConstants.SH_CT_OTP_TOKEN)),
+      verificationCode: otp,
+      otpToken: localStorage.getItem(appConstants.SH_CT_OTP_TOKEN),
     };
     try {
       const { success, data } = await api.Authenticate({
@@ -114,6 +121,7 @@ const Verify = () => {
         //   navigate(appRoutes.resetpass, {
         //     state: { token: data, userName: state.phoneNumber },
         //   });
+        console.log(data);
         onSignInSuccess(data);
         navigate(appRoutes.menu);
       }
@@ -133,15 +141,39 @@ const Verify = () => {
     setParentWidth(parentWidth);
   }, [inputsRef.current, windowWidth]);
 
+  useEffect(() => {}, []);
+
+  // useEffect(() => {
+  //   const verifyInputs = document.querySelectorAll("#verifyInput");
+  //   verifyInputs[verifyInputs.length - 1].select();
+  //   verifyInputs.forEach((verifyInput) => {
+  //     verifyInput.addEventListener("input", goToNextInput);
+  //     verifyInput.addEventListener("keydown", onKeyDown);
+  //     verifyInput.addEventListener("click", onFocus);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    const verifyInputs = document.querySelectorAll("#verifyInput");
-    verifyInputs[verifyInputs.length - 1].select();
-    verifyInputs.forEach((verifyInput) => {
-      verifyInput.addEventListener("input", goToNextInput);
-      verifyInput.addEventListener("keydown", onKeyDown);
-      verifyInput.addEventListener("click", onFocus);
-    });
-  }, []);
+    console.log(otp);
+    if (otp.length == 6) {
+      console.log(1);
+      if (localStorage.getItem("CountDownCompleted")) {
+        resendOtpMutation.mutate({
+          otpToken: JSON.parse(
+            localStorage.getItem(appConstants.SH_CT_OTP_TOKEN)
+          ),
+        });
+      } else {
+        console.log(2);
+        makeRequest();
+      }
+      // const payload = {
+      //   otpToken: localStorage.getItem("verificationToken"),
+      //   verificationCode: otp,
+      // };
+      // verifyMutation.mutate(payload);
+    }
+  }, [otp]);
 
   // renders
   const renderVerifyInputs = () => {
@@ -176,7 +208,25 @@ const Verify = () => {
         <p className={authStyles.authTitle}>
           کد تایید ارسالی به تلفن خود را وارد نمایید.
         </p>
-        {renderVerifyInputs()}
+        {/* {renderVerifyInputs()} */}
+        <div className="w-full mt-8 " dir="ltr">
+          <OTPInput
+            value={otp}
+            onChange={setOtp}
+            numInputs={6}
+            renderSeparator={<span>{space}</span>}
+            renderInput={(props, idx) => (
+              <input
+                className="!text-2xl"
+                autoFocus={idx == 0}
+                pattern="[0-9]*"
+                {...props}
+              />
+            )}
+            containerStyle=" flex justify-center gap-2 flex-row-reverse"
+            inputStyle=" !w-20 rounded-full h-20 bg-[#eee] border shadow-msm border-none text-black !text-4xl"
+          />
+        </div>
         <div className="mx-auto w-full text-center text-xl mt-10">
           {" "}
           <CountdownTimer
@@ -192,7 +242,7 @@ const Verify = () => {
             </p>
           )}
         </div>
-        {renderButton()}
+        {/* {renderButton()} */}
       </form>
     </>
   );

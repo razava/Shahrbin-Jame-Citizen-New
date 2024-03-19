@@ -9,6 +9,7 @@ const Address = ({
 }) => {
   // functions
   const onSave = (address) => {
+    console.log(address);
     onChange(address, "address");
     goToNextStep();
   };
@@ -26,6 +27,7 @@ const Address = ({
         onSave={onSave}
         coords={coords}
         address={value.details}
+        onChange={onChange}
       />
     </>
   );

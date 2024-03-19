@@ -6,6 +6,8 @@ import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
 import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
 import useInstance from "../../hooks/useInstance";
+import { getRegions } from "../../services/CommonَApi";
+import { useQuery } from "@tanstack/react-query";
 
 const allStepsDefault = [
   {
@@ -76,9 +78,16 @@ const useNewRequest = () => {
     attachments: [],
     isIdentityVisible: false,
     city: null,
+    map: { regionId: null, instanceId: null },
   });
   //hooks
   const { currentInstance, instances, setAppInstance } = useInstance();
+  // queries
+  // const { data, isLoading, isSuccess, refetch } = useQuery({
+  //   queryKey: ["Regions"],
+  //   queryFn: () => getRegions(instances[0]?.cityId),
+  //   enabled: false,
+  // });
 
   // functions
   const goToNextStep = () => {
@@ -86,6 +95,21 @@ const useNewRequest = () => {
     setCurrentStep(nextStep);
   };
 
+  // useEffect(() => {
+  //   if (isSuccess && data) {
+  //     const regionId = data.find(
+  //       (item) => item.name === values.region?.[0].title
+  //     );
+  //     console.log(regionId);
+  //     console.log(data?.[0].id);
+  //     if (regionId) {
+  //       setValues({ ...values, region: regionId.id });
+  //     } else {
+  //       setValues({ ...values, region: data?.[0].id });
+  //     }
+  //     // setValues({ ...values, region: data.data });
+  //   }
+  // }, [data]);
   // 1: checks if the step is even active (could be inActive in some cases)
   // 2: determines the direction user wants to navigate.
   // 3: if direction is backward it's all okay
@@ -111,17 +135,18 @@ const useNewRequest = () => {
 
   const onChange = (value, name) => {
     setValues({ ...values, [name]: value });
+    console.log(value, name);
   };
 
   const getPayload = () => {
     // const formData = new FormData();
-    // console.log(values.address);
+    console.log(values.address);
     // console.log(values.attachments);
     const data = {
       categoryId: values.category.id,
       comments: values.detail ? JSON.stringify(values.detail) : values.comments,
       address: {
-        regionId: 1223,
+        regionId: values.map.regionId,
         street: "",
         valley: "",
         detail: values.address.details,
@@ -156,7 +181,8 @@ const useNewRequest = () => {
       payload,
       method: httpMethods.post,
       // headers,
-      instanceId: values?.city?.id ? values.city.id : instances[0].cityId,
+      instanceId: values.map.instanceId,
+      // instanceId: values?.city?.id ? values.city.id : instances[0].cityId,
     });
     if (success) {
       navigate(appRoutes.myRequests);

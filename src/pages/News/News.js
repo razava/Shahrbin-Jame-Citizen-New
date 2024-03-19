@@ -17,7 +17,11 @@ const News = () => {
       tail: "News",
       isPerInstance: true,
     });
-    if (success) setNews(data);
+    if (success) {
+      console.log(success);
+      console.log(data);
+      setNews(data);
+    }
   };
 
   // hooks
@@ -35,7 +39,11 @@ const News = () => {
           {news.map((news) => (
             <a
               style={{
-                backgroundImage: `url(${URI.createMediaUri(news.image.url3)})`,
+                backgroundImage: `url(${URI.createMediaUri(
+                  news.imageFile.url4
+                )})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
               }}
               target="_blank"
               href={news.url}
