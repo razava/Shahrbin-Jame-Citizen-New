@@ -84,7 +84,7 @@ const Verify = () => {
         console.log(err.response);
         localStorage.setItem(
           appConstants.SH_CT_OTP_TOKEN,
-          err.response.data.value
+          err.response.data.data
         );
         toast("کد تایید مجدد ارسال شد.", { type: "info" });
         localStorage.removeItem("countdownTime");

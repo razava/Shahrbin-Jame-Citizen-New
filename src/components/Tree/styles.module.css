@@ -5,6 +5,10 @@
   overflow-y: hidden;
 }
 
+.treeWrapper {
+  @apply lg:w-[70%] w-full;
+}
+
 .treeItems {
   flex: 1;
   overflow-y: auto;

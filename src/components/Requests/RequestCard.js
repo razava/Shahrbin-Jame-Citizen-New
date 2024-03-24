@@ -60,7 +60,7 @@ const RequestCard = ({ request, isSelfRequest = false }) => {
           <div className={styles.requestCardInfoRow}>
             <p className={styles.requestCardCategory}>
               {/* {request.category.title} */}
-              {categoryTitle}
+              {request.categoryTitle}
             </p>
             <RequestStatus lastStatus={request.lastStatus} />
           </div>

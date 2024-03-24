@@ -6,6 +6,7 @@ import { api } from "../../services/http";
 import useFetch from "../../hooks/useFetch";
 import Loader from "../../components/Loader/Loader";
 import { CN } from "../../utils/functions";
+import QuickAccess from "./QuickAccess";
 
 const Category = ({
   goToNextStep = (f) => f,
@@ -38,17 +39,27 @@ const Category = ({
   console.log(categories);
   return (
     <>
-      <section className={CN.join(styles.categoryWrapper, loading ? styles.loading : "")}>
+      <section
+        className={CN.join(
+          styles.categoryWrapper,
+          loading ? styles.loading : ""
+        )}
+      >
         {loading ? (
           <Loader />
         ) : (
-          <Tree
-            data={categories}
-            keys={{ tree: "categories", title: "title", value: "id" }}
-            renderTreeItem={({ node }) => <CategoryItem item={node} />}
-            onSelectNode={onSelectNode}
-            name="categories"
-          />
+          <>
+            <div className="w-full lg:w-[30%] flex flex-col items-center  sm:px-8 mt-2 sticky rounded-xl max-lg:hidden">
+              <QuickAccess />
+            </div>
+            <Tree
+              data={categories}
+              keys={{ tree: "categories", title: "title", value: "id" }}
+              renderTreeItem={({ node }) => <CategoryItem item={node} />}
+              onSelectNode={onSelectNode}
+              name="categories"
+            />
+          </>
         )}
       </section>
     </>

@@ -209,6 +209,7 @@ const useNewRequest = () => {
     onTimeLineStepClick,
     onChange,
     onSubmit: makeRequest,
+    setCurrentStep,
   };
 };
 

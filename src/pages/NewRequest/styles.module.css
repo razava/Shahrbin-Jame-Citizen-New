@@ -196,7 +196,7 @@
   /* background-color: var(--white); */
   padding: 10px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   overflow-y: hidden;
 }
 
@@ -406,4 +406,36 @@
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.quickAccess {
+  @apply w-full lg:w-[30%] flex flex-col items-center  sm:px-8 mt-2 sticky rounded-xl;
+}
+.quickAccessText {
+  @apply font-bold mb-4 text-xl w-full grid place-content-center rounded-xl border-gray-900 text-center bg-[--yellow] shadow-md h-16;
+}
+
+.quickAccessWrapper {
+  @apply grid grid-cols-2 lg:grid-cols-1 gap-1 md:mt-2 w-full;
+}
+/* .quickAccessButton:first-child {
+  @apply lg:rounded-t-3xl max-lg:rounded-r-3xl;
+}
+.quickAccessButton:last-child {
+  @apply lg:rounded-b-3xl max-lg:rounded-l-3xl border-none border-x-2;
+} */
+.quickAccessButton:last-child:nth-last-child(odd) {
+  /* @apply max-lg:col-span-2; */
+}
+.quickAccessButton {
+  @apply text-center p-2 w-full h-14 sm:h-20 lg:h-20 flex items-center justify-center md:text-xl text-white transition cursor-pointer bg-blue-800 rounded-xl;
+}
+/* @media screen and (max-width: 992px) {
+  .quickAccessButton {
+    border-left: white solid 2px;
+  }
+} */
+
+.quickAccessImage {
+  @apply rounded-lg max-w-full w-full max-h-[8rem] object-cover;
 }
