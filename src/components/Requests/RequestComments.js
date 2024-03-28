@@ -112,6 +112,7 @@ const Comments = ({ request = {} }) => {
     else
       return comments.map((comment) => (
         <RequestComment
+          request={request}
           comment={comment}
           onDeleteCommentSuccess={getComments}
         />

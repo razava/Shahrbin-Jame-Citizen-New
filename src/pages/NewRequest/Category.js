@@ -19,6 +19,7 @@ const Category = ({
 
   // functions
   const onSelectNode = (data) => {
+    console.log(data.tracks.slice(-1)[0]);
     onChange(data.tracks.slice(-1)[0], "category");
     goToNextStep();
   };

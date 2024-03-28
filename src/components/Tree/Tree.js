@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useTree from "./useTree";
-import { CN } from "../../utils/functions";
+import { CN, findNodeAndParents } from "../../utils/functions";
 import Button from "../Button/Button";
 import styles from "./styles.module.css";
 import TreeSearch from "./TreeSearch";
 import { useQuickStore } from "../../pages/NewRequest/zustand";
 import useNewRequest from "../../pages/NewRequest/useNewRequest";
 import QuickAccess from "../../pages/NewRequest/QuickAccess";
+import { AppStore } from "../../store/AppContext";
+import { appActions } from "../../utils/variables";
 
 const Tree = ({
   data = {},
@@ -40,55 +42,129 @@ const Tree = ({
     onLastLevelReached,
   });
 
-  const { goToNextStep, setCurrentStep, setQuickAccess, onChange } =
-    useNewRequest();
-
+  const {
+    goToNextStep,
+    gtToAddress,
+    setCurrentStep,
+    setQuickAccess,
+    onChange,
+  } = useNewRequest();
+  const [store] = useContext(AppStore);
+  console.log(store.initialData.categories);
+  const [info, setInfo] = useState();
   //effect
   const state = useQuickStore((state) => state.count);
   const Data = useQuickStore((state) => state.data);
+  const change = useQuickStore((state) => state.change);
+  const bool = useQuickStore((state) => state.bool);
   const del = useQuickStore((state) => state.del);
+  const updateCategory = useQuickStore((state) => state.updateCategory);
+  const [{ createRequest = {} } = {}, dispatch] = useContext(AppStore);
+
+  function findName(categoryId, children) {
+    let level = 0;
+    if (Array.isArray(children)) {
+      // Yes, check them
+      level++;
+      for (const childNode of children) {
+        console.log(childNode.id);
+        // goIntoNextLevel({
+        //   id: childNode.id,
+        //   order: childNode.order,
+        //   code: childNode.code,
+        //   title: childNode.title,
+        //   description: childNode.description,
+        //   attachmentDescription: childNode.attachmentDescription,
+        //   duration: childNode.duration,
+        //   responseDuration: childNode.responseDuration,
+        //   formElements: childNode.formElements,
+        //   categories: childNode.categories,
+        // });
+        if (childNode.id === categoryId) {
+          // Found it
+          console.log(level);
+          return childNode;
+        }
+        // Look in this node's children
+        const found = findName(categoryId, childNode.categories);
+        if (found) {
+          // Found in this node's children
+          return found;
+        }
+      }
+    }
+  }
+  // useEffect(() => {
+  //   onChange(info, "category");
+  // }, [info]);
   useEffect(() => {
     if (state) {
       console.log("🚀 ~ file: Tree.js:47 ~ useEffect ~ state:", state);
       console.log(currentNodes);
-      goIntoNextLevel({
-        id: Data.category.id,
-        order: Data.category.order,
-        code: Data.category.code,
-        title: Data.category.title,
-        description: Data.category.description,
-        attachmentDescription: Data.category.attachmentDescription,
-        duration: Data.category.duration,
-        responseDuration: Data.category.responseDuration,
-        formElements: Data.category.formElements,
-        categories: currentNodes,
-      });
-      if (Data.category.processId) {
-        setCurrentStep({
-          id: "address",
-          title: "آدرس",
-          order: 2,
-          active: true,
-          required: true,
-        });
-        goToNextStep();
-        onChange(
-          {
-            id: Data.category.id,
-            order: Data.category.order,
-            code: Data.category.code,
-            title: Data.category.title,
-            description: Data.category.description,
-            attachmentDescription: Data.category.attachmentDescription,
-            duration: Data.category.duration,
-            responseDuration: Data.category.responseDuration,
-            formElements: Data.category.formElements,
-            categories: Data.category.categories,
-            objectionAllowed: Data.category.objectionAllowed,
-            hideMap: Data.category.hideMap,
+      console.log(Data);
+      // const category = findName(
+      //   Data.categoryId,
+      //   store?.initialData?.categories.categories
+      // );
+      console.log(Data.categoryId);
+      console.log(store?.initialData?.categories.categories);
+      const result = findNodeAndParents(
+        store?.initialData?.categories.categories,
+        Data.categoryId
+      );
+      console.log(result);
+      if (result) {
+        console.log("Node found:", result[result.length - 1]);
+        console.log("Parent nodes:", result.slice(0, -1));
+        const payload = {
+          categories: {
+            currentLevel: 3,
+            currentNodes: result[result.length - 1].categories,
+            tracks: [result[0], result[0].categories],
+            navigationStack: result,
           },
-          "category"
-        );
+        };
+        console.log(payload);
+        dispatch({
+          type: appActions.SET_CREATE_REQUEST,
+          payload: {
+            categories: {
+              currentLevel: result.length + 1,
+              currentNodes: result[result.length - 1].categories,
+              tracks: result,
+              navigationStack: [
+                result[0],
+                result.map((item, i) => {
+                  if (i !== 0) {
+                    return item.categories;
+                  }
+                }),
+              ],
+            },
+          },
+        });
+      } else {
+        console.log("Node not found");
+      }
+      // console.log(result);
+
+      // console.log(category.categories.length == 0);
+      console.log(result[result.length - 1].categories.length);
+      const category = result[result.length - 1];
+      if (result[result.length - 1].categories.length == 0) {
+        console.log("eeeeeeeee");
+        // setCurrentStep({
+        //   id: "address",
+        //   title: "آدرس",
+        //   order: 2,
+        //   active: true,
+        //   required: true,
+        // });
+        updateCategory(result[result.length - 1]);
+        change(!bool);
+        onChange(result[result.length - 1], "category");
+        // gtToAddress();
+        // goToNextStep();
         del();
       }
     }

@@ -6,29 +6,20 @@ import styles from "./styles.module.css";
 import noImage from "../../assets/images/no-image.jpeg";
 import useTree from "../../components/Tree/useTree";
 import { useQuickStore } from "./zustand";
+import { getQuickAccess } from "../../services/CitizenReport";
 
 function QuickAccess() {
   const { goToNextStep, setCurrentStep, setQuickAccess, onChange } =
     useNewRequest();
   const { goIntoNextLevel, currentNodes } = useTree();
-  const getQuickAccessItem = async () => {
-    const data = await axios.get(
-      "https://shahrbin.yazd.ir:6790/api/QuickAccess",
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("SHAHRBIN_TOKEN")}`,
-        },
-      }
-    );
-    return data.data;
-  };
+
   const { data, isLoading } = useQuery({
     queryKey: ["quickAccess"],
-    queryFn: getQuickAccessItem,
+    queryFn: getQuickAccess,
   });
-  console.log(data);
+  
   const update = useQuickStore((state) => state.inc);
-  console.log(data?.length % 2 == 0);
+  
   return (
     <>
       <p className={styles.quickAccessText}>درخواست های پرتکرار</p>
@@ -39,6 +30,7 @@ function QuickAccess() {
               <>
                 <div
                   onClick={() => {
+                    console.log(item);
                     update(item);
                     // if (item.category.processId) {
                     //   setQuickAccess(true);

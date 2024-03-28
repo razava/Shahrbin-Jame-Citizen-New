@@ -22,9 +22,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   const getInitialData = async () => {
     setDone(false);
     setError(false);
-    console.log(444444);
     try {
-      console.log(isAuthenticated, 2222222222);
       const promises = isAuthenticated
         ? [
             fetch(getCategories),
@@ -42,9 +40,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
         // complaintCategories: allData.length > 3 ? allData[3] : {},
       };
       dispatch({ type: appActions.SET_INITIALDATA, payload: initialData });
-      console.log("iniiii");
     } catch (err) {
-      console.log(err);
       setError(true);
     }
   };

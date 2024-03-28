@@ -27,6 +27,8 @@ export default class AdminRoute extends Component {
 
   render() {
     const { ready, admin, isAuthenticated, roles } = this.state;
+    console.log(window.location.pathname);
+
     var link = document.createElement("a");
     link.href = this.props.path;
     const returnUrl = `${link.protocol}//${link.host}${link.pathname}${link.search}${link.hash}`;
@@ -41,7 +43,10 @@ export default class AdminRoute extends Component {
             if (isAuthenticated) {
               if (admin) {
                 const allowedRoles = accessibilityByRoles(this.props.path);
-                if (hasRole(allowedRoles, roles) || this.props.path === '/admin/dashboard') {
+                if (
+                  hasRole(allowedRoles, roles) ||
+                  this.props.path === "/admin/dashboard"
+                ) {
                   return <Component {...props} />;
                 } else {
                   return <Redirect to={"/admin/dashboard"} />;

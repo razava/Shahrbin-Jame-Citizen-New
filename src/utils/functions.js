@@ -221,12 +221,9 @@ export class ERROR {
     }
 
     // Bad Requests
-    toast(
-      response?.data?.detail ? response.data.message : errorMessages[400],
-      {
-        type: "error",
-      }
-    );
+    toast(response?.data?.detail ? response.data.message : errorMessages[400], {
+      type: "error",
+    });
     // SnackBar.show({
     //   text: response?.data?.message
     //     ? response.data.message
@@ -561,3 +558,27 @@ export const checkExtension = (path, allowedExtensions = []) => {
 export const showExtensionError = () => {
   toast("فرمت فایل انتخابی مجاز نیست.", { type: "error" });
 };
+
+export function findNodeAndParents(tree, target, path = []) {
+  for (const node of tree) {
+    // Check if the current node matches the target
+    if (node.id === target) {
+      // Return both the node and its parents
+      return [...path, node];
+    }
+
+    // If the current node has children, recursively search them
+    if (node.categories && node.categories.length > 0) {
+      const result = findNodeAndParents(node.categories, target, [
+        ...path,
+        node,
+      ]);
+      // If the target is found in the subtree, return the result
+      if (result) {
+        return result;
+      }
+    }
+  }
+  // If target is not found, return null
+  return null;
+}

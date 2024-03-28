@@ -41,21 +41,31 @@ const useTree = ({
   const getCurrentNodes = (tracks, navigationStack) => {
     const lastTrack = tracks.slice(-1)?.[0];
     const lastStack = navigationStack.slice(-1)?.[0];
-    console.log(data["categories"]);
     if (lastTrack)
       return lastStack.find(
         (n) => String(n[keys.value]) === String(lastTrack[keys.value])
       )?.[keys.tree];
     else return data[keys.tree];
   };
-
+  // let tk;
+  // if (localStorage.getItem("tracks")) {
+  //   tk = localStorage.getItem("tracks");
+  // } else {
+  //   tk = tracks;
+  // }
   // sets the current nodes and level after clicking on a node
   const goIntoNextLevel = (node) => {
+    console.log(node);
+    localStorage.setItem("tracks", JSON.stringify(tracks));
     const newTracks = [...tracks, node];
+    console.log(tracks);
+    console.log(newTracks);
     const newNavigationStack = [...navigationStack, currentNodes];
+    console.log(newNavigationStack);
     const newCurrentLevel = newTracks.length + 1;
     const newCurrentNodes =
       getCurrentNodes(newTracks, newNavigationStack) || [];
+    console.log(newCurrentNodes);
     if (newCurrentNodes.length === 0) {
       return onLastLevelReached({
         tracks: newTracks,
@@ -64,6 +74,7 @@ const useTree = ({
         currentNodes,
       });
     }
+    localStorage.setItem("tracks", newTracks);
     const payload = {
       [name]: {
         currentLevel: newCurrentLevel,
@@ -72,6 +83,7 @@ const useTree = ({
         currentNodes: newCurrentNodes,
       },
     };
+    console.log(payload);
     dispatch({
       type: appActions.SET_CREATE_REQUEST,
       payload,

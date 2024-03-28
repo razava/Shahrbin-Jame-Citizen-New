@@ -8,8 +8,14 @@ import { api } from "../../services/http";
 import { httpMethods } from "../../utils/variables";
 import useFetch from "../../hooks/useFetch";
 import DualRingLoader from "../Loader/DualRingLoader";
+import RequestViolations from "./RequestViolations";
+import useBottomSheet from "../../hooks/useBottomSheet";
 
-const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
+const RequestComment = ({
+  comment,
+  onDeleteCommentSuccess = (f) => f,
+  request,
+}) => {
   //   functions
   const deleteComment = async (e) => {
     e.stopPropagation();
@@ -28,6 +34,24 @@ const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
   const { getUserTitle } = useMe();
   const { makeRequest, loading } = useFetch({ fn: deleteComment });
   console.log(URI.createMediaUri(comment.user?.avatar?.url3));
+  const { open } = useBottomSheet();
+
+  const style = {
+    maxWidth: 700,
+    width: "100%",
+    minHeight: 75,
+  };
+
+  const onIconClick = (e) => {
+    e.stopPropagation();
+    open({
+      style,
+      renderComponent: () => (
+        <RequestViolations request={request} type="comment" comment={comment} />
+      ),
+    });
+  };
+
   return (
     <>
       <div className={styles.requestComment}>
@@ -62,6 +86,12 @@ const RequestComment = ({ comment, onDeleteCommentSuccess = (f) => f }) => {
                 onClick={makeRequest}
               />
             )}
+            <Icon
+              name="flag"
+              type="far"
+              className={styles.RequestCardActionIcon}
+              onClick={onIconClick}
+            />
           </div>
         </div>
       </div>

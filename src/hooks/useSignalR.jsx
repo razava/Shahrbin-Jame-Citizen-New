@@ -30,7 +30,7 @@ const useSignalR = (callBack = (f) => f) => {
       try {
         await connection.start();
         console.log("SignalR connected");
-        console.log(connection.connectionId);
+        
 
         postConnectionIdMutation.mutate(connection.connectionId);
 
@@ -58,11 +58,6 @@ const useSignalR = (callBack = (f) => f) => {
     // };
   }, []);
 
-  useEffect(() => {
-    if (connection.connectionId) {
-      console.log(connection.connectionId);
-    }
-  }, [connection]);
   // console.log(connection.state);
   // useEffect(() => {
   //   console.log(11111);

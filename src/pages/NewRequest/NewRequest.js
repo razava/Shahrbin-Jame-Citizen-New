@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Address from "./Address";
 import Attachments from "./Attachments";
 import Category from "./Category";
@@ -12,11 +12,16 @@ import { CN } from "../../utils/functions";
 import City from "./City";
 import { AppStore } from "../../store/AppContext";
 import useInstance from "../../hooks/useInstance";
+import { useQuickStore } from "./zustand";
 
 const NewRequest = () => {
   //store
   const [store, dispatch] = useContext(AppStore);
   const { currentInstance, instances, setAppInstance } = useInstance();
+  const change = useQuickStore((state) => state.change);
+  const bool = useQuickStore((state) => state.bool);
+  const category = useQuickStore((state) => state.category);
+  const [first, setfirst] = useState();
   // hooks
   const {
     currentStep,
@@ -31,10 +36,19 @@ const NewRequest = () => {
   const { isDesktop } = useResize();
   //
   useEffect(() => {
-    if (instances.length == 1) {
+    if (instances.length == 1 && currentStep.id == "instance") {
       goToNextStep();
     }
-  }, []);
+  }, [currentStep]);
+  useEffect(() => {
+    if (category) {
+      goToNextStep();
+      console.log(category);
+      onChange(category, "category");
+    }
+    // console.log(currentStep);
+    // setfirst(true);
+  }, [bool]);
   //   renders
   const renderCurrentStep = () => {
     if (currentStep.id === allSteps[0].id)

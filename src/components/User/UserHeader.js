@@ -29,7 +29,7 @@ const UserHeader = ({ position }) => {
   const updateNotificationState = useNotification((state) => state.update);
   // variables
   const isMenupage = appRoutes.menu === pathname;
-  console.log(NotificationState);
+  
   // functions
   const handleLeftIconClick = (e) => {
     e.stopPropagation();
@@ -42,7 +42,7 @@ const UserHeader = ({ position }) => {
       }
     }
   };
-  console.log(instances, "rr");
+  
 
   useEffect(() => {
     const hasNotification = localStorage.getItem(

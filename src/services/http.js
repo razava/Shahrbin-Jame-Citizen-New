@@ -71,7 +71,8 @@ const createApi = () => {
                 secondArg,
                 thirdArg
               ); // request response
-              console.log(response);
+              console.log(window.location.pathname);
+              console.log(window.location.pathname.includes("/user/feedback/"));
               return handleResponse(response);
             } catch (err) {
               const { status } = err.response || {};
@@ -83,6 +84,12 @@ const createApi = () => {
                 ...err.response,
               };
               if (status === statusCodes.unAuthorized && isAuthenticated) {
+                if (window.location.pathname.includes("/user/feedback/")) {
+                  localStorage.setItem(
+                    appConstants.SH_CT_LOGIN_URL,
+                    window.location.pathname
+                  );
+                }
                 logout();
                 // return Promise.reject(rejectTo);
               }
@@ -118,9 +125,6 @@ const createApi = () => {
             };
             resolveTo.data = response.data.data;
             resolveTo.message = response.data.message;
-            console.log(response);
-            console.log(response.data.data);
-            console.log(resolveTo);
 
             return Promise.resolve(resolveTo);
           };

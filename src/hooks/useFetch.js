@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SnackBar from "../components/SnackBar/SnackBar";
-import { statusCodes } from "../utils/variables";
+import { appConstants, statusCodes } from "../utils/variables";
 import useAuthenticate from "./useAuthenticate";
 
 const useFetch = ({
@@ -30,8 +30,13 @@ const useFetch = ({
       setTimeout(() => {
         setLoading(false);
         onFailure(err);
-        if (err.status === statusCodes.unAuthorized) logout();
-        else handleError(err);
+
+        if (err.status === statusCodes.unAuthorized) {
+          if (window.location.pathname.includes("/user/feedback/")) {
+            localStorage.setItem(appConstants.SH_CT_LOGIN_URL, "sd");
+          }
+          logout();
+        } else handleError(err);
       }, 300);
     }
   };

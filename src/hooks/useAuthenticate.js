@@ -13,7 +13,6 @@ const useAuthenticate = () => {
   const isAuthenticated = !!LS.read(appConstants.SH_CT_ACCESS_TOKEN);
   //&&
   // !AUTHENTICATOR.isTokenExpired();
-  console.log(isAuthenticated);
   // functions
   // const changeAuthMode = (to = {}) => {
   //   if (searchParams.get("mode") === to.name) return;

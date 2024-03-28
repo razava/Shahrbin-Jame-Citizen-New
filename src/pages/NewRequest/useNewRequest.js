@@ -92,9 +92,24 @@ const useNewRequest = () => {
   // functions
   const goToNextStep = () => {
     const nextStep = allSteps.find((s) => s.order === currentStep.order + 1);
+    console.log(nextStep);
     setCurrentStep(nextStep);
+    console.log(222);
   };
+  useEffect(() => {
+    console.log(currentStep);
+  }, [currentStep]);
 
+  const gtToAddress = () => {
+    setCurrentStep({
+      id: "address",
+      title: "آدرس",
+      icon: () => <Icon name="map" type="far" />,
+      order: 3,
+      active: true,
+      required: true,
+    });
+  };
   // useEffect(() => {
   //   if (isSuccess && data) {
   //     const regionId = data.find(
@@ -136,6 +151,10 @@ const useNewRequest = () => {
   const onChange = (value, name) => {
     setValues({ ...values, [name]: value });
     console.log(value, name);
+    // if (name == "category") {
+    //   console.log(33);
+    //   setValues({ ...values, category: value });
+    // }
   };
 
   const getPayload = () => {
@@ -210,6 +229,7 @@ const useNewRequest = () => {
     onChange,
     onSubmit: makeRequest,
     setCurrentStep,
+    gtToAddress,
   };
 };
 

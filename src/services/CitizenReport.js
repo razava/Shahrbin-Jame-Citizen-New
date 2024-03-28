@@ -6,6 +6,12 @@ const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
 const instance = LS.read(appConstants.SH_CT_INSTANCE);
 let isRefreshing = false;
 
+axios.interceptors.request.use(function (config) {
+  const token = LS.read(appConstants.SH_CT_ACCESS_TOKEN);
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
+
 export async function postFeedback({ id, payload }) {
   const data = await axios.post(
     `/api/${instance.id}/CitizenReport/Feedback/${id}`,
@@ -26,4 +32,11 @@ export async function postObjection({ id, payload }) {
     }
   );
   return data.data;
+}
+
+export async function getQuickAccess() {
+  const data = await axios.get(
+    `/api/${instance.id}/CitizenReport/QuickAccesses`
+  );
+  return data.data.data;
 }

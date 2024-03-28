@@ -9,7 +9,11 @@ import { api } from "../../services/http";
 import { httpMethods } from "../../utils/variables";
 import useFetch from "../../hooks/useFetch";
 
-const RequestViolations = ({ request = {}, comment = {} }) => {
+const RequestViolations = ({
+  request = {},
+  comment = {},
+  type = "request",
+}) => {
   //   store
   const [store = {}, dispatch] = useContext(AppStore);
   const { initialData: { violationTypes = [] } = {} } = store;
@@ -28,15 +32,19 @@ const RequestViolations = ({ request = {}, comment = {} }) => {
 
   const submitViolation = async () => {
     const payload = {
-      reportId: request.id,
-      // commentId: comment.id,
       description: violationDescription,
       violationTypeId: violationType.id,
     };
+    if (type == "request") {
+      payload.reportId = request.id;
+    } else {
+      payload.commentId = comment.id;
+    }
     const { success } = await api.CitizenReport({
+      payload: payload,
       method: httpMethods.post,
-      tail: "ReportViolation",
-      id: request.id,
+      tail: type == "request" ? "ReportViolation" : "CommentViolation",
+      id: type == "request" ? request.id : comment.id,
     });
     if (success) {
       setCurrentStep((prev) => prev + 1);

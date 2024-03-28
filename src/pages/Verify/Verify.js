@@ -123,7 +123,12 @@ const Verify = () => {
         //   });
         console.log(data);
         onSignInSuccess(data);
-        navigate(appRoutes.menu);
+        if (localStorage.getItem(appConstants.SH_CT_LOGIN_URL)) {
+          navigate(localStorage.getItem(appConstants.SH_CT_LOGIN_URL));
+          localStorage.removeItem(appConstants.SH_CT_LOGIN_URL);
+        } else {
+          navigate(appRoutes.menu);
+        }
       }
     } catch (err) {}
   };
