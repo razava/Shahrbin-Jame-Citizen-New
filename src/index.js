@@ -6,7 +6,6 @@ import "./assets/styles/global.css";
 import { ICONS } from "./utils/functions";
 import mapboxgl from "mapbox-gl";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-
 ICONS.load();
 mapboxgl.setRTLTextPlugin(
   "https://cdn.parsimap.ir/third-party/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
