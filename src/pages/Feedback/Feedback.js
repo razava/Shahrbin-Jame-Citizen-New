@@ -29,7 +29,7 @@ const Feedback = () => {
   const [values, setValues] = useState({
     comments: "",
     attachments: [],
-    rating: 1,
+    rating: 0,
   });
 
   // functions
@@ -111,7 +111,7 @@ const Feedback = () => {
   }, [values]);
 
   const handelSubmit = () => {
-    if (satisfaction == 1) {
+    if (values.rating == 1) {
       postObjectionMutation.mutate({
         id: complaintId,
         payload: {
@@ -169,10 +169,12 @@ const Feedback = () => {
                 name="isObjection"
                 />
               </div> */}
-              {satisfaction !== 1 && (
+              <div className=" mb-3">
+                {/* {satisfaction !== 1 && ( */}
                 <Rating name="rating" onChange={hanldeChange} />
-              )}
-              <p>آیا از نحوه ی پاسخگویی راضی بودید؟</p>
+                {/* )} */}
+              </div>
+              {/* <p>آیا از نحوه ی پاسخگویی راضی بودید؟</p>
               <div className=" mb-5">
                 <RadioGroup
                   options={[
@@ -182,9 +184,14 @@ const Feedback = () => {
                   onChange={(value) => handleRadioChange(value, "")}
                   // {...meta.props}
                 />
-              </div>
-              {satisfaction == 1 && (
+              </div> */}
+
+              {values.rating == 1 && (
                 <>
+                  <p className="">
+                    باتوجه به عدم رضایت شما از نحوه رسیدگی، درخواست برای بررسی
+                    مجدد به واحد بازرسی ارجاع داده میشود.
+                  </p>
                   <TextInput
                     name={"comments"}
                     onChange={hanldeChange}

@@ -6,7 +6,7 @@ const defaultStars = [
   {
     id: 1,
     hover: false,
-    active: true,
+    active: false,
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const defaultStars = [
   },
 ];
 
-const Rating = ({ onChange = (f) => f, name="" }) => {
+const Rating = ({ onChange = (f) => f, name = "" }) => {
   // states
   const [stars, setStars] = useState(defaultStars);
   const [rating, setRating] = useState(0);
