@@ -71,8 +71,6 @@ const createApi = () => {
                 secondArg,
                 thirdArg
               ); // request response
-              console.log(window.location.pathname);
-              console.log(window.location.pathname.includes("/user/feedback/"));
               return handleResponse(response);
             } catch (err) {
               const { status } = err.response || {};

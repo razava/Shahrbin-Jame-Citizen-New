@@ -13,9 +13,11 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import useNotification from "./useNotification";
 import { appConstants } from "../utils/variables";
+import useAuthenticate from "./useAuthenticate";
 
 const useSignalR = (callBack = (f) => f) => {
   const queryClient = useQueryClient();
+  const { isAuthenticated } = useAuthenticate();
   const { pathname } = useLocation();
   const updateNotificationState = useNotification((state) => state.update);
   const postConnectionIdMutation = useMutation({
@@ -30,7 +32,6 @@ const useSignalR = (callBack = (f) => f) => {
       try {
         await connection.start();
         console.log("SignalR connected");
-        
 
         postConnectionIdMutation.mutate(connection.connectionId);
 
@@ -46,8 +47,10 @@ const useSignalR = (callBack = (f) => f) => {
         console.error("SignalR connection failed: ", err);
       }
     };
-
-    startConnection();
+    
+    if (isAuthenticated) {
+      startConnection();
+    }
     // console.log(connection.connectionId);
 
     // return () => {
@@ -56,7 +59,7 @@ const useSignalR = (callBack = (f) => f) => {
     //     console.log("SignalR disconnected");
     //   }
     // };
-  }, []);
+  }, [isAuthenticated]);
 
   // console.log(connection.state);
   // useEffect(() => {
