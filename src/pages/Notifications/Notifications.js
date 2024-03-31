@@ -28,7 +28,7 @@ const Notifications = () => {
     });
     if (success) {
       extractPaginationData(headers);
-      setMessages((prev) => [...prev, ...data?.value]);
+      setMessages((prev) => [...prev, ...data]);
     }
   };
   const deleteNotificationState = useNotification((state) => state.delete);
