@@ -10,7 +10,12 @@ import TextArea from "../../components/TextArea/TextArea";
 import AddAttahment from "../../components/Attachments/AddAttahment";
 import Rating from "../../components/Rating/Rating";
 import Button from "../../components/Button/Button";
-import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import {
+  appConstants,
+  appRoutes,
+  contentTypes,
+  httpMethods,
+} from "../../utils/variables";
 import { toast } from "react-toastify";
 import RadioGroup from "../../components2/Radio/RadioGroup";
 import TextInput from "../../components2/TextInput/TextInput";
@@ -107,8 +112,8 @@ const Feedback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
+    localStorage.removeItem(appConstants.SH_CT_LOGIN_URL);
+  }, []);
 
   const handelSubmit = () => {
     if (values.rating == 1) {

@@ -82,12 +82,6 @@ const createApi = () => {
                 ...err.response,
               };
               if (status === statusCodes.unAuthorized && isAuthenticated) {
-                if (window.location.pathname.includes("/user/feedback/")) {
-                  localStorage.setItem(
-                    appConstants.SH_CT_LOGIN_URL,
-                    window.location.pathname
-                  );
-                }
                 logout();
                 // return Promise.reject(rejectTo);
               }

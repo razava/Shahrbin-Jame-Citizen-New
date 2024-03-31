@@ -32,9 +32,6 @@ const useFetch = ({
         onFailure(err);
 
         if (err.status === statusCodes.unAuthorized) {
-          if (window.location.pathname.includes("/user/feedback/")) {
-            localStorage.setItem(appConstants.SH_CT_LOGIN_URL, "sd");
-          }
           logout();
         } else handleError(err);
       }, 300);
