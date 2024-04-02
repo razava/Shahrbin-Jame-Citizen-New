@@ -101,16 +101,6 @@ const Profile = () => {
             value={values.phoneNumber}
           />
           <TextInput
-            label="آدرس"
-            floatingLabel
-            name="address.detail"
-            onChange={handleUserDataChange}
-            classNames={{
-              wrapper: styles.profileFieldWrapper,
-            }}
-            value={values["address.detail"]}
-          />
-          <TextInput
             label="کد ملی"
             floatingLabel
             name="nationalId"

@@ -91,7 +91,7 @@ const Verify = () => {
         localStorage.removeItem("CountDownCompleted");
         setIsShow(true);
       } else {
-        toast("مشکلی در ارسال درخواست به وجود آمد.", { type: "error" });
+        toast(err.response.data.message, { type: "error" });
       }
     },
   });

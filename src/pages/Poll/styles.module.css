@@ -19,6 +19,9 @@
   font-weight: 700;
   text-align: center;
 }
+.pollQuestion img {
+  max-width: 100%;
+}
 
 .pollButton {
   width: 100%;

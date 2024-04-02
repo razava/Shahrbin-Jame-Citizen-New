@@ -81,6 +81,8 @@ const createApi = () => {
                 cancelToken,
                 ...err.response,
               };
+              // console.log(err);
+              // rejectTo.message = err.response.message;
               if (status === statusCodes.unAuthorized && isAuthenticated) {
                 logout();
                 // return Promise.reject(rejectTo);

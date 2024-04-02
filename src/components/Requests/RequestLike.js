@@ -27,7 +27,14 @@ const RequestLike = ({ request = {} }) => {
         },
       });
       if (success) {
-        setLikes(data);
+        console.log(data);
+        setLikes((prev) => {
+          if (isLiked) {
+            return prev + 1;
+          } else {
+            return prev - 1;
+          }
+        });
       } else {
         setIsLiked(!isLiked);
       }
@@ -44,14 +51,20 @@ const RequestLike = ({ request = {} }) => {
             type="fas"
             color="var(--red)"
             className={styles.RequestCardActionIcon}
-            onClick={() => onLike(!isLiked)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike(!isLiked);
+            }}
           />
         ) : (
           <Icon
             name="heart"
             type="far"
             className={styles.RequestCardActionIcon}
-            onClick={() => onLike(!isLiked)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike(!isLiked);
+            }}
           />
         )}
         <span>{likes}</span>

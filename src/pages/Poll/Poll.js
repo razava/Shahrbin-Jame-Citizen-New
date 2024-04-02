@@ -5,7 +5,7 @@ import Button from "../../components/Button/Button";
 import Loader from "../../components/Loader/Loader";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
-import { CN, STR } from "../../utils/functions";
+import { CN, STR, cn } from "../../utils/functions";
 import { appRoutes, httpMethods } from "../../utils/variables";
 import DescriptivePoll from "./DescriptivePoll";
 import SelectivePoll from "./SelectivePoll";
@@ -39,14 +39,14 @@ const Poll = () => {
       text: values.text,
       choicesIds: values.selectedChoices.map((s) => s.id),
     };
-    const { success, data } = await api.CitizenPolls({
+    const { success, data, message } = await api.CitizenPolls({
       tail: "Polls/Answer",
       payload,
       method: httpMethods.post,
       id: poll.id,
     });
     if (success) {
-      toast("با تشکر از مشارکت شما نظر شما ثبت شد.", { type: "success" });
+      toast(message, { type: "success" });
       navigate(appRoutes.polls);
     }
   };
@@ -68,8 +68,8 @@ const Poll = () => {
       return (
         <>
           <h1
-            className={styles.pollQuestion}
-            dangerouslySetInnerHTML={{ __html: STR.parseHtml(poll.question) }}
+            className={cn(styles.pollQuestion, "")}
+            dangerouslySetInnerHTML={{ __html: poll.question }}
           ></h1>
           {poll.pollType === 0 && (
             <SelectivePoll

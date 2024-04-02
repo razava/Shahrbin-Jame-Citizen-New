@@ -10,6 +10,10 @@ import RequestComment from "./RequestComment";
 import styles from "./styles.module.css";
 
 const RequestComments = ({ request = {} }) => {
+  const [commentsCount, setCommentsCount] = useState(
+    request.commentsCount ? request.commentsCount : 0
+  );
+
   //   hooks
   const { open } = useBottomSheet();
 
@@ -23,7 +27,19 @@ const RequestComments = ({ request = {} }) => {
   //   functions
   const onIconClick = (e) => {
     e.stopPropagation();
-    open({ renderComponent: () => <Comments request={request} />, style });
+    open({
+      renderComponent: () => (
+        <Comments
+          refresh={() =>
+            setCommentsCount((prev) => {
+              return prev + 1;
+            })
+          }
+          request={request}
+        />
+      ),
+      style,
+    });
   };
   console.log(request);
   return (
@@ -34,7 +50,7 @@ const RequestComments = ({ request = {} }) => {
           type="far"
           className={styles.RequestCardActionIcon}
         />
-        <span>{request.commentsCount}</span>
+        <span>{commentsCount}</span>
       </span>
     </>
   );
@@ -42,7 +58,7 @@ const RequestComments = ({ request = {} }) => {
 
 export default RequestComments;
 
-const Comments = ({ request = {} }) => {
+const Comments = ({ request = {}, refresh }) => {
   //   states
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
@@ -78,6 +94,7 @@ const Comments = ({ request = {} }) => {
     if (success) {
       setCommentText("");
       getComments();
+      refresh();
     }
   };
 

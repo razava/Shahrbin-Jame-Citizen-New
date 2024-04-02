@@ -13,28 +13,38 @@ export const genders = [
 
 export const educations = [
   {
-    id: "phd",
-    title: "دکترا",
+    id: 0,
+    title: "تعریف نشده",
+    value: 0,
+  },
+  {
+    id: 1,
+    title: "ابتدایی",
     value: 1,
   },
   {
-    id: "master",
-    title: "کارشناسی ارشد",
+    id: 2,
+    title: "دیپلم",
     value: 2,
   },
   {
-    id: "bachelor",
-    title: "کارشناسی",
+    id: 3,
+    title: "فوق دیپلم",
     value: 3,
   },
   {
-    id: "diploma",
-    title: "دیپلم",
+    id: 4,
+    title: "لیسانس",
     value: 4,
   },
   {
-    id: "elementary",
-    title: "ابندایی",
+    id: 5,
+    title: "فوق لیسانس",
     value: 5,
+  },
+  {
+    id: 6,
+    title: "دکترا",
+    value: 6,
   },
 ];

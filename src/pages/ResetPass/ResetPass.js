@@ -53,14 +53,14 @@ const ResetPass = () => {
       verificationCode: state.token,
     };
     try {
-      const { success } = await api.CitizenAccount({
+      const { success, message } = await api.CitizenAccount({
         tail: "ResetPassword",
         payload,
         method: httpMethods.post,
       });
       if (success) {
         navigate(appRoutes.signin);
-        toast("رمز عبور با موفقیت تغیر یافت.", { type: "success" });
+        toast(message, { type: "success" });
       }
     } catch (err) {}
   };

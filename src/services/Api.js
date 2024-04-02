@@ -9,5 +9,5 @@ export async function getFAQ() {
   const data = await axios.get(`/api/${instance.id}/CitizenFAQ`, {
     headers: { Authorization: `Bearer ${Token}` },
   });
-  return data.data;
+  return data.data.data;
 }

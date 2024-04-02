@@ -38,9 +38,9 @@ const Attachments = ({
     };
     let fileId;
     try {
-      const { data, success } = await api.Files({
+      const { data, success, message } = await api.Files({
         headers,
-        payload: DS.toFormData({ File: file, AttachmentType: 1 }),
+        payload: DS.toFormData({ File: file, AttachmentType: 0 }),
         method: httpMethods.post,
         showMessageOnError: false,
         isPerInstance: false,
@@ -57,6 +57,7 @@ const Attachments = ({
       }
     } catch (err) {
       setLoading(false);
+      console.log(err);
       toast("مشکلی در ارسال درخواست به وجود آمد.", { type: "error" });
       // setIsSuccess(false);
     }

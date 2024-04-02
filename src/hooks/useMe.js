@@ -23,7 +23,7 @@ const useMe = () => {
       : "",
     "address.detail": store?.initialData?.user?.address?.detail,
     gender: store?.initialData?.user?.gender,
-    educationId: store?.initialData?.user?.education?.id || "",
+    educationId: Number(store?.initialData?.user?.education),
     birthDate: store?.initialData?.user?.birthDate || "",
     phoneNumber: store?.initialData?.user?.phoneNumber || "",
   });
@@ -37,6 +37,7 @@ const useMe = () => {
 
   // functions
   const handleUserDataChange = (value, name) => {
+    console.log(value, name);
     setValues({ ...values, [name]: value });
   };
 
@@ -51,16 +52,16 @@ const useMe = () => {
       "Content-Type": contentTypes.formData,
     };
     try {
-      const { success } = await api.Authenticate({
+      const { success, message } = await api.Authenticate({
         method: httpMethods.put,
-        payload: DS.toFormData({ File: value, AttachmentType: 1 }),
+        payload: DS.toFormData({ File: value, AttachmentType: 0 }),
         headers,
         tail: "Avatar",
         isPerInstance: true,
       });
       setLoading(false);
       if (success) {
-        toast("پروفایل بروزرسانی شد.", { type: "success" });
+        toast(message, { type: "success" });
         getUserData();
       }
     } catch (err) {
@@ -98,14 +99,14 @@ const useMe = () => {
     delete editedValues.avatarFile;
     setLoading(true);
     try {
-      const { success } = await api.Authenticate({
+      const { success, message } = await api.Authenticate({
         method: httpMethods.put,
         payload: editedValues,
         isPerInstance: true,
       });
       setLoading(false);
       if (success) {
-        toast("اطلاعات به‌روزرسانی شد.", { type: "success" });
+        toast(message, { type: "success" });
         getUserData();
       }
     } catch (err) {
@@ -115,14 +116,14 @@ const useMe = () => {
 
   const changeUserPassword = async () => {
     setLoading(true);
-    const { success } = await api.Authenticate({
+    const { success, message } = await api.Authenticate({
       tail: "Password",
       method: httpMethods.put,
       payload: passwordValues,
     });
     setLoading(false);
     if (success) {
-      toast("رمز عبور به‌روزرسانی شد.", { type: "success" });
+      toast(message, { type: "success" });
     }
   };
 
@@ -139,6 +140,7 @@ const useMe = () => {
 
   // effects
   useEffect(() => {
+    console.log(Number(store?.initialData?.user?.education));
     setValues({
       firstName: store?.initialData?.user?.firstName || "",
       lastName: store?.initialData?.user?.lastName || "",
@@ -148,7 +150,7 @@ const useMe = () => {
         : "",
       "address.detail": store?.initialData?.user?.address?.detail || "",
       gender: store?.initialData?.user?.gender,
-      educationId: store?.initialData?.user?.educacation?.id || "",
+      educationId: Number(store?.initialData?.user?.education) || "",
       birthDate: store?.initialData?.user?.birthDate || "",
       phoneNumber: store?.initialData?.user?.phoneNumber || "",
     });

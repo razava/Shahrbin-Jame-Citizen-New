@@ -69,7 +69,7 @@ const Feedback = () => {
     const headers = {
       "Content-Type": contentTypes.formData,
     };
-    const { success } = await api.CitizenReport({
+    const { success, message } = await api.CitizenReport({
       tail: "Feedback",
       payload: DS.toFormData(payload),
       method: httpMethods.post,
@@ -77,7 +77,7 @@ const Feedback = () => {
       headers,
     });
     if (success) {
-      toast("بازخورد شما ثبت شد.", { type: "success" });
+      toast(message, { type: "success" });
       navigate(appRoutes.myRequests);
     }
   };

@@ -17,7 +17,7 @@ const connection = new HubConnectionBuilder()
   })
   .withAutomaticReconnect()
   .withHubProtocol(new JsonHubProtocol())
-  .configureLogging(LogLevel.Debug)
+  .configureLogging(LogLevel.Information)
   .build();
 
 // Optional: Configure connection options, such as access token or headers

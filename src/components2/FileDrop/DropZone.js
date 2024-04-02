@@ -97,7 +97,7 @@ const DropZone = ({
     // newFiles.map((item) => {
     //   console.log(item);
     // })
-    formData.append("AttachmentType", 1);
+    formData.append("AttachmentType", 0);
     postFilesMutation.mutate(formData);
     // setFiles([...files, ...newFiles]);
     // onChange([...files, ...newFiles], name);
@@ -129,7 +129,7 @@ const DropZone = ({
       file.id = `dz-f-${files.length}`;
       const formData = new FormData();
       formData.append("File", file);
-      formData.append("AttachmentType", 1);
+      formData.append("AttachmentType", 0);
       setFiles([...files, file]);
       onChange([...files, file], name);
     }

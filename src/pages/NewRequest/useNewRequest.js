@@ -196,7 +196,7 @@ const useNewRequest = () => {
     //   "Content-Type": contentTypes.formData,
     // };
     console.log(instances[0]);
-    const { success } = await api.CitizenReport({
+    const { success, message } = await api.CitizenReport({
       payload,
       method: httpMethods.post,
       // headers,
@@ -205,7 +205,8 @@ const useNewRequest = () => {
     });
     if (success) {
       navigate(appRoutes.myRequests);
-      toast("درخواست شما ثبت شد و هم‌اکنون در دست بررسی می‌باشد.", {
+      console.log(message);
+      toast(message, {
         type: "success",
       });
     }
