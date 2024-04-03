@@ -1,5 +1,10 @@
 # Stage 1: Build the React app
 FROM node:18-alpine AS builder
+ENV REACT_APP_BASENAME=/137
+ENV REACT_APP_API_URL_DEV=https://shahrbin2.yazd.ir/api
+ENV PUBLIC_URL=https://shahrbin2.yazd.ir/137
+ENV REACT_APP_SIGNALR_URL=https://shahrbin2.yazd.ir
+ENV NODE_ENV=production
 WORKDIR /app
 COPY package.json .
 RUN npm install --force
