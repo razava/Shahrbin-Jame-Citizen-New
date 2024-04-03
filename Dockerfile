@@ -50,7 +50,7 @@ WORKDIR /app
 COPY --from=build /app/build ./build
 
 # Expose the port that the React app will run on
-EXPOSE 3000
+EXPOSE 80
 
 # Command to run the React app in production mode
 CMD ["npx", "serve", "-s", "build"]
