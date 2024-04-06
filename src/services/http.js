@@ -4,9 +4,74 @@ import { ERROR, LS, URI, USER } from "../utils/functions";
 import {
   API_URL,
   appConstants,
+  appRoutes,
   contentTypes,
   statusCodes,
 } from "../utils/variables";
+import { RefreshToken } from "./AuthenticateApi";
+
+axios.interceptors.request.use(function (config) {
+  const token = LS.read(appConstants.SH_CT_ACCESS_TOKEN);
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
+
+let isRefreshing = false;
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    console.log("orggg");
+    if (error.response.status === 403) {
+      window.location.href = "/";
+      USER.clear();
+      // navigate(appRoutes.signin);
+    }
+    if (error.response.status === 401) {
+      if (!originalRequest._retry) {
+        originalRequest._retry = true;
+        const accessToken = JSON.parse(
+          localStorage.getItem(appConstants.SH_CT_ACCESS_TOKEN)
+        );
+        const refreshToken = JSON.parse(
+          localStorage.getItem(appConstants.SH_CT_REFRESH_TOKEN)
+        );
+        //accessToken && refreshToken && !isRefreshing
+        if (!isRefreshing && accessToken && refreshToken) {
+          isRefreshing = true;
+
+          try {
+            // Perform token refresh
+            const data = await RefreshToken({
+              token: accessToken,
+              refreshToken: refreshToken,
+            });
+            if (data) {
+              console.log(data);
+              originalRequest.headers["Authorization"] =
+                "Bearer " +
+                localStorage.getItem(appConstants.SH_CT_ACCESS_TOKEN);
+            }
+            // Retry the original request
+            return axios(originalRequest);
+          } catch (refreshError) {
+            console.error("Token refresh failed", refreshError);
+            // Handle refresh error, e.g., redirect to login page
+            return Promise.reject(refreshError);
+          } finally {
+            isRefreshing = false;
+          }
+        }
+      }
+    }
+
+    // For other errors or if refresh token logic is not applicable
+    return Promise.reject(error);
+  }
+);
 
 const createApi = () => {
   return new Proxy(

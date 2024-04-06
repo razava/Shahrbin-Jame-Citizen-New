@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SnackBar from "../components/SnackBar/SnackBar";
 import { appConstants, statusCodes } from "../utils/variables";
 import useAuthenticate from "./useAuthenticate";
-
+  
 const useFetch = ({
   fn = (f) => f,
   auto = false,

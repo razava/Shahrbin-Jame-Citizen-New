@@ -16,9 +16,9 @@ const App = () => {
           <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
             <BottomSheet />
             <ToastContainer rtl={true} theme="colored" />
-            <ErrorBoundary>
+            {/* <ErrorBoundary> */}
               <Routes />
-            </ErrorBoundary>
+            {/* </ErrorBoundary> */}
           </BrowserRouter>
         </AppContext>
       </QueryClientProvider>

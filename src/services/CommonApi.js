@@ -20,8 +20,18 @@ export async function postFiles(payload) {
 }
 
 export async function getRegions(cityId) {
-  const data = await axios.get(`/api/${instance.id}/StaffCommon/Regions/${cityId}`, {
+  const data = await axios.get(
+    `/api/${instance.id}/StaffCommon/Regions/${cityId}`,
+    {
+      headers: { Authorization: `Bearer ${Token}` },
+    }
+  );
+  return data.data;
+}
+
+export async function getNewsById(id) {
+  const data = await axios.get(`/api/${instance.id}/CitizenNews/${id}`, {
     headers: { Authorization: `Bearer ${Token}` },
   });
-  return data.data;
+  return data.data.data;
 }

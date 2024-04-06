@@ -42,6 +42,7 @@ export const appRoutes = {
   complaint: "/user/complaint/:id",
   polls: "/user/polls",
   news: "/user/news",
+  new: "/user/news/:id",
   settings: "/user/settings",
 
   notifications: "/user/notifications",

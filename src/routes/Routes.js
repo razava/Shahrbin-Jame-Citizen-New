@@ -33,6 +33,7 @@ import Complaint from "../pages/Complaint/Complaint";
 import Feedback from "../pages/Feedback/Feedback";
 import FAQ from "../pages/FAQ/FAQ";
 import useSignalR from "../hooks/useSignalR";
+import New from "../pages/News/New";
 
 const RateReport = lazy(() => import("../pages/RateReport/RateReport"));
 const LoginGov = lazy(() => import("../pages/LoginGov/LoginGov"));
@@ -113,6 +114,7 @@ const Routes = () => {
             <Route path={appRoutes.polls} element={<Polls />} />
             <Route path={appRoutes.poll} element={<Poll />} />
             <Route path={appRoutes.news} element={<News />} />
+            <Route path={appRoutes.new} element={<New />} />
             <Route path={appRoutes.settings} element={<Settings />} />
             <Route path={appRoutes.profile} element={<Profile />} />
             <Route path={appRoutes.FAQ} element={<FAQ />} />

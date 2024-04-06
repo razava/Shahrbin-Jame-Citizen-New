@@ -42,6 +42,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
       dispatch({ type: appActions.SET_INITIALDATA, payload: initialData });
     } catch (err) {
       setError(true);
+      getInitialData();
     }
   };
 

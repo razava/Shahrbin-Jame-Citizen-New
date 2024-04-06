@@ -6,10 +6,13 @@ import { api } from "../../services/http";
 import { CN, URI } from "../../utils/functions";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
+import { appRoutes } from "../../utils/variables";
+import { useNavigate } from "react-router-dom";
 
 const News = () => {
   // states
   const [news, setNews] = useState([]);
+  const navigate = useNavigate();
 
   //   functions
   const getData = async () => {
@@ -37,23 +40,25 @@ const News = () => {
       return (
         <Staggered className={styles.newsCard}>
           {news.map((news) => (
-            <a
+            <div
               style={{
                 backgroundImage: `url(${URI.createMediaUri(
                   news.imageFile.url4
                 )})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
+                cursor: "pointer",
               }}
               target="_blank"
               href={news.url}
+              onClick={() => navigate(`/user/news/${news.id}`)}
               className={styles.newsCardContent}
             >
               <span>
                 <p className={styles.newsCardTitle}>{news.title}</p>
               </span>
               <p className={styles.newsCardDesc}>{news.description}</p>
-            </a>
+            </div>
           ))}
         </Staggered>
       );

@@ -11,7 +11,7 @@ import { allFormats } from "./constants";
 import File from "./File";
 import styles from "./style.module.css";
 import { useMutation } from "@tanstack/react-query";
-import { postFiles } from "../../services/CommonَApi";
+import { postFiles } from "../../services/CommonApi";
 
 const DropZone = ({
   placeholder = "فایل را بکشید و اینجا رها کنید.",

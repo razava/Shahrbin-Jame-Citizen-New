@@ -582,3 +582,16 @@ export function findNodeAndParents(tree, target, path = []) {
   // If target is not found, return null
   return null;
 }
+
+export const convertserverTimeToDateString = (
+  dateString,
+  format = "DD MMMM YYYY ساعت HH:mm"
+) => {
+  if (!dateString) return "---";
+  return dayjs
+    .utc(dateString)
+    .local()
+    .calendar("jalali")
+    .locale("fa")
+    .format(format);
+};

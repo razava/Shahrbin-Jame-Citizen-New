@@ -62,19 +62,25 @@ export async function GetCaptcha() {
 
 export async function RefreshToken(payload) {
   try {
-    const response = await axios.post("api/Authenticate/Refresh", payload);
-    localStorage.setItem(
-      appConstants.SH_CT_ACCESS_TOKEN,
-      response.data.jwtToken
+    const response = await axios.post(
+      `/api/${instance.id}/Authenticate/Refresh`,
+      payload
     );
-    localStorage.getItem(
-      appConstants.SH_CT_REFRESH_TOKEN,
-      response.data.refreshToken
-    );
+    LS.save(appConstants.SH_CT_ACCESS_TOKEN, response.data.data.jwtToken);
+    LS.save(appConstants.SH_CT_REFRESH_TOKEN, response.data.data.refreshToken);
+    // localStorage.setItem(
+    //   appConstants.SH_CT_ACCESS_TOKEN,
+    //   response.data.jwtToken
+    // );
+    // localStorage.getItem(
+    //   appConstants.SH_CT_REFRESH_TOKEN,
+    //   response.data.refreshToken
+    // );
+    window.location.reload();
     return response.data;
   } catch (error) {
     USER.clear();
-    window.location.href = "/";
+    // window.location.href = "/";
   }
 }
 
