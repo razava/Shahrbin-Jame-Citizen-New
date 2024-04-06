@@ -106,7 +106,8 @@ const useMe = () => {
       });
       setLoading(false);
       if (success) {
-        toast(message, { type: "success" });
+        console.log(message);
+        toast("اطلاعات با موفقیت ویرایش شد.", { type: "success" });
         getUserData();
       }
     } catch (err) {
@@ -116,12 +117,13 @@ const useMe = () => {
 
   const changeUserPassword = async () => {
     setLoading(true);
-    const { success, message } = await api.Authenticate({
+    const { success, data, message } = await api.Authenticate({
       tail: "Password",
       method: httpMethods.put,
       payload: passwordValues,
     });
     setLoading(false);
+    console.log(success);
     if (success) {
       toast(message, { type: "success" });
     }

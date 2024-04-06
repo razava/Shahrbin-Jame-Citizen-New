@@ -39,7 +39,7 @@ const DropZone = ({
     onSuccess: (res) => {
       setFileIds([...fileIds, { id: res.id }]);
       setFiles([...files, temporaryFiles]);
-      onChange([...fileIds, { id: res.id }], name);
+      onChange([...fileIds, { id: res.data.id }], name);
     },
     onError: (err) => {},
   });

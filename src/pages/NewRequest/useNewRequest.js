@@ -92,13 +92,33 @@ const useNewRequest = () => {
   // functions
   const goToNextStep = () => {
     const nextStep = allSteps.find((s) => s.order === currentStep.order + 1);
-    console.log(nextStep);
+    console.log(allSteps);
     setCurrentStep(nextStep);
-    console.log(222);
+    console.log(allSteps);
   };
+
   useEffect(() => {
     console.log(currentStep);
   }, [currentStep]);
+
+  const deleteAttachmentStep = () => {
+    if (allSteps[4].id == "attachments") {
+      const filteredSteps = allStepsDefault.filter(
+        (step) => step.id !== "attachments"
+      );
+      const updatedSteps = filteredSteps.map((step, index) => ({
+        ...step,
+        order: index + 1,
+      }));
+      setAllSteps(updatedSteps);
+    }
+  };
+
+  const addAttachmentStep = () => {
+    if (allSteps[4].id !== "attachments") {
+      setAllSteps(allStepsDefault);
+    }
+  };
 
   const gtToAddress = () => {
     setCurrentStep({
@@ -231,6 +251,8 @@ const useNewRequest = () => {
     onSubmit: makeRequest,
     setCurrentStep,
     gtToAddress,
+    deleteAttachmentStep,
+    addAttachmentStep,
   };
 };
 

@@ -32,6 +32,8 @@ const NewRequest = () => {
     onTimeLineStepClick,
     onChange,
     onSubmit,
+    deleteAttachmentStep,
+    addAttachmentStep,
   } = useNewRequest();
   const { isDesktop } = useResize();
   //
@@ -43,15 +45,16 @@ const NewRequest = () => {
   useEffect(() => {
     if (category) {
       goToNextStep();
-      console.log(category);
       onChange(category, "category");
     }
-    // console.log(currentStep);
-    // setfirst(true);
   }, [bool]);
+
+
   //   renders
   const renderCurrentStep = () => {
-    if (currentStep.id === allSteps[0].id)
+    console.log(currentStep);
+    console.log(allSteps);
+    if (currentStep.id === "instance")
       return (
         <City
           goToNextStep={goToNextStep}
@@ -59,7 +62,7 @@ const NewRequest = () => {
           onChange={onChange}
         />
       );
-    else if (currentStep.id === allSteps[1].id)
+    else if (currentStep.id === "category")
       return (
         <Category
           goToNextStep={goToNextStep}
@@ -68,16 +71,19 @@ const NewRequest = () => {
           city={values.city}
         />
       );
-    else if (currentStep.id === allSteps[2].id)
+    else if (currentStep.id === "address")
       return (
         <Address
           goToNextStep={goToNextStep}
           value={values.address}
           onChange={onChange}
           city={values.city}
+          deleteAttachmentStep={deleteAttachmentStep}
+          addAttachmentStep={addAttachmentStep}
+          values={values}
         />
       );
-    else if (currentStep.id === allSteps[3].id)
+    else if (currentStep.id === "details")
       return (
         <Details
           goToNextStep={goToNextStep}
@@ -87,7 +93,7 @@ const NewRequest = () => {
           name={{ comments: "comments" }}
         />
       );
-    else if (currentStep.id === allSteps[4].id)
+    else if (currentStep.id === "attachments")
       return (
         <Attachments
           goToNextStep={goToNextStep}
@@ -96,7 +102,7 @@ const NewRequest = () => {
           values={values}
         />
       );
-    else if (currentStep.id === allSteps[5].id)
+    else if (currentStep.id === "review")
       return (
         <Review
           values={values}

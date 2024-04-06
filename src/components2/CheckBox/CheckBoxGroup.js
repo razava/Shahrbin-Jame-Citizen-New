@@ -10,7 +10,7 @@ const CheckBoxGroup = ({
   defaultSelecteds = [],
 }) => {
   //   states
-  const [values, setValues] = useState(defaultSelecteds);
+  const [values, setValues] = useState([]);
 
   const handleChange = (value, index) => {
     console.log(value);
@@ -23,6 +23,7 @@ const CheckBoxGroup = ({
     onChange(newValues, name);
   };
 
+  console.log(values);
   // useEffect(() => {
   //   setValues(defaultSelecteds);
   // }, [defaultSelecteds]);
