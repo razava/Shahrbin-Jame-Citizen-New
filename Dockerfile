@@ -2,9 +2,9 @@ FROM node:18-alpine AS builder
 
 ENV NODE_ENV production
 ENV REACT_APP_BASENAME=/137
-# ENV REACT_APP_API_URL_DEV=https://shahrbin2.yazd.ir/api
+ENV REACT_APP_API_URL_DEV=https://shahrbin2.yazd.ir/api
 # ENV PUBLIC_URL=https://shahrbin2.yazd.ir/137
-# ENV REACT_APP_SIGNALR_URL=https://shahrbin2.yazd.ir
+ENV REACT_APP_SIGNALR_URL=https://shahrbin2.yazd.ir
 ENV PUBLIC_URL=/137
 WORKDIR /app
 
