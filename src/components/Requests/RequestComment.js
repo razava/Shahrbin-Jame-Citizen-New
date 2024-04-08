@@ -58,8 +58,7 @@ const RequestComment = ({
         <div className={styles.requestCommentAvatar}>
           <img
             src={
-              URI.createMediaUri(comment.user?.avatar?.url3).pathname !==
-              "/undefined"
+              comment.user?.avatar?.url3
                 ? URI.createMediaUri(comment.user?.avatar?.url3)
                 : ph
             }

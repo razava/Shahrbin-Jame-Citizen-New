@@ -9,6 +9,7 @@ import useNewRequest from "../../pages/NewRequest/useNewRequest";
 import QuickAccess from "../../pages/NewRequest/QuickAccess";
 import { AppStore } from "../../store/AppContext";
 import { appActions } from "../../utils/variables";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Tree = ({
   data = {},
@@ -24,7 +25,6 @@ const Tree = ({
   const onLastLevelReached = (data) => {
     return onSelectNode(data);
   };
-  console.log(data);
   // hooks
   const {
     currentNodes,
@@ -50,7 +50,6 @@ const Tree = ({
     onChange,
   } = useNewRequest();
   const [store] = useContext(AppStore);
-  console.log(store.initialData.categories);
   const [info, setInfo] = useState();
   //effect
   const state = useQuickStore((state) => state.count);
@@ -60,7 +59,7 @@ const Tree = ({
   const del = useQuickStore((state) => state.del);
   const updateCategory = useQuickStore((state) => state.updateCategory);
   const [{ createRequest = {} } = {}, dispatch] = useContext(AppStore);
-
+  const { pathname } = useLocation();
   function findName(categoryId, children) {
     let level = 0;
     if (Array.isArray(children)) {
@@ -94,25 +93,19 @@ const Tree = ({
       }
     }
   }
-  // useEffect(() => {
-  //   onChange(info, "category");
-  // }, [info]);
+
+
   useEffect(() => {
     if (state) {
       console.log("🚀 ~ file: Tree.js:47 ~ useEffect ~ state:", state);
       console.log(currentNodes);
       console.log(Data);
-      // const category = findName(
-      //   Data.categoryId,
-      //   store?.initialData?.categories.categories
-      // );
-      console.log(Data.categoryId);
-      console.log(store?.initialData?.categories.categories);
+
       const result = findNodeAndParents(
         store?.initialData?.categories.categories,
         Data.categoryId
       );
-      console.log(result);
+
       if (result) {
         console.log("Node found:", result[result.length - 1]);
         console.log("Parent nodes:", result.slice(0, -1));
@@ -146,27 +139,14 @@ const Tree = ({
       } else {
         console.log("Node not found");
       }
-      // console.log(result);
-
-      // console.log(category.categories.length == 0);
       console.log(result[result.length - 1].categories.length);
       const category = result[result.length - 1];
       if (result[result.length - 1].categories.length == 0) {
-        console.log("eeeeeeeee");
-        // setCurrentStep({
-        //   id: "address",
-        //   title: "آدرس",
-        //   order: 2,
-        //   active: true,
-        //   required: true,
-        // });
         updateCategory(result[result.length - 1]);
         change(!bool);
         onChange(result[result.length - 1], "category");
-        // gtToAddress();
-        // goToNextStep();
-        del();
       }
+      del();
     }
   }, [state]);
 

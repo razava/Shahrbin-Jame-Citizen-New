@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppStore } from "../../store/AppContext";
 import { appActions } from "../../utils/variables";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useTree = ({
   data = {},
@@ -175,6 +176,7 @@ const useTree = ({
   useEffect(() => {
     if (type !== "set") return;
     if (!config) {
+      console.log("config");
       const currentNodes = getCurrentNodes(
         tracks,
         navigationStack,
@@ -208,6 +210,23 @@ const useTree = ({
         },
       });
     };
+  }, []);
+
+  useEffect(() => {
+    const currentNodes = getCurrentNodes(tracks, navigationStack, currentLevel);
+    console.log("reset");
+    dispatch({
+      type: appActions.SET_CREATE_REQUEST,
+      payload: {
+        currentStep: 1,
+        [name]: {
+          currentLevel: 1,
+          currentNodes: currentNodes,
+          navigationStack: [],
+          tracks: [],
+        },
+      },
+    });
   }, []);
 
   return {

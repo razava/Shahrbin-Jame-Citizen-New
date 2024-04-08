@@ -12,7 +12,7 @@ const Review = ({
 }) => {
   console.log(values);
   localStorage.setItem("val", JSON.stringify(values.detail));
-  
+
   return (
     <>
       <section className={styles.review}>
@@ -38,7 +38,7 @@ const Review = ({
                 ? String(values.comments).slice(0, 50) + "..."
                 : values.comments}
             </span>
-            <div className=" flex flex-col gap-2 text-xl">
+            <div className=" flex flex-col gap-2 text-2xl">
               {values?.detail && (
                 <>
                   {Object.keys(values.detail).map((key, item) => {
@@ -64,20 +64,38 @@ const Review = ({
                           </span>
                         </div>
                       );
-                    } else if (Array.isArray(values.detail[key])) {
+                    } else if (
+                      Array.isArray(values.detail[key]) &&
+                      !values.detail[key][0]?.id == undefined &&
+                      !values.detail[key][0]?.id
+                    ) {
                       return (
-                        <div>
-                          <div>{key}:</div>
-                          <div className=" flex flex-col gap-1 text-gray-500">
-                            {values.detail[key].map((item) => {
-                              if (item.name) {
-                                return <div>{item.name}</div>;
-                              } else {
-                                return <div>{item.title}</div>;
-                              }
-                            })}
-                          </div>
-                        </div>
+                        <span className=" flex gap-1">
+                          <span>{key}:</span>
+                          <span className=" flex  gap-1 text-gray-500">
+                            <>
+                              {values.detail[key].map((item, idx) => {
+                                if (item.name) {
+                                  return (
+                                    <span>
+                                      {item.name}{" "}
+                                      {values.detail[key].length - 1 != idx &&
+                                        ","}
+                                    </span>
+                                  );
+                                } else {
+                                  return (
+                                    <span>
+                                      {item.title}
+                                      {values.detail[key].length - 1 != idx &&
+                                        ","}
+                                    </span>
+                                  );
+                                }
+                              })}
+                            </>
+                          </span>
+                        </span>
                       );
                     }
                   })}

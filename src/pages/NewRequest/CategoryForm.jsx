@@ -12,18 +12,16 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
   console.log(data.category.form.elements);
   let obj = {};
   const names = data.category.form.elements.map((item) => {
-    if (item.elementType !== "message" || item.elementType !== "header")
-      obj[item.name] = "";
+    if (item.elementType !== "message" && item.elementType !== "header") return;
   });
   const [values, setValues] = useState(obj);
-  console.log(obj);
-  console.log(values);
+
   const { category } = data;
   const handleChange = (e, name) => {
     console.log(e, name);
     setValues({ ...values, [name]: e });
-    if (name == "dropzone") {
-      console.log("44444");
+    if (Array.isArray(e) && e[0].hasOwnProperty("id")) {
+      setValues({ ...values, [name]: e });
       requestOnChange(e, "attachments");
     } else {
       onChange({ ...values, [name]: e });
@@ -43,7 +41,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
         if (item.elementType === "text") {
           return (
             <div
-                style={{ order: item.order }}
+              style={{ order: item.order }}
               // className={` order-${item.order} `}
             >
               <TextInput
@@ -56,7 +54,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
         } else if (item.elementType == "select") {
           return (
             <div
-                style={{ order: item.order }}
+              style={{ order: item.order }}
               // className={` order-${item.order}`}
             >
               <Optional
@@ -121,7 +119,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
               className={` order-${item.order}`}
             >
               <DropZone
-                onChange={(value) => handleChange(value, "dropzone")}
+                onChange={(value) => handleChange(value, item.name)}
                 {...meta.props}
               />
             </div>
