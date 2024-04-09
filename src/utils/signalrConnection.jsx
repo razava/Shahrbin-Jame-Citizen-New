@@ -10,7 +10,7 @@ import { appConstants } from "./variables";
 const token = LS.read(appConstants.SH_CT_ACCESS_TOKEN);
 
 const connection = new HubConnectionBuilder()
-  .withUrl(`${process.env.REACT_APP_SIGNALR_URL}/notifhub`, {
+  .withUrl(`${window.__ENV__?.REACT_APP_SIGNALR_URL}/notifhub`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
