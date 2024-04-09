@@ -1,7 +1,9 @@
 import axios from "axios";
 import { LS, USER } from "../utils/functions";
 import { appConstants } from "../utils/variables";
-axios.defaults.baseURL = process.env.REACT_APP_API_URL_DEV;
+import { env } from "../env";
+
+axios.defaults.baseURL = env.REACT_APP_API_URL_DEV;
 const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
 const instance = LS.read(appConstants.SH_CT_INSTANCE);
 let isRefreshing = false;

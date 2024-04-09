@@ -39,7 +39,7 @@ const useAuthenticate = () => {
 
   const logout = () => {
     USER.clear();
-    // navigate(appRoutes.signin);
+    navigate(appRoutes.signin);
   };
 
   //   hooks

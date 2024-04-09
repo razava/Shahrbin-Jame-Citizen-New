@@ -18,18 +18,21 @@ const useClick = (
               (w) => w.current && !w.current.contains(event.target)
             )
           : true;
-      console.log(
-        isIn,
-        element.current,
-        element.current.contains(event.target)
-      );
+      console.log(isIn);
+      // console.log(
+      //   isIn,
+      //   element.current,
+      //   element.current.contains(event.target)
+      // );
       if (
-        element.current !== null &&
-        !element.current.contains(event.target) &&
+        element?.current !== null &&
+        !element?.current.contains(event.target) &&
         isIn
       ) {
         console.log("useclick from: ", isActive, " to: ", !isActive);
-        setIsActive(!isActive);
+        setIsActive(true);
+      } else if (!isIn) {
+        setIsActive(false);
       }
     };
 

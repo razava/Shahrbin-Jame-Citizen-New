@@ -20,7 +20,7 @@ const CheckBoxGroup = ({
     newValues[index] = value;
     console.log(newValues, "za");
     const updatedNewValues = newValues.map((item) => {
-      if (item) {
+      if (item?.title) {
         return item;
       }
     });

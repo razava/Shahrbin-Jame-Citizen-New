@@ -45,6 +45,7 @@ const DropDown = ({
       if (isClicked) {
         setShow(true);
       } else {
+        console.log("log");
         setShow(false);
       }
     }

@@ -20,7 +20,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
   const handleChange = (e, name) => {
     console.log(e, name);
     setValues({ ...values, [name]: e });
-    if (Array.isArray(e) && e[0].hasOwnProperty("id")) {
+    if (Array.isArray(e) && e?.[0].hasOwnProperty("id")) {
       setValues({ ...values, [name]: e });
       requestOnChange(e, "attachments");
     } else {

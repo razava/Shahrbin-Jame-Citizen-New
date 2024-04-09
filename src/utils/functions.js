@@ -177,6 +177,7 @@ export class USER {
     LS.remove(appConstants.SH_CT_CURRENT_TIME);
     LS.remove(appConstants.SH_CT_EXPIRATION);
     LS.remove(appConstants.SH_CT_USER_ROLES);
+    LS.remove(appConstants.SH_CT_LOGIN_URL);
   }
 }
 
