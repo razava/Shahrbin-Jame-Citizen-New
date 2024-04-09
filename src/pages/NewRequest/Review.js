@@ -64,11 +64,7 @@ const Review = ({
                           </span>
                         </div>
                       );
-                    } else if (
-                      Array.isArray(values.detail[key]) &&
-                      !values.detail[key][0]?.id == undefined &&
-                      !values.detail[key][0]?.id
-                    ) {
+                    } else if (Array.isArray(values.detail[key])) {
                       return (
                         <span className=" flex gap-1">
                           <span>{key}:</span>

@@ -19,8 +19,14 @@ const CheckBoxGroup = ({
     // console.log(value);
     newValues[index] = value;
     console.log(newValues, "za");
-    setValues(newValues);
-    onChange(newValues, name);
+    const updatedNewValues = newValues.map((item) => {
+      if (item) {
+        return item;
+      }
+    });
+    console.log(updatedNewValues);
+    setValues(updatedNewValues);
+    onChange(updatedNewValues, name);
   };
 
   console.log(values);

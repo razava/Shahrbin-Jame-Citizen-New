@@ -12,7 +12,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
   console.log(data.category.form.elements);
   let obj = {};
   const names = data.category.form.elements.map((item) => {
-    if (item.elementType !== "message" && item.elementType !== "header") return;
+    if (item.elementType !== "message" && item.elementType !== "header" && item.elementType !== "dropzone") return;
   });
   const [values, setValues] = useState(obj);
 
