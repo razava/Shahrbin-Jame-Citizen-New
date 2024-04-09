@@ -1,5 +1,3 @@
-import { env } from "../env";
-
 export const appActions = {
   SET_FILTERS: "SET_FILTERS",
   SET_QUICK_ACCESSES: "SET_QUICK_ACCESSES",
@@ -73,8 +71,8 @@ export const appConstants = {
 
 export const API_URL =
   process.env.NODE_ENV === "development"
-    ? env.REACT_APP_API_URL_DEV
-    : env.REACT_APP_API_URL_DEV;
+    ? window.__ENV__?.REACT_APP_API_URL_DEV
+    : window.__ENV__?.REACT_APP_API_URL_DEV;
 
 export const errorMessages = {
   500: "خطایی رخ داد. لطفا از اتصال اینترنت خود اطمینان حاصل نمایید.",
