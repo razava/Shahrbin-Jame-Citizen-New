@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Routes from "./routes/Routes";
 import AppContext from "./store/AppContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { env } from "./env";
 
 const queryClient = new QueryClient();
 const App = () => {
@@ -13,11 +14,11 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <AppContext>
-          <BrowserRouter basename={process.env.REACT_APP_BASENAME}>
+          <BrowserRouter basename={env.REACT_APP_BASENAME}>
             <BottomSheet />
             <ToastContainer rtl={true} theme="colored" />
             {/* <ErrorBoundary> */}
-              <Routes />
+            <Routes />
             {/* </ErrorBoundary> */}
           </BrowserRouter>
         </AppContext>
