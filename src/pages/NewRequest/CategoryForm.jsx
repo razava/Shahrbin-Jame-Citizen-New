@@ -11,38 +11,52 @@ import Message from "../../components2/Message/Message";
 export default function CategoryForm({ data, onChange, requestOnChange }) {
   console.log(data.category.form.elements);
   let obj = {};
-  const names = data.category.form.elements.map((item) => {
-    if (
-      item.elementType !== "message" ||
-      item.elementType !== "header" ||
-      item.elementType !== "dropzone"
-    )
-      return item.name;
-  });
-  console.log(names);
-  const [values, setValues] = useState(obj);
-
   const { category } = data;
-  const handleChange = (e, name) => {
-    console.log(e, name);
-    setValues({ ...values, [name]: e });
-    if (Array.isArray(e) && e?.[0].hasOwnProperty("id")) {
-      setValues({ ...values, [name]: e });
-      requestOnChange(e, "attachments");
-    } else {
-      onChange({ ...values, [name]: e });
-    }
-  };
 
   const sortedElements = category?.form?.elements.sort(
     (a, b) => a.order - b.order
   );
 
+  const filteredElements = sortedElements.filter(
+    (item) => !["message", "header", "dropzone"].includes(item.elementType)
+  );
+  console.log(filteredElements);
+  const allValues = filteredElements.map((item, idx) => {
+    return { id: item.order, name: item.name, value: "" };
+  });
+
+  console.log(allValues);
+  const [values, setValues] = useState(allValues);
+  // console.log(name[]);
+
+  const handleChange = (e, name, index) => {
+    console.log(e, name, index);
+    // const currentValue = values[index];
+    // currentValue.value = e;
+    const newValues = values.map((item) => {
+      console.log(item.id, index);
+      if (item.id === index) {
+        return { ...item, value: e };
+      }
+      return item;
+    });
+    // setValues({ ...values, currentValue });
+    setValues(newValues);
+    if (Array.isArray(e) && e?.[0].hasOwnProperty("id")) {
+      // setValues({ ...values, [name]: e });
+      requestOnChange(e, "attachments");
+    } else {
+      console.log(newValues);
+      onChange(newValues);
+    }
+  };
+
+  console.log(sortedElements);
   console.log(sortedElements);
 
   return (
     <div className="w-full flex flex-col gap-2">
-      {sortedElements.map((item) => {
+      {sortedElements.map((item, index) => {
         const meta = JSON.parse(item.meta);
         if (item.elementType === "text") {
           return (
@@ -52,7 +66,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <TextInput
                 name={item.name}
-                onChange={handleChange}
+                onChange={(e, name) => handleChange(e, name, item.order)}
                 {...meta.props}
               />
             </div>
@@ -64,7 +78,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
               // className={` order-${item.order}`}
             >
               <Optional
-                handleChange2={handleChange}
+                handleChange2={(e, name) => handleChange(e, name, item.order)}
                 name={item.name}
                 field={meta}
               />
@@ -78,7 +92,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <TextArea
                 name={item.name}
-                onChange={handleChange}
+                onChange={(e, name) => handleChange(e, name, item.order)}
                 {...meta.props}
               />
             </div>
@@ -90,7 +104,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
               // className={` order-${item.order}`}
             >
               <RadioGroup
-                onChange={(value) => handleChange(value, item.name)}
+                onChange={(value) => handleChange(value, item.name, item.order)}
                 {...meta.props}
               />
             </div>
@@ -103,7 +117,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <CheckBoxGroup
                 name={item.name}
-                onChange={handleChange}
+                onChange={(e, name) => handleChange(e, name, item.order)}
                 defaultSelecteds={[]}
                 {...meta.props}
               />
@@ -125,7 +139,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
               className={` order-${item.order}`}
             >
               <DropZone
-                onChange={(value) => handleChange(value, item.name)}
+                onChange={(value) => handleChange(value, item.name, item.order)}
                 {...meta.props}
               />
             </div>

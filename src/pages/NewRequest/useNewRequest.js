@@ -183,7 +183,12 @@ const useNewRequest = () => {
     // console.log(values.attachments);
     const data = {
       categoryId: values.category.id,
-      comments: values.detail ? JSON.stringify(values.detail) : values.comments,
+      comments: values.detail
+        ? JSON.stringify({
+            values: values.detail,
+            formId: values.category.form.id,
+          })
+        : values.comments,
       address: {
         regionId: values.map.regionId,
         street: "",
@@ -212,6 +217,7 @@ const useNewRequest = () => {
   const onSubmit = async () => {
     console.log("gggg");
     const payload = getPayload();
+    console.log(payload);
     // const headers = {
     //   "Content-Type": contentTypes.formData,
     // };

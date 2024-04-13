@@ -42,49 +42,49 @@ const Review = ({
               {values?.detail && (
                 <>
                   {Object.keys(values.detail).map((key, item) => {
-                    console.log(Array.isArray(values.detail[key]));
-                    if (typeof values.detail[key] == "string") {
+                    console.log(Array.isArray(values.detail[key].value));
+                    if (typeof values.detail[key].value == "string") {
                       return (
                         <div className="">
-                          <span>{key}</span>:{" "}
+                          <span>{values.detail[key].name}</span>:{" "}
                           <span className=" text-gray-500">
-                            {values.detail[key]}
+                            {values.detail[key].value}
                           </span>
                         </div>
                       );
                     } else if (
-                      typeof values.detail[key] == "object" &&
-                      !Array.isArray(values.detail[key])
+                      typeof values.detail[key].value == "object" &&
+                      !Array.isArray(values.detail[key].value)
                     ) {
                       return (
                         <div>
-                          {key}:{" "}
+                          {values.detail[key].name}:{" "}
                           <span className=" text-gray-500">
-                            {values.detail[key].title}
+                            {values.detail[key].value.title}
                           </span>
                         </div>
                       );
-                    } else if (Array.isArray(values.detail[key])) {
+                    } else if (Array.isArray(values.detail[key].value)) {
                       return (
                         <span className=" flex gap-1">
-                          <span>{key}:</span>
+                          <span>{values.detail[key].name}:</span>
                           <span className=" flex  gap-1 text-gray-500">
                             <>
-                              {values.detail[key].map((item, idx) => {
+                              {values.detail[key].value.map((item, idx) => {
                                 if (item.name) {
                                   return (
                                     <span>
                                       {item.name}{" "}
-                                      {values.detail[key].length - 1 != idx &&
-                                        ","}
+                                      {values.detail[key].value.length - 1 !=
+                                        idx && ","}
                                     </span>
                                   );
                                 } else {
                                   return (
                                     <span>
                                       {item.title}
-                                      {values.detail[key].length - 1 != idx &&
-                                        ","}
+                                      {values.detail[key].value.length - 1 !=
+                                        idx && ","}
                                     </span>
                                   );
                                 }
