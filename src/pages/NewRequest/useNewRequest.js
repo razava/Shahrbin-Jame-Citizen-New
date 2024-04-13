@@ -183,12 +183,10 @@ const useNewRequest = () => {
     // console.log(values.attachments);
     const data = {
       categoryId: values.category.id,
-      comments: values.detail
-        ? JSON.stringify({
-            values: values.detail,
-            formId: values.category.form.id,
-          })
-        : values.comments,
+      comments: JSON.stringify({
+        values: values.detail,
+        formId: values.category.form.id,
+      }),
       address: {
         regionId: values.map.regionId,
         street: "",
