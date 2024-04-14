@@ -23,7 +23,7 @@ const Request = () => {
   // hooks
   const { id } = useParams();
   const { loading } = useFetch({ fn: getData, auto: id });
-
+  // console.log(data);
   //   renders
   const renderContent = () => {
     if (loading) return <Loader />;
@@ -44,7 +44,7 @@ const Request = () => {
       forms = JSON.parse(request.comments);
     }
   }
-  console.log(forms);
+  console.log(forms.values);
   //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
     console.log(request);
@@ -61,49 +61,67 @@ const Request = () => {
           <RequestStatus lastStatus={request.lastStatus} />
           <p className={styles.requestCategory}>{request.category?.title}</p>
 
-          {forms ? (
+          {forms?.values ? (
             <>
-              {" "}
-              <div className=" flex flex-col gap-2 text-xl">
-                {Object.keys(forms).map((key, item) => {
-                  console.log(Array.isArray(forms[key]));
-                  if (typeof forms[key] == "string") {
-                    return (
-                      <div className="">
-                        <span>{key}</span>:{" "}
-                        <span className=" text-gray-500">{forms[key]}</span>
-                      </div>
-                    );
-                  } else if (
-                    typeof forms[key] == "object" &&
-                    !Array.isArray(forms[key])
-                  ) {
-                    return (
-                      <div>
-                        {key}:{" "}
-                        <span className=" text-gray-500">
-                          {forms[key].title}
-                        </span>
-                      </div>
-                    );
-                  } else if (Array.isArray(forms[key])) {
-                    return (
-                      <div>
-                        <div>{key}:</div>
-                        <div className=" flex flex-col gap-1 text-gray-500">
-                          {forms[key].map((item) => {
-                            console.log(forms[key]);
-                            if (item?.name) {
-                              return <div>{item.name}</div>;
-                            } else if (item?.title && item.checked) {
-                              return <div>{item.title}</div>;
-                            }
-                          })}
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
+              <div className=" flex flex-col gap-2 text-xl my-2">
+                {forms?.values && (
+                  <>
+                    {Object.keys(forms.values).map((key, item) => {
+                      console.log(Array.isArray(forms?.values[key].value));
+                      if (typeof forms?.values[key].value == "string") {
+                        return (
+                          <div className="">
+                            <span>{forms?.values[key].name}</span>:{" "}
+                            <span className=" text-gray-500">
+                              {forms?.values[key].value}
+                            </span>
+                          </div>
+                        );
+                      } else if (
+                        typeof forms?.values[key].value == "object" &&
+                        !Array.isArray(forms?.values[key].value)
+                      ) {
+                        return (
+                          <div>
+                            {forms?.values[key].name}:{" "}
+                            <span className=" text-gray-500">
+                              {forms?.values[key].value.title}
+                            </span>
+                          </div>
+                        );
+                      } else if (Array.isArray(forms?.values[key].value)) {
+                        return (
+                          <span className=" flex gap-1">
+                            <span>{forms?.values[key].name}:</span>
+                            <span className=" flex  gap-1 text-gray-500">
+                              <>
+                                {forms?.values[key].value.map((item, idx) => {
+                                  if (item.name) {
+                                    return (
+                                      <span>
+                                        {item.name}{" "}
+                                        {forms?.values[key].value.length - 1 !=
+                                          idx && ","}
+                                      </span>
+                                    );
+                                  } else {
+                                    return (
+                                      <span>
+                                        {item.title}
+                                        {forms?.values[key].value.length - 1 !=
+                                          idx && ","}
+                                      </span>
+                                    );
+                                  }
+                                })}
+                              </>
+                            </span>
+                          </span>
+                        );
+                      }
+                    })}
+                  </>
+                )}
               </div>
             </>
           ) : (
