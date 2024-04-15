@@ -44,7 +44,7 @@ const Request = () => {
       forms = JSON.parse(request.comments);
     }
   }
-  console.log(forms.values);
+  
   //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
     console.log(request);
