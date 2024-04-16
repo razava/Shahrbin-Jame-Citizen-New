@@ -44,7 +44,7 @@ const Request = () => {
       forms = JSON.parse(request.comments);
     }
   }
-
+  console.log(forms?.values);
   //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
     console.log(request);
@@ -67,7 +67,7 @@ const Request = () => {
                 {forms?.values && (
                   <>
                     {Object.keys(forms.values).map((key, item) => {
-                      console.log(Array.isArray(forms?.values[key].value));
+                      console.log(forms?.values[key]);
                       if (typeof forms?.values[key].value == "string") {
                         return (
                           <div className="">
@@ -104,7 +104,7 @@ const Request = () => {
                                           idx && ","}
                                       </span>
                                     );
-                                  } else {
+                                  } else if (item?.title) {
                                     return (
                                       <span>
                                         {item.title}
