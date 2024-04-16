@@ -60,7 +60,6 @@ const ResetPass = () => {
       });
       if (success) {
         navigate(appRoutes.signin);
-        toast(message, { type: "success" });
       }
     } catch (err) {}
   };

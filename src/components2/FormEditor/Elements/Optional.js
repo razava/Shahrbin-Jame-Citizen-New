@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DropDown from "../../DropDown/DropDown";
 import TextInput from "../../TextInput/TextInput";
 
-const Optional = ({ field = {}, handleChange2, name }) => {
+const Optional = ({ field = {}, handleChange2, name, isRequired = false }) => {
   const [selecteds, setSelecteds] = useState([]);
   console.log(field);
   const handleChange = (selecteds) => {
@@ -23,6 +23,7 @@ const Optional = ({ field = {}, handleChange2, name }) => {
         renderToggle={(selecteds = [], removeSelecteds = (f) => f) => (
           <TextInput
             {...field.props}
+            isRequired={isRequired}
             // placeholder={field.props.placeholder}
             icon={
               selecteds && selecteds.length > 0

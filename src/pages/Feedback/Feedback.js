@@ -87,18 +87,21 @@ const Feedback = () => {
     mutationFn: postFeedback,
     onSuccess: (res) => {
       // if (satisfaction !== 0) {
-      toast("بازخورد شما ثبت شد.", { type: "success" });
+      setValues({ ...values, rating: 0 });
       navigate(appRoutes.myRequests);
       // }
     },
     onError: (err) => {},
   });
 
+  useEffect(() => {
+    setValues({ ...values, rating: 0 });
+  }, []);
+
   const postObjectionMutation = useMutation({
     mutationKey: ["postObjection"],
     mutationFn: postObjection,
     onSuccess: (res) => {
-      toast("بازخورد شما ثبت شد.", { type: "success" });
       navigate(appRoutes.myRequests);
     },
     onError: (err) => {},

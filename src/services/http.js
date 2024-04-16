@@ -20,6 +20,12 @@ let isRefreshing = false;
 
 axios.interceptors.response.use(
   (response) => {
+    if (response.status == 200 || response.status == 201) {
+      if (response.data?.message) {
+        toast(response.data?.message, { type: "success" });
+      }
+    }
+
     return response;
   },
   async function (error) {

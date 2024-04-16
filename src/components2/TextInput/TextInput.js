@@ -43,6 +43,7 @@ const TextInput = ({
     icon: {},
     label: {},
   },
+  isRequired = false,
   forwardRef = {},
 }) => {
   // refs
@@ -113,6 +114,7 @@ const TextInput = ({
       <section className={wrapperClassName} style={style.wrapper}>
         {label && (
           <span className={labelClassName} style={style.label}>
+            {isRequired && <span className=" text-red-500">*</span>}
             {label}
           </span>
         )}

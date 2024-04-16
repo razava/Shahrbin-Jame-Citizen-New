@@ -64,6 +64,7 @@ const BottomSheet = () => {
               name="angle-down"
               classNames={{ icon: styles.closeBtn }}
               onClick={closeMenu}
+              className=" cursor-pointer w-14 h-10 text-3xl"
             />
           </div>
           <div

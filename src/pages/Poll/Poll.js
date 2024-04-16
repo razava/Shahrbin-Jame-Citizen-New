@@ -46,7 +46,6 @@ const Poll = () => {
       id: poll.id,
     });
     if (success) {
-      toast(message, { type: "success" });
       navigate(appRoutes.polls);
     }
   };

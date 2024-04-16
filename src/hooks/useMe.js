@@ -61,7 +61,6 @@ const useMe = () => {
       });
       setLoading(false);
       if (success) {
-        toast(message, { type: "success" });
         getUserData();
       }
     } catch (err) {
@@ -107,7 +106,6 @@ const useMe = () => {
       setLoading(false);
       if (success) {
         console.log(message);
-        toast("اطلاعات با موفقیت ویرایش شد.", { type: "success" });
         getUserData();
       }
     } catch (err) {
@@ -125,7 +123,6 @@ const useMe = () => {
     setLoading(false);
     console.log(success);
     if (success) {
-      toast(message, { type: "success" });
     }
   };
 

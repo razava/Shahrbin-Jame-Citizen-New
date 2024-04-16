@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Icon from "../Icon/Icon";
 
@@ -58,6 +58,37 @@ const Rating = ({ onChange = (f) => f, name = "" }) => {
       })
     );
   };
+
+  useEffect(() => {
+    setStars([
+      {
+        id: 1,
+        hover: false,
+        active: false,
+      },
+      {
+        id: 2,
+        hover: false,
+        active: false,
+      },
+      {
+        id: 3,
+        hover: false,
+        active: false,
+      },
+      {
+        id: 4,
+        hover: false,
+        active: false,
+      },
+      {
+        id: 5,
+        hover: false,
+        active: false,
+      },
+    ]);
+    setRating(0);
+  }, []);
 
   const onClick = (star) => {
     const index = stars.indexOf(star);

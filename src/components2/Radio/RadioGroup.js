@@ -17,6 +17,7 @@ const RadioGroup = ({
   horizontal = true,
   onChange = (f) => f,
   disabled = false,
+  isRequired = false,
 }) => {
   // states
   // ** data
@@ -39,7 +40,10 @@ const RadioGroup = ({
   return (
     <>
       <section className={wrapperClassName}>
-        <span className={labelClassName}>{label}</span>
+        <span className={labelClassName}>
+          {isRequired && <span className=" text-red-500">*</span>}
+          {label}
+        </span>
         <div className={containerClassName}>
           {options.map((option) => (
             <Radio

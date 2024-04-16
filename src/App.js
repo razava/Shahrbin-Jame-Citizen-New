@@ -1,5 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Flip } from "react-toastify";
 import ErrorBoundary from "./components/Errors/ErrorBoundary";
 import BottomSheet from "./components/BottomSheet/BottomSheet";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +15,7 @@ const App = () => {
         <AppContext>
           <BrowserRouter basename={window.__ENV__?.REACT_APP_BASENAME}>
             <BottomSheet />
-            <ToastContainer rtl={true} theme="colored" />
+            <ToastContainer transition={Flip} rtl={true} theme="colored" />
             {/* <ErrorBoundary> */}
             <Routes />
             {/* </ErrorBoundary> */}

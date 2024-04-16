@@ -6,6 +6,7 @@ import TextInput from "../../components/TextInput/TextInput";
 import useValidation from "../../hooks/useValidation";
 import { validationTypes } from "../../utils/variables";
 import CategoryForm from "./CategoryForm";
+import { toast } from "react-toastify";
 
 const Details = ({
   goToNextStep = (f) => f,
@@ -17,6 +18,7 @@ const Details = ({
   // states
   const checkField = Object.values(name).includes("firstName");
   const [comments, setComments] = useState(value);
+  const [formData, setFormData] = useState();
   const [details, setDetails] = useState({
     firstName: "",
     lastName: "",
@@ -32,24 +34,28 @@ const Details = ({
       return { ...prev, comments: value };
     });
   };
+
   const handelFirstName = (value) => {
     onChange(value, name.firstName);
     setDetails((prev) => {
       return { ...prev, firstName: value };
     });
   };
+
   const handelLastName = (value) => {
     onChange(value, name.laststName);
     setDetails((prev) => {
       return { ...prev, lastName: value };
     });
   };
+
   const handelNationalId = (value) => {
     onChange(value, name.nationalId);
     setDetails((prev) => {
       return { ...prev, nationalId: value };
     });
   };
+
   const handelNextStep = () => {
     const validators = [
       {
@@ -73,6 +79,43 @@ const Details = ({
     goToNextStep();
   };
 
+  const checkRequiredElements = () => {
+    const requiredElements = values?.category?.form?.elements.filter((item) => {
+      const meta = JSON.parse(item.meta);
+      console.log(meta);
+      if (meta?.props?.required) {
+        return item;
+      }
+    });
+
+    const unvaluedElements = [];
+    values.detail.map((item1) => {
+      requiredElements.filter((item2) => {
+        if (item2.order == item1.id) {
+          if (!item1.value) {
+            unvaluedElements.push(item1);
+          }
+        }
+      });
+    });
+
+    console.log(unvaluedElements);
+    if (unvaluedElements.length > 0) {
+      toast("لطفا تمامی فیلد های الزامی را تکمیل نمایید.", { type: "error" });
+    } else {
+      goToNextStep();
+    }
+  };
+
+  const requiredElements = values?.category?.form?.elements.filter((item) => {
+    const meta = JSON.parse(item.meta);
+    console.log(meta);
+    if (meta?.props?.required) {
+      return item;
+    }
+  });
+  console.log(requiredElements);
+  console.log(values.category?.form.elements[0].meta);
   return (
     <>
       <section className={styles.details}>
@@ -145,7 +188,8 @@ const Details = ({
             if (checkField) {
               handelNextStep();
             } else {
-              goToNextStep();
+              checkRequiredElements();
+              // goToNextStep();
             }
           }}
         >

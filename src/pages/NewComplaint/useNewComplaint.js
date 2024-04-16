@@ -123,9 +123,6 @@ const useNewComplaint = () => {
     });
     if (success) {
       navigate(appRoutes.myComplaints);
-      toast("شکایت شما ثبت شد و هم‌اکنون در دست بررسی می‌باشد.", {
-        type: "success",
-      });
     }
   };
 

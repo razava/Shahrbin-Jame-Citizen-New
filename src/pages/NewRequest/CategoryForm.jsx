@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextInput from "../../components2/TextInput/TextInput";
 import TextArea from "../../components2/TextArea/TextArea";
 import RadioGroup from "../../components2/Radio/RadioGroup";
@@ -22,7 +22,14 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
   );
   console.log(filteredElements);
   const allValues = filteredElements.map((item, idx) => {
-    return { id: item.order, name: item.name, value: "" };
+    const meta = JSON.parse(item.meta);
+
+    return {
+      id: item.order,
+      name: item.name,
+      value: "",
+      required: meta?.props?.required ? meta?.props?.required : false,
+    };
   });
 
   console.log(allValues);
@@ -45,11 +52,16 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
     if (Array.isArray(e) && e?.[0].hasOwnProperty("id")) {
       // setValues({ ...values, [name]: e });
       requestOnChange(e, "attachments");
+      onChange(allValues);
     } else {
       console.log(newValues);
       onChange(newValues);
     }
   };
+
+  useEffect(() => {
+    onChange(allValues);
+  }, []);
 
   console.log(sortedElements);
   console.log(sortedElements);
@@ -66,6 +78,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <TextInput
                 name={item.name}
+                isRequired={meta.props?.required}
                 onChange={(e, name) => handleChange(e, name, item.order)}
                 {...meta.props}
               />
@@ -80,6 +93,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
               <Optional
                 handleChange2={(e, name) => handleChange(e, name, item.order)}
                 name={item.name}
+                isRequired={meta.props?.required}
                 field={meta}
               />
             </div>
@@ -92,6 +106,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <TextArea
                 name={item.name}
+                isRequired={meta.props?.required}
                 onChange={(e, name) => handleChange(e, name, item.order)}
                 {...meta.props}
               />
@@ -105,6 +120,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <RadioGroup
                 onChange={(value) => handleChange(value, item.name, item.order)}
+                isRequired={meta.props?.required}
                 {...meta.props}
               />
             </div>
@@ -117,6 +133,7 @@ export default function CategoryForm({ data, onChange, requestOnChange }) {
             >
               <CheckBoxGroup
                 name={item.name}
+                isRequired={meta.props?.required}
                 onChange={(e, name) => handleChange(e, name, item.order)}
                 defaultSelecteds={[]}
                 {...meta.props}

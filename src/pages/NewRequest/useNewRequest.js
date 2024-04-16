@@ -230,9 +230,6 @@ const useNewRequest = () => {
     if (success) {
       navigate(appRoutes.myRequests);
       console.log(message);
-      toast(message, {
-        type: "success",
-      });
     }
   };
 

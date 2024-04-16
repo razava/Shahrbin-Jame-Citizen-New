@@ -8,6 +8,7 @@ const CheckBoxGroup = ({
   name = "",
   options = [],
   defaultSelecteds = [],
+  isRequired = false,
 }) => {
   //   states
   const [values, setValues] = useState([]);
@@ -36,7 +37,12 @@ const CheckBoxGroup = ({
   return (
     <>
       <section className={styles.checkBoxGroup}>
-        {label && <span className={styles.groupLabel}>{label}</span>}
+        {label && (
+          <span className={styles.groupLabel}>
+            {isRequired && <span className=" text-red-500">*</span>}
+            {label}
+          </span>
+        )}
         <div className={styles.checkboxes}>
           {options.map((option, i) => (
             <CheckBox

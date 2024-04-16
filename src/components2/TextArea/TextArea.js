@@ -28,6 +28,7 @@ const TextArea = ({
   label = "",
   error = false,
   errorMessage = "",
+  isRequired = false,
 }) => {
   // refs
   const inputRef = useRef(null);
@@ -67,11 +68,13 @@ const TextArea = ({
     }
   };
 
+  console.log(isRequired);
   return (
     <>
       <section className={wrapperClassName} style={style.wrapper}>
         {label && (
           <span className={labelClassName} style={style.label}>
+            {isRequired && <span className=" text-red-500">*</span>}
             {label}
           </span>
         )}
