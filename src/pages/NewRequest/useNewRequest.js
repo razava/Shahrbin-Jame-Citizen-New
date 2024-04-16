@@ -220,11 +220,12 @@ const useNewRequest = () => {
     //   "Content-Type": contentTypes.formData,
     // };
     console.log(instances[0]);
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
     const { success, message } = await api.CitizenReport({
       payload,
       method: httpMethods.post,
-      // headers,
-      instanceId: values.map.instanceId,
+      isPerInstance: false,
+      id: instance.id,
       // instanceId: values?.city?.id ? values.city.id : instances[0].cityId,
     });
     if (success) {

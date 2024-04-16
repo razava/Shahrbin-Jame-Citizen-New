@@ -2,8 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/http";
 import { AppStore } from "../store/AppContext";
-import { appActions, appRoutes, statusCodes } from "../utils/variables";
+import {
+  appActions,
+  appConstants,
+  appRoutes,
+  statusCodes,
+} from "../utils/variables";
 import useAuthenticate from "./useAuthenticate";
+import { LS } from "../utils/functions";
 
 const useInitialData = ({ fetchOnMount = false } = {}) => {
   //   store
@@ -71,13 +77,17 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
     return api.CitizenCommon({
       tail: `ViolationTypes`,
       showMessageOnError: false,
+      isPerInstance: false,
     });
   };
 
   const getCategories = () => {
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
     return api.CitizenCommon({
-      tail: "Categories",
+      tail: `Categories`,
       showMessageOnError: false,
+      isPerInstance: false,
+      id: instance?.id,
     });
   };
 

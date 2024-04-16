@@ -17,8 +17,7 @@ const useInstance = () => {
       const { data, success } = await api.CitizenCommon({
         tail: "ShahrbinInstances",
         showMessageOnError: false,
-        // isPerInstance: false,
-        instanceId: 1,
+        isPerInstance: false,
       });
       if (success) {
         dispatch({ type: appActions.SET_INSTANCES, payload: data });

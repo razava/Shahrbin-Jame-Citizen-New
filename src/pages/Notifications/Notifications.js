@@ -24,7 +24,7 @@ const Notifications = () => {
     };
     const { success, data, headers } = await api.Messages({
       params,
-      isPerInstance: true,
+      isPerInstance: false,
     });
     if (success) {
       extractPaginationData(headers);

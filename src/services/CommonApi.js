@@ -7,7 +7,7 @@ const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
 const instance = LS.read(appConstants.SH_CT_INSTANCE);
 
 export async function getFAQ() {
-  const data = await axios.get(`/api/${instance.id}/CitizenFAQ`, {
+  const data = await axios.get(`/api/CitizenFAQ/${instance.id}`, {
     headers: { Authorization: `Bearer ${Token}` },
   });
   return data.data;
@@ -31,7 +31,7 @@ export async function getRegions(cityId) {
 }
 
 export async function getNewsById(id) {
-  const data = await axios.get(`/api/${instance.id}/CitizenNews/${id}`, {
+  const data = await axios.get(`/api/CitizenNews/${id}`, {
     headers: { Authorization: `Bearer ${Token}` },
   });
   return data.data.data;

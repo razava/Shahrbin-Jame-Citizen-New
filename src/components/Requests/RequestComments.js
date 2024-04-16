@@ -69,6 +69,7 @@ const Comments = ({ request = {}, refresh }) => {
     const { success, data } = await api.CitizenReport({
       tail: "Comments",
       id: request.id,
+      isPerInstance: false,
     });
     if (success) {
       setComments(data);

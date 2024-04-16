@@ -21,7 +21,10 @@ const Poll = () => {
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.CitizenPolls({ id });
+    const { success, data } = await api.CitizenPolls({
+      id,
+      isPerInstance: false,
+    });
     if (success) {
       setPoll(data);
       console.log(data);
@@ -43,6 +46,7 @@ const Poll = () => {
       tail: "Polls/Answer",
       payload,
       method: httpMethods.post,
+      isPerInstance: false,
       id: poll.id,
     });
     if (success) {

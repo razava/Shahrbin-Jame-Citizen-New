@@ -40,11 +40,16 @@ const RequestViolations = ({
     } else {
       payload.commentId = comment.id;
     }
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
     const { success } = await api.CitizenReport({
       payload: payload,
       method: httpMethods.post,
+      isPerInstance: false,
       tail: type == "request" ? "ReportViolation" : "CommentViolation",
-      id: type == "request" ? request.id : comment.id,
+      id:
+        type == "request"
+          ? `${request.id}/${instance.id}`
+          : `${comment.id}/${instance.id}`,
     });
     if (success) {
       setCurrentStep((prev) => prev + 1);

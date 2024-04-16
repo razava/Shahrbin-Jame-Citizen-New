@@ -27,7 +27,7 @@ const Category = ({
   const getCategories = async () => {
     const { success, data } = await api.CitizenCommon({
       tail: "Categories",
-      instanceId: city?.id,
+      isPerInstance: false,
     });
     if (success) {
       // console.log(data);

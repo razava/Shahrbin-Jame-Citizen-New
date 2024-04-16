@@ -8,7 +8,7 @@ const instance = LS.read(appConstants.SH_CT_INSTANCE);
 
 export async function postConnectionId(id) {
   const data = await axios.post(
-    `/api/${instance.id}/Messages/ConnectionId`,
+    `/api/Messages/ConnectionId`,
     id,
     {
       headers: {

@@ -14,30 +14,22 @@ axios.interceptors.request.use(function (config) {
 });
 
 export async function postFeedback({ id, payload }) {
-  const data = await axios.post(
-    `/api/${instance.id}/CitizenReport/Feedback/${id}`,
-    payload,
-    {
-      headers: { Authorization: `Bearer ${Token}` },
-    }
-  );
+  const data = await axios.post(`/api/CitizenReport/Feedback/${id}`, payload, {
+    headers: { Authorization: `Bearer ${Token}` },
+  });
   return data.data;
 }
 
 export async function postObjection({ id, payload }) {
-  const data = await axios.post(
-    `/api/${instance.id}/CitizenReport/Objection/${id}`,
-    payload,
-    {
-      headers: { Authorization: `Bearer ${Token}` },
-    }
-  );
+  const data = await axios.post(`/api/CitizenReport/Objection/${id}`, payload, {
+    headers: { Authorization: `Bearer ${Token}` },
+  });
   return data.data;
 }
 
 export async function getQuickAccess() {
   const data = await axios.get(
-    `/api/${instance.id}/CitizenReport/QuickAccesses`
+    `/api/CitizenReport/QuickAccesses/${instance?.id}`
   );
   return data.data.data;
 }

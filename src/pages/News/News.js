@@ -16,9 +16,11 @@ const News = () => {
 
   //   functions
   const getData = async () => {
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
     const { success, data } = await api.CitizenNews({
       tail: "News",
-      isPerInstance: true,
+      isPerInstance: false,
+      id: instance.id,
     });
     if (success) {
       console.log(success);

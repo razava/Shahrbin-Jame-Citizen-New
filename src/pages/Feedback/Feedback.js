@@ -42,7 +42,7 @@ const Feedback = () => {
     const { success, data } = await api.CitizenReport({
       tail: "Mine",
       id: complaintId,
-      isPerInstance: true,
+      isPerInstance: false,
     });
     if (success) {
       setComplaint(data);

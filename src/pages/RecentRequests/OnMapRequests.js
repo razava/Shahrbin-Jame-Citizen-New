@@ -44,6 +44,7 @@ const OnMapRequests = () => {
     };
     const { success, data, headers } = await api.CitizenReport({
       params: params,
+      isPerInstance: false,
       // tail: "all",
     });
     if (success) {

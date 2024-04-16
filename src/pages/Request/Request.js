@@ -16,7 +16,11 @@ const Request = () => {
 
   // functions
   const getData = async () => {
-    const { success, data } = await api.CitizenReport({ tail: "Mine", id });
+    const { success, data } = await api.CitizenReport({
+      tail: "Mine",
+      id,
+      isPerInstance: false,
+    });
     if (success) setRequest(data);
   };
 

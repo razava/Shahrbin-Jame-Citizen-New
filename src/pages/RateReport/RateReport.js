@@ -31,6 +31,7 @@ const RateReport = () => {
       tail: "feedback",
       id: feedbackId,
       params,
+      isPerInstance: false,
     });
     if (success) {
       navigate(appRoutes.home);

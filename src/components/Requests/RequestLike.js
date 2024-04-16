@@ -21,7 +21,7 @@ const RequestLike = ({ request = {} }) => {
         tail: "like",
         id: params.reportId,
         method: httpMethods.put,
-        isPerInstance: true,
+        isPerInstance: false,
         params: {
           isLiked: params.isLiked,
         },

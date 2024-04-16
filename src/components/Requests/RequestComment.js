@@ -22,6 +22,7 @@ const RequestComment = ({
     const { success } = await api.CitizenReport({
       tail: "Comment",
       id: comment.id,
+      isPerInstance: false,
       method: httpMethods.delete,
     });
     if (success) {

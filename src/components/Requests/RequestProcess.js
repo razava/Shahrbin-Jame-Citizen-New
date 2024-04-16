@@ -23,6 +23,7 @@ const RequestProcess = ({
     const { success, data } = await api.CitizenReport({
       tail: "ReportHistory",
       id: requestId,
+      isPerInstance: false,
     });
     if (success) setData(data);
   };
