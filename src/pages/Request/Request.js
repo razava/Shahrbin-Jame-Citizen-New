@@ -44,7 +44,7 @@ const Request = () => {
       forms = JSON.parse(request.comments);
     }
   }
-  
+
   //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
     console.log(request);
@@ -96,10 +96,10 @@ const Request = () => {
                             <span className=" flex  gap-1 text-gray-500">
                               <>
                                 {forms?.values[key].value.map((item, idx) => {
-                                  if (item.name) {
+                                  if (item?.name) {
                                     return (
                                       <span>
-                                        {item.name}{" "}
+                                        {item?.name}{" "}
                                         {forms?.values[key].value.length - 1 !=
                                           idx && ","}
                                       </span>
