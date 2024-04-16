@@ -8,6 +8,7 @@ import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
 import useInstance from "../../hooks/useInstance";
 import { getRegions } from "../../services/CommonApi";
 import { useQuery } from "@tanstack/react-query";
+import { LS } from "../../utils/functions";
 
 const allStepsDefault = [
   {

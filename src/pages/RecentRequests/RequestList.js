@@ -6,7 +6,7 @@ import usePagination from "../../hooks/usePagination";
 import { api } from "../../services/http";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
-import { CN } from "../../utils/functions";
+import { CN, LS } from "../../utils/functions";
 
 const RequestList = ({
   source = { controller: "", params: { params: {}, rest: {} } },
@@ -33,7 +33,7 @@ const RequestList = ({
           ...source.params.params,
           isPerInstance: false,
         },
-        ...(params?.tail == "Mine" && { id: ele }),
+        ...(params?.tail == "Mine" && { id: instance.id }),
         ...source.rest,
       });
       if (success) {

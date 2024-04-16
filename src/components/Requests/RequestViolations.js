@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AppStore } from "../../store/AppContext";
-import { CN } from "../../utils/functions";
+import { CN, LS } from "../../utils/functions";
 import styles from "./styles.module.css";
 import TextArea from "../TextArea/TextArea";
 import Icon from "../Icon/Icon";

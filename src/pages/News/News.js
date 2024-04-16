@@ -3,7 +3,7 @@ import Staggered from "../../components/Animated/Staggered";
 import Loader from "../../components/Loader/Loader";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
-import { CN, URI } from "../../utils/functions";
+import { CN, LS, URI } from "../../utils/functions";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
 import { appRoutes } from "../../utils/variables";

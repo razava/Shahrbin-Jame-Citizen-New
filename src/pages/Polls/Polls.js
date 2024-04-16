@@ -5,7 +5,7 @@ import Icon from "../../components/Icon/Icon";
 import Loader from "../../components/Loader/Loader";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
-import { CN, DNT, STR } from "../../utils/functions";
+import { CN, DNT, LS, STR } from "../../utils/functions";
 import { appRoutes } from "../../utils/variables";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
