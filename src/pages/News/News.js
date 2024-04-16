@@ -6,7 +6,7 @@ import { api } from "../../services/http";
 import { CN, LS, URI } from "../../utils/functions";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
-import { appRoutes } from "../../utils/variables";
+import { appConstants, appRoutes } from "../../utils/variables";
 import { useNavigate } from "react-router-dom";
 
 const News = () => {

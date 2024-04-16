@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Icon from "../../components/Icon/Icon";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
-import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import { appConstants, appRoutes, contentTypes, httpMethods } from "../../utils/variables";
 import useInstance from "../../hooks/useInstance";
 import { getRegions } from "../../services/CommonApi";
 import { useQuery } from "@tanstack/react-query";

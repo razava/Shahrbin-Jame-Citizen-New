@@ -6,7 +6,7 @@ import TextArea from "../TextArea/TextArea";
 import Icon from "../Icon/Icon";
 import Button from "../Button/Button";
 import { api } from "../../services/http";
-import { httpMethods } from "../../utils/variables";
+import { appConstants, httpMethods } from "../../utils/variables";
 import useFetch from "../../hooks/useFetch";
 
 const RequestViolations = ({

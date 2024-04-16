@@ -7,6 +7,7 @@ import { api } from "../../services/http";
 import styles from "./styles.module.css";
 import NoData from "../../components/NoData/NoData";
 import { CN, LS } from "../../utils/functions";
+import { appConstants } from "../../utils/variables";
 
 const RequestList = ({
   source = { controller: "", params: { params: {}, rest: {} } },
@@ -24,7 +25,6 @@ const RequestList = ({
       pageSize,
     };
     try {
-      console.log(source);
       const instance = LS.read(appConstants.SH_CT_INSTANCE);
       const { success, data, headers } = await api[source.controller]({
         ...source.params,
