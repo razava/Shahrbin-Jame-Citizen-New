@@ -69,7 +69,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   const getUser = () => {
     return api.Authenticate({
       showMessageOnError: false,
-      isPerInstance: true,
+      isPerInstance: false,
     });
   };
 

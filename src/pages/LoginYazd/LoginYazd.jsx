@@ -27,6 +27,7 @@ const LoginYazd = () => {
       tail: "LoginMyYazd",
       payload,
       method: httpMethods.post,
+      isPerInstance: false,
     });
     if (success) {
       onSignInSuccess(data);

@@ -114,6 +114,7 @@ const Verify = () => {
         tail: "VerifyCitizen",
         payload,
         method: httpMethods.post,
+        isPerInstance: false,
       });
       if (success) {
         // if (state.type === "signin") onSignInSuccess(data);

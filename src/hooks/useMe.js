@@ -57,7 +57,7 @@ const useMe = () => {
         payload: DS.toFormData({ File: value, AttachmentType: 0 }),
         headers,
         tail: "Avatar",
-        isPerInstance: true,
+        isPerInstance: false,
       });
       setLoading(false);
       if (success) {
@@ -69,7 +69,7 @@ const useMe = () => {
   };
   const getUserData = async () => {
     const { success, data } = await api.Authenticate({
-      isPerInstance: true,
+      isPerInstance: false,
     });
     if (success) {
       const payload = { ...store.initialData, user: data };
@@ -101,7 +101,7 @@ const useMe = () => {
       const { success, message } = await api.Authenticate({
         method: httpMethods.put,
         payload: editedValues,
-        isPerInstance: true,
+        isPerInstance: false,
       });
       setLoading(false);
       if (success) {
@@ -119,6 +119,7 @@ const useMe = () => {
       tail: "Password",
       method: httpMethods.put,
       payload: passwordValues,
+      isPerInstance: false,
     });
     setLoading(false);
     console.log(success);

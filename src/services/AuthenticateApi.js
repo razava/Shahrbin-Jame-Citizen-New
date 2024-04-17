@@ -63,7 +63,7 @@ export async function GetCaptcha() {
 export async function RefreshToken(payload) {
   try {
     const response = await axios.post(
-      `/api/${instance.id}/Authenticate/Refresh`,
+      `/api/Authenticate/Refresh`,
       payload
     );
     LS.save(appConstants.SH_CT_ACCESS_TOKEN, response.data.data.jwtToken);
