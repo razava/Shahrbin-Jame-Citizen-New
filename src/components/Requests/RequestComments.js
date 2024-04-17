@@ -91,6 +91,7 @@ const Comments = ({ request = {}, refresh }) => {
       id: request.id,
       payload,
       method: httpMethods.post,
+      isPerInstance: false,
     });
     if (success) {
       setCommentText("");

@@ -26,15 +26,16 @@ const RequestList = ({
     };
     try {
       const instance = LS.read(appConstants.SH_CT_INSTANCE);
+      console.log(source.params);
       const { success, data, headers } = await api[source.controller]({
         ...source.params,
         params: {
           ...params,
           ...source.params.params,
-          isPerInstance: false,
         },
-        ...(params?.tail == "Mine" && { id: instance.id }),
+        ...(source.params?.tail !== "Mine" && { id: instance.id }),
         ...source.rest,
+        isPerInstance: false,
       });
       if (success) {
         setData((prev) => [...prev, ...data]);

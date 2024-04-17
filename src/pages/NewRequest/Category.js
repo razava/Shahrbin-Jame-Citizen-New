@@ -5,8 +5,9 @@ import styles from "./styles.module.css";
 import { api } from "../../services/http";
 import useFetch from "../../hooks/useFetch";
 import Loader from "../../components/Loader/Loader";
-import { CN } from "../../utils/functions";
+import { CN, LS } from "../../utils/functions";
 import QuickAccess from "./QuickAccess";
+import { appConstants } from "../../utils/variables";
 
 const Category = ({
   goToNextStep = (f) => f,
@@ -25,9 +26,11 @@ const Category = ({
   };
 
   const getCategories = async () => {
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
     const { success, data } = await api.CitizenCommon({
       tail: "Categories",
       isPerInstance: false,
+      id: instance?.id,
     });
     if (success) {
       // console.log(data);

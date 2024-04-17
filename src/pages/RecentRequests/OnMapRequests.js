@@ -6,10 +6,11 @@ import { api } from "../../services/http";
 import styles from "./styles.module.css";
 import marker from "../../assets/images/location.svg";
 import useClick from "../../hooks/useClick";
-import { CN } from "../../utils/functions";
+import { CN, LS } from "../../utils/functions";
 import RequestCard from "../../components/Requests/RequestCard";
 import { AppStore } from "../../store/AppContext";
 import useInstance from "../../hooks/useInstance";
+import { appConstants } from "../../utils/variables";
 
 const MapContainer = ReactMapboxGl({
   accessToken: process.env.REACT_APP_ACCESS_TOKEN,
@@ -42,9 +43,12 @@ const OnMapRequests = () => {
       pageNumber,
       pageSize,
     };
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
+
     const { success, data, headers } = await api.CitizenReport({
       params: params,
       isPerInstance: false,
+      id: instance.id,
       // tail: "all",
     });
     if (success) {
