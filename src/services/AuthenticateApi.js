@@ -54,7 +54,7 @@ let isRefreshing = false;
 // );
 
 export async function GetCaptcha() {
-  const data = await axios.get(`/api/${instance.id}/Authenticate/Captcha`, {
+  const data = await axios.get(`/api/Authenticate/Captcha`, {
     responseType: "blob",
   });
   return data;
