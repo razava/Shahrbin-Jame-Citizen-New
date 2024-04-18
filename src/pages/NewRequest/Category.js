@@ -30,7 +30,8 @@ const Category = ({
     const { success, data } = await api.CitizenCommon({
       tail: "Categories",
       isPerInstance: false,
-      id: instance?.id,
+      params: { instanceId: instance?.id },
+      // id: instance?.id,
     });
     if (success) {
       // console.log(data);

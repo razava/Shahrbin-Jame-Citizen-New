@@ -7,8 +7,9 @@ const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
 const instance = LS.read(appConstants.SH_CT_INSTANCE);
 
 export async function getFAQ() {
-  const data = await axios.get(`/api/CitizenFAQ/${instance.id}`, {
+  const data = await axios.get(`/api/CitizenFAQ`, {
     headers: { Authorization: `Bearer ${Token}` },
+    params: { instanceId: instance?.id },
   });
   return data.data;
 }

@@ -46,6 +46,7 @@ const AnimatedTabs = ({
           wrapperRef.current?.getBoundingClientRect().right -
           child?.getBoundingClientRect().right -
           1,
+        padding:"21px"
       };
       setThumbStyle(thumbStyle);
     }

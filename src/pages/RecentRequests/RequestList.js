@@ -32,8 +32,9 @@ const RequestList = ({
         params: {
           ...params,
           ...source.params.params,
+          ...(source.params?.tail !== "Mine" && { instanceId: instance.id }),
         },
-        ...(source.params?.tail !== "Mine" && { id: instance.id }),
+        // ...(source.params?.tail !== "Mine" && { id: instance.id }),
         ...source.rest,
         isPerInstance: false,
       });

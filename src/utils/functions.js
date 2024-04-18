@@ -103,6 +103,7 @@ export class URI {
       longitude,
       reportId,
       isLiked,
+      instanceId,
     } = queries;
     if (pageSize !== undefined) myUrl.searchParams.append("PageSize", pageSize);
     if (pageNumber !== undefined)
@@ -114,6 +115,7 @@ export class URI {
       myUrl.searchParams.append("longitude", longitude);
     if (reportId !== undefined) myUrl.searchParams.append("reportId", reportId);
     if (isLiked !== undefined) myUrl.searchParams.append("isLiked", isLiked);
+    if (instanceId !== undefined) myUrl.searchParams.append("instanceId", instanceId);
 
     return myUrl;
   }

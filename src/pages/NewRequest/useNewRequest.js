@@ -4,7 +4,12 @@ import { toast } from "react-toastify";
 import Icon from "../../components/Icon/Icon";
 import useFetch from "../../hooks/useFetch";
 import { api } from "../../services/http";
-import { appConstants, appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import {
+  appConstants,
+  appRoutes,
+  contentTypes,
+  httpMethods,
+} from "../../utils/variables";
 import useInstance from "../../hooks/useInstance";
 import { getRegions } from "../../services/CommonApi";
 import { useQuery } from "@tanstack/react-query";
@@ -217,16 +222,14 @@ const useNewRequest = () => {
     console.log("gggg");
     const payload = getPayload();
     console.log(payload);
-    // const headers = {
-    //   "Content-Type": contentTypes.formData,
-    // };
-    console.log(instances[0]);
     const instance = LS.read(appConstants.SH_CT_INSTANCE);
+    payload.instanceId = instance.id;
+    
     const { success, message } = await api.CitizenReport({
       payload,
       method: httpMethods.post,
       isPerInstance: false,
-      id: instance.id,
+      // id: instance.id,
       // instanceId: values?.city?.id ? values.city.id : instances[0].cityId,
     });
     if (success) {

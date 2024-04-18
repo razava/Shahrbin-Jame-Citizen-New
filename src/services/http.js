@@ -98,7 +98,7 @@ const createApi = () => {
             // instanceId = null,
             instanceId = 1,
           } = props || {}; // request props
-
+          
           const cancelToken = axios.CancelToken.source(); // cancel token
           cancelTokenBearer.current = cancelToken;
           const isAuthenticated = LS.read(appConstants.SH_CT_ACCESS_TOKEN);

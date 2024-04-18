@@ -20,7 +20,8 @@ const Polls = () => {
     const { success, data } = await api.CitizenPolls({
       tail: "Polls",
       isPerInstance: false,
-      id:instance.id
+      params: { instanceId: instance?.id },
+      // id:instance.id
     });
     if (success) setPolls(data);
   };

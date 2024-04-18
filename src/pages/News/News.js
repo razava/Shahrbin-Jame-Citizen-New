@@ -20,7 +20,8 @@ const News = () => {
     const { success, data } = await api.CitizenNews({
       tail: "News",
       isPerInstance: false,
-      id: instance.id,
+      params: { instanceId: instance?.id },
+      // id: instance.id,
     });
     if (success) {
       console.log(success);

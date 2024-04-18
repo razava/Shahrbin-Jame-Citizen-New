@@ -28,8 +28,8 @@ export async function postObjection({ id, payload }) {
 }
 
 export async function getQuickAccess() {
-  const data = await axios.get(
-    `/api/CitizenReport/QuickAccesses/${instance?.id}`
-  );
+  const data = await axios.get(`/api/CitizenCommon/QuickAccesses`, {
+    params: { instanceId: instance?.id },
+  });
   return data.data.data;
 }

@@ -87,7 +87,8 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
       tail: `Categories`,
       showMessageOnError: false,
       isPerInstance: false,
-      id: instance?.id,
+      params: { instanceId: instance?.id },
+      // id: instance?.id,
     });
   };
 
