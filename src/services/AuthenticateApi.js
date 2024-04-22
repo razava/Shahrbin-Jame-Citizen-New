@@ -62,10 +62,7 @@ export async function GetCaptcha() {
 
 export async function RefreshToken(payload) {
   try {
-    const response = await axios.post(
-      `/api/Authenticate/Refresh`,
-      payload
-    );
+    const response = await axios.post(`/api/Authenticate/Refresh`, payload);
     LS.save(appConstants.SH_CT_ACCESS_TOKEN, response.data.data.jwtToken);
     LS.save(appConstants.SH_CT_REFRESH_TOKEN, response.data.data.refreshToken);
     // localStorage.setItem(
@@ -85,6 +82,6 @@ export async function RefreshToken(payload) {
 }
 
 export async function resendOtp(payload) {
-  const data = await axios.post(`/api/1/Authenticate/ResendOtp`, payload);
+  const data = await axios.post(`/api/Authenticate/ResendOtp`, payload);
   return data.data;
 }

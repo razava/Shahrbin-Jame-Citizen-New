@@ -1,6 +1,6 @@
 {
   "name": "shahrbin-citizen-web",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",

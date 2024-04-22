@@ -51,11 +51,12 @@ const CountdownTimer = ({ isShow, setIsShow }) => {
   };
   useEffect(() => {
     if (!isShow) {
-      setRemainingTime(2 * 60000);
+      // setRemainingTime(2 * 60000);
       const newKey = Math.random();
       setKey(newKey);
     }
   }, [isShow]);
+
   return (
     <div className={`${isShow ? "" : "hidden"} text-2xl text-gray-500`}>
       {/* {!localStorage.getItem("CountDownCompleted") && ( */}
