@@ -233,23 +233,23 @@ const Verify = () => {
             inputStyle=" !w-20 rounded-full h-20 bg-[#eee] border shadow-msm border-none text-black !text-4xl"
           />
         </div>
-        <div className="mx-auto w-full text-center text-xl mt-10">
-          {" "}
-          <CountdownTimer
-            setIsShow={(state) => setIsShow(state)}
-            isShow={isShow}
-          />
-          {!isShow && (
-            <p
-              onClick={handelResendOtp}
-              className=" text-[var(--blue)] text-xl cursor-pointer"
-            >
-              ارسال مجدد کد تایید
-            </p>
-          )}
-        </div>
         {/* {renderButton()} */}
       </form>
+      <div className="mx-auto w-full text-center text-xl mt-10">
+        {" "}
+        <CountdownTimer
+          setIsShow={(state) => setIsShow(state)}
+          isShow={isShow}
+        />
+        {!isShow && (
+          <p
+            onClick={handelResendOtp}
+            className=" text-[var(--blue)] text-xl cursor-pointer"
+          >
+            ارسال مجدد کد تایید
+          </p>
+        )}
+      </div>
     </>
   );
 };
