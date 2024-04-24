@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url("./fonts.css");
 @import url("./variables.css");
 @import url("./common.css");
@@ -187,7 +191,6 @@ input {
   background-color: var(--yellow);
 }
 
-
 .react-responsive-modal-modal {
   background: white;
   max-width: 500px;
@@ -195,9 +198,8 @@ input {
   direction: rtl;
   text-align: right;
   padding: 20px;
-  border-radius: 10px
+  border-radius: 10px;
 }
 .react-responsive-modal-modal {
   @apply rounded-lg;
 }
-

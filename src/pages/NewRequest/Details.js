@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import useValidation from "../../hooks/useValidation";
 import { validationTypes } from "../../utils/variables";
+import { CN } from "../../utils/functions";
 
 const Details = ({
   goToNextStep = (f) => f,
@@ -70,50 +71,68 @@ const Details = ({
   return (
     <>
       <section className={styles.details}>
-        <div className={styles.inputWrapper} style={{ display: "flex" }}>
+        {checkField && (
+          <div className="flex items-center w-full gap-3 px-1">
+            <p className=" font-bold">مشخصات شاکی</p>
+            <div className=" flex-1 h-[3px] bg-gray-300"></div>
+          </div>
+        )}
+        <div
+          className={CN.join(styles.inputWrapper, " mb-5")}
+          style={{ display: "flex" }}
+        >
           {checkField && (
             <>
-              <TextInput
-                type="string"
-                name="firstName"
-                value={details.firstName}
-                onChange={handelFirstName}
-                label={
-                  <p>
-                    <span style={{ color: "var(--red)" }}>* </span>نام
-                  </p>
-                }
-                error={errors.firstName}
-              />
-              <TextInput
-                type="string"
-                name="lastName"
-                value={details.lastName}
-                onChange={handelLastName}
-                label={
-                  <p>
-                    <span style={{ color: "var(--red)" }}>* </span>نام خانوادگی
-                  </p>
-                }
-                error={errors.lastName}
-              />
-              <TextInput
-                type="string"
-                name="nationalId"
-                value={details.nationalId}
-                onChange={handelNationalId}
-                label={
-                  <p>
-                    <span style={{ color: "var(--red)" }}>* </span>کدملی
-                  </p>
-                }
-                error={errors.nationalId}
-              />
+              <>
+                <TextInput
+                  type="string"
+                  name="firstName"
+                  value={details.firstName}
+                  onChange={handelFirstName}
+                  label={
+                    <p>
+                      <span style={{ color: "var(--red)" }}>* </span>نام
+                    </p>
+                  }
+                  error={errors.firstName}
+                />
+                <TextInput
+                  type="string"
+                  name="lastName"
+                  value={details.lastName}
+                  onChange={handelLastName}
+                  label={
+                    <p>
+                      <span style={{ color: "var(--red)" }}>* </span>نام
+                      خانوادگی
+                    </p>
+                  }
+                  error={errors.lastName}
+                />
+                <TextInput
+                  type="string"
+                  name="nationalId"
+                  value={details.nationalId}
+                  onChange={handelNationalId}
+                  label={
+                    <p>
+                      <span style={{ color: "var(--red)" }}>* </span>کدملی
+                    </p>
+                  }
+                  error={errors.nationalId}
+                />
+              </>
             </>
           )}
         </div>
+        {checkField && (
+          <div className="flex items-center w-full gap-3 px-1 mb-5">
+            <p className=" font-bold">متن شکایت</p>
+            <div className=" flex-1 h-[3px] bg-gray-300"></div>
+          </div>
+        )}
         <TextArea
-          placeholder="توضیحات"
+          placeholder={checkField ? "متن شکایت" : "توضیحات"}
           classNames={{
             wrapper: styles.commentsWrapper,
             input: styles.commentsInput,

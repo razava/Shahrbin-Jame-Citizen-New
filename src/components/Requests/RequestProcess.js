@@ -26,6 +26,7 @@ const RequestProcess = ({
     if (success) setData(data.history);
   };
 
+  console.log(data);
   //   hooks
   const { loading } = useFetch({ fn: getData, auto: requestId });
 
@@ -65,7 +66,7 @@ const RequestProcess = ({
         </div>
         <div className={styles.requestProcessLogDetails}>
           {log.reason && <span>{log?.reason?.title}</span>}
-          {log.description && <span>{log?.description}</span>}
+          {/* {log.description && <span>{log?.description}</span>} */}
           {log.isPublic && log.comment && <span>{log?.comment}</span>}
           {log.isPublic && log[keys.attachments].length > 0 && (
             <>

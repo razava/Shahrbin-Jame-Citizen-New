@@ -59,9 +59,9 @@ const AuthenticationDesktop = ({ children }) => {
     return (
       <div className={CN.join(styles.d_pageSide, styles[position])}>
         <div className={styles.d_pageSideContent}>
-          <img src={image1} />
+          <img style={{ width: "70%" }} src={image1} />
           {/* <img src={image2} /> */}
-          <img src={image3} />
+          <img style={{ width: "95%" }} src={image3} />
           <Supporters />
         </div>
         <img src={image4} className={styles.d_pageSideBottomImage} />
