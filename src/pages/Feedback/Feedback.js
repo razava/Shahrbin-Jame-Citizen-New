@@ -143,7 +143,7 @@ const Feedback = () => {
           <Loader />
         ) : (
           <>
-            <p>
+            <p className=" max-sm:mt-44">
               شهروند گرامی، درخواست شما با کد رهگیری{" "}
               <span className={styles.trackingNumber}>
                 {complaint.trackingNumber}
