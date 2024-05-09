@@ -80,10 +80,13 @@ const RequestProcess = ({
                     return (
                       <div
                         className={styles.requestProcessLogAttachment}
-                        onClick={URI.download(a.url)}
+                        // onClick={(e) => {
+                        //   e.stopPropagation();
+                        //   URI.download(a.url);
+                        // }}
                         key={i}
                       >
-                        <img src={URI.createMediaUri(a.url3)} />
+                        <img src={URI.createMediaUri(a.url)} />
                       </div>
                     );
                   } else {
@@ -91,6 +94,10 @@ const RequestProcess = ({
                       <div
                         className={styles.requestProcessLogAttachment}
                         key={i}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          URI.download(a.url);
+                        }}
                       >
                         <img src={ph} />
                       </div>
