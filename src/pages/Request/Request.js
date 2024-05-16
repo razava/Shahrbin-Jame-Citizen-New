@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./styles.module.css";
 import noImage from "../../assets/images/no-image.jpeg";
-import { CN, DNT, URI } from "../../utils/functions";
+import { CN, DNT, URI, b64toBlob } from "../../utils/functions";
 import Map from "../../components/Map/Map";
 import Icon from "../../components/Icon/Icon";
 import RequestStatus from "../../components/Requests/RequestStatus";
@@ -48,6 +48,40 @@ const Request = () => {
       forms = JSON.parse(request.comments);
     }
   }
+
+  const openFileInNewTab = (base64Data, fileType) => {
+    const blob = b64toBlob(base64Data, fileType);
+    const blobUrl = URL.createObjectURL(blob);
+    const newTab = window.open();
+    if (newTab) {
+      newTab.document.write(
+        '<html style="height: 100%;"><head><title>File Preview</title></head><body style="margin: 0; padding: 0; height: 100%; overflow: hidden;">'
+      );
+
+      // Check the file type and handle accordingly
+      if (fileType.includes("image")) {
+        newTab.document.write(
+          `<img src="data:${fileType};base64,${base64Data}" alt="File Preview"/>`
+        );
+      } else if (fileType === "application/pdf") {
+        newTab.document.write(
+          `<iframe width="100%" height="100%" src="${blobUrl}"></iframe>`
+        );
+      } else {
+        newTab.document.write(
+          `<a href="${blobUrl}" target="_blank">Open in New Tab</a>`
+        );
+      }
+
+      newTab.document.write("</body></html>");
+      newTab.document.close();
+
+      URL.revokeObjectURL(blobUrl);
+    } else {
+      console.error("Unable to open a new tab.");
+    }
+  };
+
   console.log(forms?.values);
   //   request?.comments[0] == "{" ? JSON.parse(request.comments) : null;
   const renderDetailsCard = () => {
@@ -131,6 +165,38 @@ const Request = () => {
           ) : (
             <p className={styles.requestComments}>{request.comments}</p>
           )}
+          <p>پیوست‌ها</p>
+          <div className=" text-[#464646] mt-2">
+            <div className="flex flex-wrap items-center w-full gap-2 my-2 text-xs  max-md:flex-col">
+              {request?.medias.map((item, index) => {
+                const fileName = item.url.split("/")[2];
+                console.log(fileName);
+                return (
+                  <div
+                    key={index}
+                    className=" bg-gray-100 text-[#7C838A] w-full md:w-[30%] rounded-md h-12 p-2 flex justify-between gap-3 items-center"
+                  >
+                    <a className="flex items-center gap-2 truncate cursor-pointer ">
+                      <i style={{ fontSize: "13px" }} class="fas fa-file"></i>
+                      <p className=" max-w-full truncate">{fileName}</p>
+                    </a>
+                    <div
+                      className=""
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        URI.download(item.url);
+                      }}
+                    >
+                      <i
+                        style={{ fontSize: "13px" }}
+                        class="fas fa-download cursor-pointer"
+                      ></i>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <div className={styles.requestDetails}>
             <p className={styles.requestTrackingNumber}>
               <span>کد رهگیری: </span>

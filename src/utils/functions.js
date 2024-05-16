@@ -115,7 +115,8 @@ export class URI {
       myUrl.searchParams.append("longitude", longitude);
     if (reportId !== undefined) myUrl.searchParams.append("reportId", reportId);
     if (isLiked !== undefined) myUrl.searchParams.append("isLiked", isLiked);
-    if (instanceId !== undefined) myUrl.searchParams.append("instanceId", instanceId);
+    if (instanceId !== undefined)
+      myUrl.searchParams.append("instanceId", instanceId);
 
     return myUrl;
   }
@@ -597,4 +598,23 @@ export const convertserverTimeToDateString = (
     .calendar("jalali")
     .locale("fa")
     .format(format);
+};
+
+export const b64toBlob = (b64Data, contentType = "", sliceSize = 512) => {
+  const byteCharacters = atob(b64Data);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  return new Blob(byteArrays, { type: contentType });
 };

@@ -30,11 +30,11 @@ const Feedback = () => {
 
   // states
   const [complaint, setComplaint] = useState({});
-  const [satisfaction, setSatisfaction] = useState();
+  const [satisfaction, setSatisfaction] = useState(0);
   const [values, setValues] = useState({
     comments: "",
     attachments: [],
-    rating: 0,
+    rating: 3,
   });
 
   // functions
@@ -95,7 +95,7 @@ const Feedback = () => {
   });
 
   useEffect(() => {
-    setValues({ ...values, rating: 0 });
+    setValues({ ...values, rating: 3 });
   }, []);
 
   const postObjectionMutation = useMutation({
@@ -119,7 +119,8 @@ const Feedback = () => {
   }, []);
 
   const handelSubmit = () => {
-    if (values.rating == 1) {
+    console.log(values);
+    if (satisfaction == 2) {
       postObjectionMutation.mutate({
         id: complaintId,
         payload: {
@@ -159,7 +160,8 @@ const Feedback = () => {
             </p>
 
             <p className=" text-right w-full">
-              لطفا میزان رضایتمندی خود را از فرآیند رسیدگی اعلام نمایید.
+              لطفا درصورت رضایت میزان رضایتمندی خود را از فرآیند رسیدگی اعلام
+              نمایید.
             </p>
             <p className=" text-right w-full">
               نظرات شما باعث ارتقای سطح خدمت رسانی ما خواهد شد.
@@ -177,24 +179,26 @@ const Feedback = () => {
                 name="isObjection"
                 />
               </div> */}
-              <div className=" mb-3">
-                {/* {satisfaction !== 1 && ( */}
-                <Rating name="rating" onChange={hanldeChange} />
-                {/* )} */}
-              </div>
-              {/* <p>آیا از نحوه ی پاسخگویی راضی بودید؟</p>
+              <p className=" font-bold">آیا از نحوه ی پاسخگویی راضی بودید؟</p>
               <div className=" mb-5">
                 <RadioGroup
                   options={[
-                    { value: 0, title: "بله" },
-                    { value: 1, title: "خیر" },
+                    { value: 1, title: "بله" },
+                    { value: 2, title: "خیر" },
                   ]}
-                  onChange={(value) => handleRadioChange(value, "")}
+                  onChange={(e) => handleRadioChange(e)}
                   // {...meta.props}
                 />
-              </div> */}
+              </div>
+              {satisfaction == 1 && (
+                <div className=" mb-3">
+                  {/* {satisfaction !== 1 && ( */}
+                  <Rating name="rating" onChange={hanldeChange} />
+                  {/* )} */}
+                </div>
+              )}
 
-              {values.rating == 1 && (
+              {satisfaction == 2 && (
                 <>
                   <p className="">
                     باتوجه به عدم رضایت شما از نحوه رسیدگی، درخواست برای بررسی
@@ -227,6 +231,7 @@ const Feedback = () => {
             </div>
 
             <Button
+              disabled={satisfaction == 0}
               className={styles.btn}
               loading={submitLoading}
               onClick={handelSubmit}

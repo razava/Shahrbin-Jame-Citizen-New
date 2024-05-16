@@ -12,7 +12,12 @@ const RequestProcess = ({
   history = [],
   requestId,
   highlight,
-  keys = { name: "message", date: "dateTime", attachments: "attachments" },
+  keys = {
+    name: "message",
+    date: "dateTime",
+    attachments: "attachments",
+    actor: "actor",
+  },
 }) => {
   // states
   const [data, setData] = useState(history);
@@ -63,7 +68,10 @@ const RequestProcess = ({
             backgroundColor: statusColors[log[keys.name]] || "var(--blue)",
           }}
         >
-          <span>{log[keys.name]}</span>
+          <span>
+            {log[keys.name]}
+            {log[keys.actor] !== null && <> توسط {log[keys.actor].title}</>}
+          </span>
         </div>
         <div className={styles.requestProcessLogDetails}>
           {log.reason && <span>{log?.reason?.title}</span>}

@@ -6,17 +6,17 @@ const defaultStars = [
   {
     id: 1,
     hover: false,
-    active: false,
+    active: true,
   },
   {
     id: 2,
     hover: false,
-    active: false,
+    active: true,
   },
   {
     id: 3,
     hover: false,
-    active: false,
+    active: true,
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const defaultStars = [
 const Rating = ({ onChange = (f) => f, name = "" }) => {
   // states
   const [stars, setStars] = useState(defaultStars);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
 
   // functions
   const onMouseEnter = (star) => {
@@ -64,17 +64,17 @@ const Rating = ({ onChange = (f) => f, name = "" }) => {
       {
         id: 1,
         hover: false,
-        active: false,
+        active: true,
       },
       {
         id: 2,
         hover: false,
-        active: false,
+        active: true,
       },
       {
         id: 3,
         hover: false,
-        active: false,
+        active: true,
       },
       {
         id: 4,
