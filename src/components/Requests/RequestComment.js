@@ -95,6 +95,39 @@ const RequestComment = ({
           </div>
         </div>
       </div>
+      {comment?.reply && (
+        <div className={styles.requestComment}>
+          <div className={styles.requestCommentAvatar}>
+            <img
+              src={URI.createMediaUri(comment.reply.user?.avatar?.url3) || ph}
+            />
+          </div>
+
+          <div className={styles.requestCommentDetails}>
+            <div className={styles.requestCommentInfo}>
+              <p className={styles.requestCommentUserTitle}>
+                {getUserTitle(comment.reply.user)}
+              </p>
+              <span className={styles.requestCommentDate}>
+                {DNT.toJalaliString(comment.reply.dateTime)}
+              </span>
+            </div>
+            <div className={styles.requestCommentTextWrapper}>
+              <p className={styles.requestCommentText}>{comment.reply.text}</p>
+              {comment.canDelete && loading ? (
+                <DualRingLoader size="small" />
+              ) : (
+                <Icon
+                  type="far"
+                  name="trash"
+                  className={styles.requestCommentAction}
+                  onClick={makeRequest}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

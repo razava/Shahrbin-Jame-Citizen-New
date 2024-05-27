@@ -70,7 +70,15 @@ const RequestProcess = ({
         >
           <span>
             {log[keys.name]}
-            {log[keys.actor] !== null && <> توسط {log[keys.actor].title}</>}
+            {log[keys.actor] !== null && (
+              <>
+                {" "}
+                توسط{" "}
+                {log[keys.actor].displayName
+                  ? log[keys.actor].displayName
+                  : log[keys.actor].firstName + " " + log[keys.actor].lastName}
+              </>
+            )}
           </span>
         </div>
         <div className={styles.requestProcessLogDetails}>
