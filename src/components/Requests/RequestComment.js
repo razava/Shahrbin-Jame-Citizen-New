@@ -114,7 +114,7 @@ const RequestComment = ({
             </div>
             <div className={styles.requestCommentTextWrapper}>
               <p className={styles.requestCommentText}>{comment.reply.text}</p>
-              {comment.canDelete && loading ? (
+              {comment.reply.canDelete && loading ? (
                 <DualRingLoader size="small" />
               ) : (
                 <Icon

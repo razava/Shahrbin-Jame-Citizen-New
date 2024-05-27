@@ -68,7 +68,7 @@ const RequestProcess = ({
             backgroundColor: statusColors[log[keys.name]] || "var(--blue)",
           }}
         >
-          <span>
+          <span className=" text-[13.5px] text-center">
             {log[keys.name]}
             {log[keys.actor] !== null && (
               <>
@@ -84,6 +84,7 @@ const RequestProcess = ({
         <div className={styles.requestProcessLogDetails}>
           {log.reason && <span>{log?.reason?.title}</span>}
           {log.description && <span>{log?.description}</span>}
+          {log.isPublic && log.comment && <span>{log?.comment}</span>}
           {log.isPublic && log.comment && <span>{log?.comment}</span>}
           {log.isPublic && log[keys.attachments].length > 0 && (
             <>
