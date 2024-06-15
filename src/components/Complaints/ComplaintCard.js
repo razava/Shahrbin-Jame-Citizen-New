@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { appRoutes } from "../../utils/variables";
 import RequestStatus from "../Requests/RequestStatus";
 import RequestProcessIcon from "../Requests/RequestProcessIcon";
+import { useQuery } from "@tanstack/react-query";
+import { getComplaintHistory } from "../../services/Api";
 
 const ComplaintCard = ({ complaint = {}, isSelfComplaint = false }) => {
   // functions
@@ -24,6 +26,12 @@ const ComplaintCard = ({ complaint = {}, isSelfComplaint = false }) => {
     }
   };
 
+  const { data, isLoading, isSuccess, refetch } = useQuery({
+    queryKey: ["Captcha"],
+    queryFn: () => getComplaintHistory(complaint.id),
+  });
+
+  console.log(data);
   // status
   // 0: created
   // 1: live
@@ -40,7 +48,7 @@ const ComplaintCard = ({ complaint = {}, isSelfComplaint = false }) => {
         <div className={styles.complaintCardInfoWrapper}>
           <div className={styles.complaintCardInfoRow}>
             <p className={styles.complaintCardCategory}>
-              {complaint.category.title}
+              {complaint.categoryTitle}
             </p>
             <RequestStatus lastStatus={getStatusText(complaint.status)} />
           </div>
@@ -68,9 +76,10 @@ const ComplaintCard = ({ complaint = {}, isSelfComplaint = false }) => {
           </div>
 
           <div className={styles.complaintCardInfoRow}>
-            {complaint.logs.length > 0 && (
+            {data && (
               <RequestProcessIcon
-                logs={complaint.logs}
+                request={complaint.id}
+                logs={data}
                 keys={{
                   name: "title",
                   date: "timestamp",

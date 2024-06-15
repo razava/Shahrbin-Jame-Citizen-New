@@ -34,8 +34,8 @@ const RequestProcess = ({
   };
   console.log(requestId);
   //   hooks
-  const { loading } = useFetch({ fn: getData, auto: true }); //auto: requestId });
-
+  const { loading } = useFetch({ fn: getData, auto: false }); //auto: requestId });
+  console.log(data);
   //   renders
   const renderContent = () => {
     if (loading) return <Loader />;
@@ -70,7 +70,7 @@ const RequestProcess = ({
         >
           <span className=" text-[13.5px] text-center">
             {log[keys.name]}
-            {log[keys.actor] !== null && (
+            {log?.actor && log[keys.actor] !== null && (
               <>
                 {" "}
                 توسط{" "}

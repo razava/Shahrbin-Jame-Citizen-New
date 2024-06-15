@@ -3,9 +3,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Icon from "../../components/Icon/Icon";
 import useFetch from "../../hooks/useFetch";
-import { api } from "../../services/http";
-import { appRoutes, contentTypes, httpMethods } from "../../utils/variables";
+import { api, complaintApi } from "../../services/http";
+import {
+  appConstants,
+  appRoutes,
+  contentTypes,
+  httpMethods,
+} from "../../utils/variables";
 import useInstance from "../../hooks/useInstance";
+import { LS } from "../../utils/functions";
 
 const allStepsDefault = [
   {
@@ -107,18 +113,21 @@ const useNewComplaint = () => {
     formData.append("laststName", values.laststName);
     formData.append("nationalId", values.nationalId);
     values.attachments.forEach((a) => formData.append("attachments", a.file));
-    return formData;
+    const instance = LS.read(appConstants.SH_CT_INSTANCE);
+    const payload = {
+      instanceId: instance.id,
+      categoryId: values.category.id,
+      description: values.comments,
+      attachments: values.attachments.map((a) => a.id),
+    };
+    return payload;
   };
 
   const onSubmit = async () => {
     const payload = getPayload();
-    const headers = {
-      "Content-Type": contentTypes.formData,
-    };
-    const { success } = await api.complaint({
+    const { success } = await complaintApi.CitizenComplaint({
       payload,
       method: httpMethods.post,
-      headers,
       isPerInstance: false,
     });
     if (success) {

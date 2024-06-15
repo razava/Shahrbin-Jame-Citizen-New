@@ -115,7 +115,7 @@ const Details = ({
     }
   });
   console.log(requiredElements);
-  console.log(values.category?.form.elements[0].meta);
+  // console.log(values.category?.form.elements[0].meta);
   return (
     <>
       <section className={styles.details}>
@@ -127,7 +127,7 @@ const Details = ({
           />
         )}
 
-        <div className={styles.inputWrapper} style={{ display: "flex" }}>
+        {/* <div className={styles.inputWrapper} style={{ display: "flex" }}>
           {checkField && (
             <>
               {" "}
@@ -169,7 +169,7 @@ const Details = ({
               />
             </>
           )}
-        </div>
+        </div> */}
         {!values.category.form && (
           <TextArea
             placeholder="توضیحات"
@@ -186,7 +186,7 @@ const Details = ({
           className={styles.detailsButton}
           onClick={() => {
             if (checkField) {
-              handelNextStep();
+              goToNextStep();
             } else {
               checkRequiredElements();
               // goToNextStep();

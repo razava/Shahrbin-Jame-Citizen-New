@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../services/http";
+import { api, complaintApi } from "../services/http";
 import { AppStore } from "../store/AppContext";
 import {
   appActions,
@@ -34,7 +34,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
             fetch(getCategories),
             fetch(getUser),
             fetch(getViolationTypes),
-            // fetch(getComplaintCategories),
+            fetch(getComplaintCategories),
           ]
         : [];
       const allData = await Promise.all(promises);
@@ -43,7 +43,7 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
         categories: allData.length > 0 ? allData[0] : {},
         user: allData.length > 1 ? allData[1] : {},
         violationTypes: allData.length > 2 ? allData[2] : {},
-        // complaintCategories: allData.length > 3 ? allData[3] : {},
+        complaintCategories: allData.length > 3 ? allData[3] : {},
       };
       dispatch({ type: appActions.SET_INITIALDATA, payload: initialData });
     } catch (err) {
@@ -93,9 +93,10 @@ const useInitialData = ({ fetchOnMount = false } = {}) => {
   };
 
   const getComplaintCategories = () => {
-    return api.complaintCategory({
+    return complaintApi.CitizenCommon({
       showMessageOnError: false,
       isPerInstance: false,
+      tail: "Categories",
     });
   };
 

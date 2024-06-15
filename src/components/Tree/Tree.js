@@ -198,9 +198,12 @@ const Tree = ({
   return (
     <>
       <section className={styles.treeWrapper}>
-        <div className="w-full lg:w-[30%] flex flex-col items-center  sm:px-8 mt-2 sticky rounded-xl lg:hidden">
-          <QuickAccess />
-        </div>
+        {pathname !== "/user/new-complaint" && (
+          <div className="w-full lg:w-[30%] flex flex-col items-center  sm:px-8 mt-2 sticky rounded-xl lg:hidden">
+            <QuickAccess />
+          </div>
+        )}
+
         {renderSearch()}
         {/* {renderTreeTitle()} */}
         {renderBreadCrumb()}

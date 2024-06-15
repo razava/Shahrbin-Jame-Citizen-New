@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../../components/Loader/Loader";
 import useFetch from "../../hooks/useFetch";
 import usePagination from "../../hooks/usePagination";
-import { api } from "../../services/http";
+import { api, complaintApi } from "../../services/http";
 import styles from "./styles.module.css";
 import ComplaintCard from "./ComplaintCard";
 import NoData from "../NoData/NoData";
@@ -24,7 +24,7 @@ const ComplaintsList = ({
       pageSize,
     };
     try {
-      const { success, data, headers } = await api[source.controller]({
+      const { success, data, headers } = await complaintApi[source.controller]({
         ...source.params,
         params: { ...params, ...source.params.params },
         ...source.rest,

@@ -194,7 +194,7 @@
   flex: 1;
   padding: 10px;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   overflow-y: hidden;
 }
 

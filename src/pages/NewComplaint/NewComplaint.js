@@ -61,6 +61,7 @@ const NewComplaint = () => {
   //   }
   // },[currentStep])
   //   renders
+  console.log(values);
   const renderCurrentStep = () => {
     if (currentStep.id === allSteps[0].id)
       return (
@@ -84,6 +85,7 @@ const NewComplaint = () => {
         <Details
           goToNextStep={goToNextStep}
           value={values.description}
+          values={values}
           onChange={onChange}
           name={{
             description: "comments",

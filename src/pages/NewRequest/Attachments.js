@@ -68,9 +68,9 @@ const Attachments = ({
     setAttachments(newAttachments);
     onChange(newAttachments, "attachments");
   };
-  console.log(values.category.form?.elements);
+
   let hasAttachment;
-  values.category.form?.elements.map((item) => {
+  values?.category?.form?.elements.map((item) => {
     if (item.elementType == "dropzone") {
       hasAttachment = true;
     }

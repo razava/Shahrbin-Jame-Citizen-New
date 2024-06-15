@@ -6,7 +6,7 @@
 }
 
 .treeWrapper {
-  @apply lg:w-[70%] w-full;
+  @apply w-full;
 }
 
 .treeItems {

@@ -21,7 +21,7 @@ const MyComplaints = () => {
       <section className={styles.wrapper}>
         <ComplaintsList
           source={{
-            controller: "complaint",
+            controller: "CitizenComplaint",
             params: {},
             rest: { isPerInstance: false },
           }}
