@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import fava from "../../assets/images/fava-yazd-logo.png";
 import pishgaman from "../../assets/images/goroh-pishgaman-logo.png";
 import shetab from "../../assets/images/shetab-logo.png";
-import ostandari from "../../assets/images/ostandari2.png";
+import Municipality from "../../assets/images/Yazd-Municipality.png";
 
 const Supporters = () => {
   // variables
@@ -28,15 +28,15 @@ const Supporters = () => {
   //   ******
   const shetabLogo = <img src={shetab} style={logoStyles} />;
   //   ******
-  const ostandariLogo = <img src={ostandari} style={logoStyles} />;
+  const MunicipalityLogo = <img src={Municipality} style={logoStyles} />;
   //   ******
   const pishgamanLogo = <img src={pishgaman} style={logoStyles} />;
   return (
     <>
       <section className={styles.supporters}>
-        {/* {favaLogo} */}
+        {favaLogo}
         {/* {municipalityLogo} */}
-        {ostandariLogo}
+        {MunicipalityLogo}
         {shetabLogo}
         {pishgamanLogo}
       </section>
