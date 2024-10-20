@@ -1,7 +1,7 @@
 import axios from "axios";
 import { LS, USER } from "../utils/functions";
 import { appConstants } from "../utils/variables";
-axios.defaults.baseURL = "http://localhost";
+axios.defaults.baseURL = "https://137.yazd.ir";
 //axios.defaults.baseURL = "https://shahrbinapi.shetabdahi.ir";
 const Token = LS.read(appConstants.SH_CT_ACCESS_TOKEN) || {};
 const instance = LS.read(appConstants.SH_CT_INSTANCE) || { id: 1 };
