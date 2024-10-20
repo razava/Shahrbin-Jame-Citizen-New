@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const LoginYazd = () => {
   //   states
   const [error, setError] = useState(false);
-  console.log("6666");
+  console.log("SSO.Yazd.ir");
   // functions
   const getData = async () => {
     const searchParams = new URL(window.location.href).searchParams;

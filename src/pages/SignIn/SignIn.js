@@ -147,14 +147,14 @@ const SignIn = () => {
   const renderLinks = () => {
     return (
       <div className={authStyles.authLinks}>
-        {/* {process.env.REACT_APP_MY_GOV_LINK && (
+        {process.env.REACT_APP_MY_GOV_LINK && (
           <a
             href={process.env.REACT_APP_MY_GOV_LINK}
             className={authStyles.authLink}
           >
             ورود با یزد من
           </a>
-        )} */}
+        )}
         {/* <AuthLink to={authModes.signup}>حساب جدیدی ایجاد کنید.</AuthLink>
         <AuthLink to={authModes.forgotpass}>
           رمز عبور خود را فراموش کرده‌اید؟

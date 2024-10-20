@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { api } from "../../services/http";
 import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import TextInput from "../TextInput/TextInput";
@@ -10,9 +10,9 @@ import marker from "../../assets/images/location.svg";
 import { AppStore } from "../../store/AppContext";
 import useInstance from "../../hooks/useInstance";
 
+// MapContainer with Mapbox token
 const MapContainer = ReactMapboxGl({
   accessToken: process.env.REACT_APP_ACCESS_TOKEN,
-  zoom: 9,
 });
 
 const Map = ({
@@ -27,18 +27,18 @@ const Map = ({
   onSave = (f) => f,
   onChange,
 }) => {
-  // refs
+  // Refs
   const searchResultsRef = useRef(null);
   const searchInputRef = useRef(null);
 
-  // store
+  // Store
   const [store] = useContext(AppStore);
   const defaultCoords = {
     latitude: store.instance?.latitude || process.env.REACT_APP_LATITUDE,
     longitude: store.instance?.longitude || process.env.REACT_APP_LONGITUDE,
   };
 
-  // states
+  // State
   const [coordinates, setCoordinates] = useState(
     !coords.latitude || !coords.longitude ? defaultCoords : coords
   );
@@ -46,20 +46,16 @@ const Map = ({
   const [geofences, setGeofences] = useState(address);
   const [searchResults, setSearchResults] = useState([]);
 
-  // hooks
+  // Hooks
   const [isSearchResultOpened, toggleSearchResults] = useClick({
     element: searchResultsRef,
     whitelists: [searchInputRef],
   });
   const {
-    isSuccess,
-    currentInstance,
-    getInstances,
-    setAppInstance,
     getCurrentInstance,
   } = useInstance();
 
-  //   functions
+  // Functions
   const onMapClicked = (_, e) => {
     const coordinates = {
       latitude: e.lngLat.lat,
@@ -76,21 +72,13 @@ const Map = ({
       isPerInstance: false,
     });
     if (success) {
-      console.log(data.regionId);
-      console.log(getCurrentInstance());
       const instance = getCurrentInstance();
-      console.log({ ...instance, id: data.instanceId });
-      // setAppInstance({ ...instance, id: data.instanceId });
-      // setAppins
       onChange({ instanceId: data.instanceId, regionId: data.regionId }, "map");
-      // onChange(data.instanceId, "instanceId");
-      // onChange(data.regionId, "regionId");
       setGeofences(data.regionId);
       setSearchText(data.address);
     }
   };
 
-  useEffect(() => {}, []);
   const getCoordinatesByAddress = async (address = "") => {
     setSearchText(address);
     const { success, data } = await api.map({
@@ -100,7 +88,6 @@ const Map = ({
       isPerInstance: false,
     });
     if (success) {
-      console.log(data.results);
       setSearchResults(data.results);
       toggleSearchResults(true);
     }
@@ -123,7 +110,7 @@ const Map = ({
     toggleSearchResults(false);
   };
 
-  //   renders
+  // Render search results
   const renderSearchResults = () => {
     if (searchResults.length > 0)
       return (
@@ -147,6 +134,7 @@ const Map = ({
       );
   };
 
+  // Render save button
   const renderSaveButton = () => {
     const visible = coordinates.latitude && coordinates.longitude && searchText;
     return (
@@ -158,14 +146,16 @@ const Map = ({
       </Button>
     );
   };
+
   return (
     <>
       <MapContainer
         zoom={[zoom]}
         center={[coordinates.longitude, coordinates.latitude]}
+        style={process.env.REACT_APP_PMI_BASEMAP_URL} // Correctly use environment variable
         containerStyle={{ height, width, ...containerStyle }}
         onClick={selectable ? onMapClicked : undefined}
-        style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=${process.env.REACT_APP_PMI_TOKEN}`}
+        accessToken = {process.env.REACT_APP_ACCESS_TOKEN}
       >
         {selectable && (
           <Marker coordinates={[coordinates.longitude, coordinates.latitude]}>
@@ -177,7 +167,7 @@ const Map = ({
         )}
         {!selectable && (
           <Marker coordinates={[coordinates.longitude, coordinates.latitude]}>
-            <img src={marker} />
+            <img src={marker} alt="Marker" />
           </Marker>
         )}
         {renderSaveButton()}
