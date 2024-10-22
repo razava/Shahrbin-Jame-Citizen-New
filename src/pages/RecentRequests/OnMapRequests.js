@@ -103,8 +103,8 @@ const OnMapRequests = () => {
             store.instance?.latitude || defaultCoords.latitude,
           ]}
           containerStyle={{ height: "100%", width: "100%", borderRadius: 20 }}
-          style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=p18879615a54484eb98d403da218956ecaa2740c42}`}
-         // style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=${process.env.REACT_APP_PMI_TOKEN}`}
+          // style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=p18879615a54484eb98d403da218956ecaa2740c42}`}
+         style={`https://api.parsimap.ir/styles/parsimap-streets-v11?key=${process.env.REACT_APP_PMI_TOKEN}`}
           onClick={onMapClicked}
         >
           {data?.map((d) => (
